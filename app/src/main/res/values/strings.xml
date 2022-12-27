@@ -15,5 +15,20 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="action_add_car">New</string>
+    <string name="action_show_rentals">My Rentals</string>
+    <string name="action_rented_cars">Rented</string>
+    <string name="action_show_invoices">Invoices</string>
+    <string name="action_pay_invoice">Pay</string>
+    <string name="action_edit_carinfo">Edit</string>
+    <string name="action_delete_car">Delete</string>
+    <string name="action_show_car">Show</string>
+    <string name="action_backtocar">Back</string>
+    <string name="action_confirm_reservation">Confirm</string>
+    <string name="action_add_photo">Add photo</string>
+    <string name="action_save_car">Save</string>
+    <string name="action_rented">Rented</string>
+    <string name="action_show_my_rentals">My Rentals</string>
+    <string name="action_reserve_car">Reserve</string>
 
 </resources>
