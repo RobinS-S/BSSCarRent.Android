@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import com.bss.carrent.R
 import com.bss.carrent.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -29,14 +32,25 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
+        val loginButton: Button = binding.buttonLogin
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
+
         }
+
+        loginButton.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.navigate_to_login)
+        }
+
         return root
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

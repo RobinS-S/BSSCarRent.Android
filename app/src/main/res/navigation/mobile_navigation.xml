@@ -9,7 +9,18 @@
         android:id="@+id/navigation_home"
         android:name="com.bss.carrent.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/navigate_to_login"
+            app:destination="@id/login_activity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/login_activity"
+        android:name="com.bss.carrent.ui.login.LoginActivity"
+        android:label="@string/login"
+        tools:layout="@layout/activity_login">
+    </activity>
 
     <fragment
         android:id="@+id/navigation_dashboard"
