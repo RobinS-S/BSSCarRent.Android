@@ -1,11 +1,9 @@
-package com.bss.carrent.ui
+package com.bss.carrent
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.bss.carrent.R
 import android.content.Intent
 import android.os.CountDownTimer
-import com.bss.carrent.MainActivity
 
 class SplashActivity : AppCompatActivity() {
 
