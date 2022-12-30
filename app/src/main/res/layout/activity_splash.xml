@@ -4,14 +4,16 @@
     android:id="@+id/top_bar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     >
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="300dp"
-        android:layout_height="75dp"
-        android:src="@mipmap/ic_bss_logo_round"
+        android:layout_height="100dp"
         android:contentDescription="@+id/bss_car_rent_logo_round"
+        android:src="@mipmap/ic_bss_logo_round"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
