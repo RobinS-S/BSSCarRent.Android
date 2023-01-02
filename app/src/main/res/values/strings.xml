@@ -35,4 +35,11 @@
     <string name="action_show_my_rentals">My Rentals</string>
     <string name="action_reserve_car">Reserve</string>
     <string name="login">Login</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">Car Rental Made Easy</string>
+    <string name="nav_header_subtitle">Avans Informatica</string>
 </resources>
