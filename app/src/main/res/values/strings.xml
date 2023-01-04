@@ -42,4 +42,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="nav_header_title">Car Rental Made Easy</string>
     <string name="nav_header_subtitle">Avans Informatica</string>
+    <string name="email">E-mail address</string>
+    <string name="password">Password</string>
+    <string name="reset_login">Reset login details</string>
 </resources>

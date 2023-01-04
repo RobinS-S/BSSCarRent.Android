@@ -1,6 +1,6 @@
 package com.bss.carrent.data
 
-import com.bss.carrent.data.model.LoggedInUser
+import com.bss.carrent.data.model.User
 import java.io.IOException
 
 /**
@@ -8,13 +8,13 @@ import java.io.IOException
  */
 class LoginDataSource {
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
-        try {
+    fun login(username: String, password: String): Result<User> {
+        return try {
             // TODO: handle loggedInUser authentication
-            val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
-            return Result.Success(fakeUser)
+            val fakeUser = User("bla", null, "tesT", "+31", "612345678")
+            Result.Success(fakeUser)
         } catch (e: Throwable) {
-            return Result.Error(IOException("Error logging in", e))
+            Result.Error(IOException("Error logging in", e))
         }
     }
 
