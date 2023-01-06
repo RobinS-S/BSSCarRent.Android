@@ -5,6 +5,7 @@ import com.bss.carrent.api.ApiClient
 import com.bss.carrent.api.PrefsHelper
 import com.bss.carrent.api.UserApiService
 import com.bss.carrent.model.User
+import java.io.IOException
 
 class ProfileRepository {
     suspend fun attemptLogin(context: Context): User? {
@@ -12,13 +13,13 @@ class ProfileRepository {
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper != null && prefsHelper.areCredentialsFilled()) {
-            val profile = profileApiService?.getProfile()
-            if(profile != null) {
-                if(profile.code() == 200) {
+            try {
+                val profile = profileApiService?.getProfile()
+                if(profile != null && profile.code() == 200) {
                     return profile.body()
                 }
-                else {
-                }
+            } catch (e: IOException) {
+                return null
             }
         }
         return null

@@ -11,12 +11,12 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel() : ViewModel() {
     private val _isError = MutableLiveData<Boolean>()
-    private val _user = MutableLiveData<User>()
+    private val _user = MutableLiveData<User?>()
 
-    val user: LiveData<User>
+    val user: LiveData<User?>
         get() = _user
 
-    private fun setUser(value: User) {
+    fun setUser(value: User?) {
         _user.value = value
     }
 
@@ -27,14 +27,19 @@ class LoginViewModel() : ViewModel() {
         _isError.value = value
     }
 
-    fun tryLogin(context: Context) {
+    fun tryLogin(context: Context, silent: Boolean = false) {
         viewModelScope.launch {
             val repository = ProfileRepository()
             val retrievedUser = repository.attemptLogin(context)
             if(retrievedUser == null) {
-                setIsError(true)
+                if(!silent) {
+                    setIsError(true)
+                }
+                setUser(null)
             } else {
-                setIsError(false)
+                if(!silent) {
+                    setIsError(false)
+                }
                 setUser(retrievedUser)
             }
         }

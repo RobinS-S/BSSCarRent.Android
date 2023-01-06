@@ -13,13 +13,18 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.bss.carrent.api.PrefsHelper
 import com.bss.carrent.databinding.ActivityMainBinding
+import com.bss.carrent.misc.Helpers
 import com.bss.carrent.viewmodel.LoginViewModel
+import java.io.IOException
+import kotlin.coroutines.coroutineContext
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: LoginViewModel
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var prefsHelper: PrefsHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,14 +53,24 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        prefsHelper = PrefsHelper(applicationContext)
+
         viewModel.user.observe(this) { user ->
             val navView = findViewById<NavigationView>(R.id.nav_view)
             val headerLayout = navView.getHeaderView(0)
             val textView = headerLayout.findViewById<TextView>(R.id.subNavTitle)
             if(user == null) {
                 textView.setText(R.string.nav_header_subtitle)
+                prefsHelper.reset()
             } else {
-                textView.text = "Logged in as ${user.firstName} ${user.infix  ?: ""} ${user.lastName}"
+                textView.text = "Logged in as ${Helpers.getFormattedName(user)}"
+            }
+        }
+        if(prefsHelper.areCredentialsFilled()) {
+            try {
+                viewModel.tryLogin(applicationContext, true)
+            } catch(e: IOException) {
+                viewModel.setUser(null)
             }
         }
     }

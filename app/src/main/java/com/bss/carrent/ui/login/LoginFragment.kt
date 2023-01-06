@@ -14,12 +14,14 @@ import androidx.navigation.Navigation
 import com.bss.carrent.R
 import com.bss.carrent.api.PrefsHelper
 import com.bss.carrent.databinding.FragmentLoginBinding
+import com.bss.carrent.misc.Helpers
 import com.bss.carrent.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
     private lateinit var navController: NavController
     private var _binding: FragmentLoginBinding? = null
     private lateinit var viewModel: LoginViewModel
+    private var _busy = false;
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -39,14 +41,15 @@ class LoginFragment : Fragment() {
         }
 
         viewModel.user.observe(viewLifecycleOwner) { user ->
-            if(user != null) {
+            if(user != null && _busy) {
                 binding.loginButton.isClickable = true
                 Toast.makeText(
                     context,
-                    "Logged in as ${user.firstName} ${user.infix  ?: ""} ${user.lastName}",
+                    "Logged in as ${Helpers.getFormattedName(user)}",
                     5000
                 ).show()
                 navController.navigate(R.id.nav_home)
+                _busy = false
             }
         }
 
@@ -83,13 +86,14 @@ class LoginFragment : Fragment() {
         resetLogin.setOnClickListener {
             val prefsHelper = context?.let { PrefsHelper(it) }
             prefsHelper?.reset()
+            viewModel.setUser(null)
             binding.email.editText?.text?.clear()
             binding.password.editText?.text?.clear()
             binding.loginButton.isClickable = true
 
             Toast.makeText(
                 context,
-                "Login details have been reset.",
+                "You have logged out.",
                 5000
             ).show()
         }
@@ -102,6 +106,7 @@ class LoginFragment : Fragment() {
                 if(validateForm()) {
                     prefsHelper.update(textUsername, textPassword)
                     binding.loginButton.isClickable = false
+                    _busy = true
                     viewModel.tryLogin(context!!)
                 }
             }

@@ -18,33 +18,21 @@ object ApiClient {
             .add(KotlinJsonAdapterFactory())
             .build()
 
-        val authenticator = object : Authenticator {
-            override fun authenticate(route: Route?, response: Response): Request? {
-                if (response.request.header("Authorization") != null) {
-                    return response.request
-                }
-                if (!prefsHelper.areCredentialsFilled()) {
-                    return null
-                }
-                val credential = Credentials.basic(prefsHelper.getUsername()!!, prefsHelper.getPassword()!!)
-                return response.request.newBuilder().header("Authorization", credential).build()
-            }
-        }
+        val authenticator = Authentication(prefsHelper.getUsername(), prefsHelper.getPassword())
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS)
 
-        val client = OkHttpClient.Builder()
-            .followSslRedirects(false)
+        var client = OkHttpClient.Builder()
             .followRedirects(false)
-            .authenticator(authenticator)
+            .followSslRedirects(false)
             .addInterceptor(loggingInterceptor)
             .retryOnConnectionFailure(false)
-            .build()
+            .authenticator(authenticator)
 
         val retrofit = Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl("$BASE_URL/$controllerName/")
-            .client(client)
+            .client(client.build())
             .build()
 
         return retrofit.create(serviceClass)
