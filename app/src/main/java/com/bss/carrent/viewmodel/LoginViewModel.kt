@@ -31,13 +31,13 @@ class LoginViewModel() : ViewModel() {
         viewModelScope.launch {
             val repository = ProfileRepository()
             val retrievedUser = repository.attemptLogin(context)
-            if(retrievedUser == null) {
-                if(!silent) {
+            if (retrievedUser == null) {
+                if (!silent) {
                     setIsError(true)
                 }
                 setUser(null)
             } else {
-                if(!silent) {
+                if (!silent) {
                     setIsError(false)
                 }
                 setUser(retrievedUser)

@@ -11,7 +11,11 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 private const val BASE_URL = "https://bsscarrent.azurewebsites.net/api"
 
 object ApiClient {
-    fun <T : ApiService> createService(context: Context, serviceClass: Class<T>, controllerName: String): T {
+    fun <T : ApiService> createService(
+        context: Context,
+        serviceClass: Class<T>,
+        controllerName: String
+    ): T {
         val prefsHelper = PrefsHelper(context)
 
         val moshi = Moshi.Builder()

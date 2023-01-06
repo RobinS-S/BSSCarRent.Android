@@ -41,7 +41,7 @@ class LoginFragment : Fragment() {
         }
 
         viewModel.user.observe(viewLifecycleOwner) { user ->
-            if(user != null && _busy) {
+            if (user != null && _busy) {
                 binding.loginButton.isClickable = true
                 Toast.makeText(
                     context,
@@ -100,10 +100,10 @@ class LoginFragment : Fragment() {
 
         gotoLogin.setOnClickListener {
             val prefsHelper = context?.let { PrefsHelper(it) }
-            if(prefsHelper != null) {
+            if (prefsHelper != null) {
                 val textUsername = binding.email.editText?.text.toString()
                 val textPassword = binding.password.editText?.text.toString()
-                if(validateForm()) {
+                if (validateForm()) {
                     prefsHelper.update(textUsername, textPassword)
                     binding.loginButton.isClickable = false
                     _busy = true

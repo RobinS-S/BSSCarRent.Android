@@ -9,7 +9,7 @@ class Authentication(
     private var _count = 0
 
     override fun authenticate(route: Route?, response: Response): Request? {
-        if(_count++ > 0) {
+        if (_count++ > 0) {
             return null
         } else {
             if (response.request.header("Authorization") != null || username == null || password == null) {

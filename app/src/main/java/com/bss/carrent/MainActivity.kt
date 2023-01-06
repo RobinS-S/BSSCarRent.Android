@@ -59,17 +59,17 @@ class MainActivity : AppCompatActivity() {
             val navView = findViewById<NavigationView>(R.id.nav_view)
             val headerLayout = navView.getHeaderView(0)
             val textView = headerLayout.findViewById<TextView>(R.id.subNavTitle)
-            if(user == null) {
+            if (user == null) {
                 textView.setText(R.string.nav_header_subtitle)
                 prefsHelper.reset()
             } else {
                 textView.text = "Logged in as ${Helpers.getFormattedName(user)}"
             }
         }
-        if(prefsHelper.areCredentialsFilled()) {
+        if (prefsHelper.areCredentialsFilled()) {
             try {
                 viewModel.tryLogin(applicationContext, true)
-            } catch(e: IOException) {
+            } catch (e: IOException) {
                 viewModel.setUser(null)
             }
         }
