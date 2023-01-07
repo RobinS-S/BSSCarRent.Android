@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bss.carrent.R
 import com.bss.carrent.data.Car
 import com.bss.carrent.data.CarType
@@ -58,14 +59,16 @@ class HomeFragment : Fragment() {
         homeViewModel.carList.observe(viewLifecycleOwner) { carList ->
             carList?.let {
                 carAdapter.setCarList(it)
+                carAdapter.notifyDataSetChanged()
+                binding.carListSwipeRefresh.isRefreshing = false
             }
         }
 
-        homeViewModel.carList.value = listOf(
-            Car(1, 1, "Toyota", "Camry", "Blue", 100000, 25.0, 0.25, "ABC-123", LocalDate.now(), LocalDate.now().plusYears(1), CarType.COMBUSTION, CombustionFuelType.GASOLINE, 10000.0, 51.5, 0.1),
-            Car(2, 1, "Honda", "Civic", "Red", 80000, 20.0, 0.20, "DEF-456", LocalDate.now(), LocalDate.now().plusYears(1), CarType.COMBUSTION, CombustionFuelType.GASOLINE, 8000.0, 51.5, 0.1),
-            Car(3, 2, "Tesla", "Model 3", "White", 60000, 30.0, 0.30, "GHI-789", LocalDate.now(), LocalDate.now().plusYears(1), CarType.BATTERY_ELECTRIC, null, 30000.0, 51.5, 0.1)
-        )
+        binding.carListSwipeRefresh.setOnRefreshListener {
+            homeViewModel.getCars(requireContext())
+        }
+
+        homeViewModel.getCars(requireContext())
 
         return root
     }

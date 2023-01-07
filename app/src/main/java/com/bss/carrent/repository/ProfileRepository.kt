@@ -10,17 +10,17 @@ import java.io.IOException
 class ProfileRepository {
     suspend fun attemptLogin(context: Context): User? {
         val profileApiService =
-            ApiClient.createService(context, UserApiService::class.java, "users")
+            ApiClient.createService(context, UserApiService::class.java)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {
-            try {
+            return try {
                 val profile = profileApiService.getProfile()
                 if (profile.code() == 200) {
-                    return profile.body()
-                }
+                    profile.body()
+                } else throw IOException()
             } catch (e: IOException) {
-                return null
+                null
             }
         }
         return null
