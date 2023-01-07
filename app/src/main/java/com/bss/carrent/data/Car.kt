@@ -18,5 +18,6 @@ data class Car(
     val fuelType: CombustionFuelType?,
     val initialCost: Double,
     val lat: Double,
-    val lng: Double
+    val lng: Double,
+    val imageIds: List<Long>
 ) : java.io.Serializable

@@ -49,7 +49,7 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
 
         init {
             itemView.setOnClickListener {
-                val clickedPosition = adapterPosition
+                val clickedPosition = bindingAdapterPosition
                 val clickedCar = carList[clickedPosition]
                 listener.onItemClick(clickedCar)
             }
