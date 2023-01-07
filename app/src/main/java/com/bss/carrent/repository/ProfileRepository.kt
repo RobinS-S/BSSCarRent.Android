@@ -13,10 +13,10 @@ class ProfileRepository {
             ApiClient.createService(context, UserApiService::class.java, "users")
 
         val prefsHelper = PrefsHelper(context)
-        if (prefsHelper != null && prefsHelper.areCredentialsFilled()) {
+        if (prefsHelper.areCredentialsFilled()) {
             try {
-                val profile = profileApiService?.getProfile()
-                if (profile != null && profile.code() == 200) {
+                val profile = profileApiService.getProfile()
+                if (profile.code() == 200) {
                     return profile.body()
                 }
             } catch (e: IOException) {

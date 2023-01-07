@@ -21,7 +21,7 @@ class LoginFragment : Fragment() {
     private lateinit var navController: NavController
     private var _binding: FragmentLoginBinding? = null
     private lateinit var viewModel: LoginViewModel
-    private var _busy = false;
+    private var _busy = false
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -37,7 +37,7 @@ class LoginFragment : Fragment() {
         if (prefsHelper != null && prefsHelper.areCredentialsFilled()) {
             binding.email.editText?.setText(prefsHelper.getUsername())
             binding.password.editText?.setText(prefsHelper.getPassword())
-            Toast.makeText(context, "You already have credentials.", 5000).show()
+            Toast.makeText(context, "You already have credentials.", Toast.LENGTH_LONG).show()
         }
 
         viewModel.user.observe(viewLifecycleOwner) { user ->
@@ -46,7 +46,7 @@ class LoginFragment : Fragment() {
                 Toast.makeText(
                     context,
                     "Logged in as ${Helpers.getFormattedName(user)}",
-                    5000
+                    Toast.LENGTH_LONG
                 ).show()
                 navController.navigate(R.id.nav_home)
                 _busy = false
@@ -58,7 +58,7 @@ class LoginFragment : Fragment() {
                 Toast.makeText(
                     context,
                     "Logging in failed. Are you sure you've got the right credentials?",
-                    5000
+                    Toast.LENGTH_LONG
                 ).show()
                 binding.email.error = "Invalid"
                 binding.password.error = "Invalid"
@@ -94,7 +94,7 @@ class LoginFragment : Fragment() {
             Toast.makeText(
                 context,
                 "You have logged out.",
-                5000
+                Toast.LENGTH_LONG
             ).show()
         }
 
@@ -107,7 +107,7 @@ class LoginFragment : Fragment() {
                     prefsHelper.update(textUsername, textPassword)
                     binding.loginButton.isClickable = false
                     _busy = true
-                    viewModel.tryLogin(context!!)
+                    viewModel.tryLogin(requireContext())
                 }
             }
         }

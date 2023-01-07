@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bss.carrent.R
 import com.bss.carrent.data.Car
 
-class CarAdapter : RecyclerView.Adapter<CarAdapter.NameViewHolder>() {
+class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
     private var carList: List<Car> = emptyList()
     private lateinit var listener: OnItemClickListener
 
@@ -26,12 +26,12 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.NameViewHolder>() {
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NameViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.car_info_row, parent, false)
-        return NameViewHolder(view)
+        return CarViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: NameViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
         holder.bind(carList[position])
     }
 
@@ -39,14 +39,13 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.NameViewHolder>() {
         return carList.size
     }
 
-    inner class NameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class CarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.rv_car_image)
         private val brandTextView: TextView = itemView.findViewById(R.id.rv_info_car_brand)
         private val modelTextView: TextView = itemView.findViewById(R.id.rv_info_car_model)
         private val buildYearTextView: TextView = itemView.findViewById(R.id.rv_info_car_buildyear)
         private val colorTextView: TextView = itemView.findViewById(R.id.rv_info_car_color)
         private val carTypeTextView: TextView = itemView.findViewById(R.id.rv_info_car_type)
-
 
         init {
             itemView.setOnClickListener {

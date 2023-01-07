@@ -9,7 +9,7 @@ import com.bss.carrent.data.User
 import com.bss.carrent.repository.ProfileRepository
 import kotlinx.coroutines.launch
 
-class LoginViewModel() : ViewModel() {
+class LoginViewModel : ViewModel() {
     private val _isError = MutableLiveData<Boolean>()
     private val _user = MutableLiveData<User?>()
 

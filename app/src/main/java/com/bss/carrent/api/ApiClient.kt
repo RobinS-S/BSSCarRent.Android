@@ -26,7 +26,7 @@ object ApiClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS)
 
-        var client = OkHttpClient.Builder()
+        val client = OkHttpClient.Builder()
             .followRedirects(false)
             .followSslRedirects(false)
             .addInterceptor(loggingInterceptor)
