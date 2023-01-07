@@ -1,6 +1,6 @@
 package com.bss.carrent.api
 
-import com.bss.carrent.model.User
+import com.bss.carrent.data.User
 import retrofit2.Response
 import retrofit2.http.POST
 

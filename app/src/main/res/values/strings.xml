@@ -49,7 +49,7 @@
     <string name="empty_carbrand">Car brand</string>
     <string name="empty_carbuildyear">Car build year</string>
     <string name="empty_carcolor">Car color</string>
-    <string name="empty_carfueltype">Car fueltype</string>
+    <string name="empty_cartype">Car type</string>
     <string name="empty_carprice">Car price</string>
     <string name="empty_cartransmission">Car transmission</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.bss.carrent.model
+package com.bss.carrent.data
 
 data class User(
     val firstName: String,

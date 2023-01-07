@@ -4,7 +4,7 @@ import android.content.Context
 import com.bss.carrent.api.ApiClient
 import com.bss.carrent.api.PrefsHelper
 import com.bss.carrent.api.UserApiService
-import com.bss.carrent.model.User
+import com.bss.carrent.data.User
 import java.io.IOException
 
 class ProfileRepository {

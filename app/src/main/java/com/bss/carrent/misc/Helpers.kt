@@ -1,6 +1,6 @@
 package com.bss.carrent.misc
 
-import com.bss.carrent.model.User
+import com.bss.carrent.data.User
 
 object Helpers {
     fun getFormattedName(user: User): String {
