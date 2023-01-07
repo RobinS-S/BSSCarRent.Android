@@ -52,4 +52,18 @@
     <string name="empty_cartype">Car type</string>
     <string name="empty_carprice">Car price</string>
     <string name="empty_cartransmission">Car transmission</string>
+    <string name="car_model_label">Model</string>
+    <string name="car_buildyear_label">Buildyear</string>
+    <string name="car_color_label">Color</string>
+    <string name="car_transmission_label">Transmission</string>
+    <string name="car_cartype_label">Car type</string>
+    <string name="car_price_label">Price per kilometer €</string>
+    <string name="car_initialcost_label">Initial cost €</string>
+    <string name="car_initialcost">Initial cost </string>
+    <string name="car_priceperhour_label">Price per hour €</string>
+    <string name="car_priceperhour">Price per hour </string>
+    <string name="car_kilometersdistance">Distance to car</string>
+    <string name="car_kilometersdistance_label">Distance to car</string>
+    <string name="car_fueltype_label">Fuel type</string>
+    <string name="car_fueltype">Fuel type</string>
 </resources>
