@@ -8,8 +8,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.bss.carrent.R
 import com.bss.carrent.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -35,6 +33,7 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
         return root
     }
 
