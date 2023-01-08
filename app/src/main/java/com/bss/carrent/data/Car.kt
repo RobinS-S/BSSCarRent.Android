@@ -19,5 +19,5 @@ data class Car(
     val initialCost: Double,
     val lat: Double,
     val lng: Double,
-    val imageIds: List<Long>
+    val imageIds: List<Long>?
 ) : java.io.Serializable
