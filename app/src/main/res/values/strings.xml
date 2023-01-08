@@ -52,6 +52,7 @@
     <string name="empty_cartype">Car type</string>
     <string name="empty_carprice">Car price</string>
     <string name="empty_cartransmission">Car transmission</string>
+
     <string name="car_model_label">Model</string>
     <string name="car_buildyear_label">Buildyear</string>
     <string name="car_color_label">Color</string>
@@ -66,4 +67,13 @@
     <string name="car_kilometersdistance_label">Distance to car</string>
     <string name="car_fueltype_label">Fuel type</string>
     <string name="car_fueltype">\?</string>
+
+    <string name="car_detail_car_owner_label">Car owned by:</string>
+    <string name="car_brand_label">Brand:</string>
+    <string name="car_apk_label">APK up to:</string>
+    <string name="car_priceperkilometer_label">Price per kilometer:</string>
+    <string name="car_hireprice_label">Price for hire:</string>
+    <string name="car_current_kilometers">Current kilometers:</string>
+    <string name="car_button_rental_options">View rental options</string>
+    <string name="car_prices_sum_label">Total price:</string>
 </resources>

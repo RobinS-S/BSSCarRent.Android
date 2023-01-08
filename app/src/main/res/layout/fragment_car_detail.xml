@@ -6,120 +6,325 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.CarDetailFragment">
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/car_detail_images_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="200dp"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/car_detail_car_owner_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/car_detail_car_owner_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_images_viewpager" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:src="@drawable/ic_menu_gallery"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+        android:id="@+id/car_detail_car_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Verhuurder"
+        android:textSize="22dp"
+        app:layout_constraintLeft_toRightOf="@id/car_detail_car_owner_label"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_images_viewpager" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.viewpager.widget.ViewPager>
+    <Button
+        android:id="@+id/car_detail_owner_button"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:text="details"
+        android:backgroundTint="@color/red"
+        app:layout_constraintStart_toEndOf="@id/car_detail_car_owner"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_images_viewpager" />
+
+    <TextView
+        android:id="@+id/car_detail_brand_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/car_brand_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_car_owner_label" />
 
     <TextView
         android:id="@+id/car_detail_brand_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="4dp"
         android:text="..."
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="22dp"
+        app:layout_constraintLeft_toRightOf="@id/car_detail_brand_name_label"
+        app:layout_constraintTop_toTopOf="@id/car_detail_brand_name_label" />
+
+    <TextView
+        android:id="@+id/car_detail_model_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="@string/car_model_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/car_detail_brand_name_label" />
 
     <TextView
         android:id="@+id/car_detail_model_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="4dp"
         android:text="..."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/car_detail_brand_name" />
+        android:textSize="22dp"
+        app:layout_constraintLeft_toRightOf="@id/car_detail_model_name_label"
+        app:layout_constraintTop_toTopOf="@id/car_detail_model_name_label" />
 
     <TextView
-        android:id="@+id/car_detail_color_name"
+        android:id="@+id/car_detail_constructionyear_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:text="..."
+        android:text="@string/car_buildyear_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/car_detail_model_name" />
+        app:layout_constraintTop_toBottomOf="@id/car_detail_model_name_label" />
 
     <TextView
         android:id="@+id/car_detail_constructionyear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="4dp"
         android:text="..."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/car_detail_color_name" />
+        android:textSize="22dp"
+        app:layout_constraintLeft_toRightOf="@id/car_detail_constructionyear_label"
+        app:layout_constraintTop_toTopOf="@id/car_detail_constructionyear_label" />
 
     <TextView
-        android:id="@+id/car_detail_priceperkilometer"
+        android:id="@+id/car_detail_cartype_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:text="..."
+        android:text="@string/car_cartype_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/car_detail_constructionyear" />
-
-    <TextView
-        android:id="@+id/car_detail_priceperhour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:text="..."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/car_detail_priceperkilometer" />
-
-    <TextView
-        android:id="@+id/car_detail_initialcost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:text="..."
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/car_detail_priceperhour" />
+        app:layout_constraintTop_toBottomOf="@id/car_detail_constructionyear_label" />
 
     <TextView
         android:id="@+id/car_detail_cartype"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="4dp"
         android:text="..."
+        android:textSize="22dp"
+        app:layout_constraintLeft_toRightOf="@id/car_detail_cartype_label"
+        app:layout_constraintTop_toTopOf="@id/car_detail_cartype_label" />
+
+    <TextView
+        android:id="@+id/car_detail_apk_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="@string/car_apk_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/car_detail_initialcost" />
+        app:layout_constraintTop_toBottomOf="@id/car_detail_cartype_label" />
+
+    <TextView
+        android:id="@+id/car_detail_apk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:text="..."
+        android:textSize="22dp"
+        app:layout_constraintLeft_toRightOf="@id/car_detail_apk_label"
+        app:layout_constraintTop_toTopOf="@id/car_detail_apk_label" />
+
+    <TextView
+        android:id="@+id/car_detail_fueltype_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="@string/car_fueltype_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_apk_label" />
 
     <TextView
         android:id="@+id/car_detail_fueltype"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="4dp"
         android:text="..."
+        android:textSize="22dp"
         android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/car_detail_cartype" />
+        app:layout_constraintLeft_toRightOf="@id/car_detail_fueltype_label"
+        app:layout_constraintTop_toTopOf="@id/car_detail_fueltype_label" />
 
     <TextView
-        android:id="@+id/car_detail_distance"
+        android:id="@+id/car_detail_price_per_hour_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/car_priceperhour_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/car_detail_brand_name_label" />
+
+    <TextView
+        android:id="@+id/car_detail_price_per_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
         android:text="..."
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@color/red"
+        android:textSize="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_price_per_hour_label" />
+
+    <TextView
+        android:id="@+id/car_detail_price_per_kilometer_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="@string/car_priceperkilometer_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/car_detail_constructionyear_label" />
+
+    <TextView
+        android:id="@+id/car_detail_price_per_kilometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="..."
+        android:textColor="@color/red"
+        android:textSize="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_price_per_kilometer_label" />
+
+    <TextView
+        android:id="@+id/car_detail_hireprice_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="@string/car_hireprice_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/car_detail_apk_label" />
+
+    <TextView
+        android:id="@+id/car_detail_hireprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="..."
+        android:textColor="@color/red"
+        android:textSize="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_hireprice_label" />
+
+    <TextView
+        android:id="@+id/car_detail_current_kilometers_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="@string/car_current_kilometers"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_hireprice" />
+
+    <TextView
+        android:id="@+id/car_detail_current_kilometers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="..."
+        android:textColor="@color/red"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_current_kilometers_label" />
+
+    <TextView
+        android:id="@+id/car_detail_price_total_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/car_prices_sum_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/car_detail_button_view_rental_options"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/car_detail_price_total">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="0"
+            android:textSize="22dp" />
+
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:text="10.000"
+            android:textSize="22dp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/car_detail_price_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="..."
+        android:textSize="22dp"
+        app:layout_constraintBottom_toTopOf="@id/car_detail_button_view_rental_options"
+        app:layout_constraintLeft_toRightOf="@id/car_detail_price_total_label" />
+
+    <Button
+        android:id="@+id/car_detail_button_view_rental_options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/red"
+        android:text="@string/car_button_rental_options"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
