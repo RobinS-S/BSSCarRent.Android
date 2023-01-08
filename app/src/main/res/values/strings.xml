@@ -59,11 +59,11 @@
     <string name="car_cartype_label">Car type</string>
     <string name="car_price_label">Price per kilometer €</string>
     <string name="car_initialcost_label">Initial cost €</string>
-    <string name="car_initialcost">Initial cost </string>
+    <string name="car_initialcost">500</string>
     <string name="car_priceperhour_label">Price per hour €</string>
-    <string name="car_priceperhour">Price per hour </string>
-    <string name="car_kilometersdistance">Distance to car</string>
+    <string name="car_priceperhour">2</string>
+    <string name="car_kilometersdistance">2.05km</string>
     <string name="car_kilometersdistance_label">Distance to car</string>
     <string name="car_fueltype_label">Fuel type</string>
-    <string name="car_fueltype">Fuel type</string>
+    <string name="car_fueltype">\?</string>
 </resources>

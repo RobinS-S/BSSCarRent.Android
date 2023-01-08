@@ -5,9 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bss.carrent.R
 import com.bss.carrent.data.Car
+import com.bss.carrent.misc.Helpers
 
 class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
     private var carList: List<Car> = emptyList()
@@ -45,7 +47,14 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
         private val modelTextView: TextView = itemView.findViewById(R.id.rv_info_car_model)
         private val buildYearTextView: TextView = itemView.findViewById(R.id.rv_info_car_buildyear)
         private val colorTextView: TextView = itemView.findViewById(R.id.rv_info_car_color)
+        private val carTransmissionTextView: TextView = itemView.findViewById(R.id.rv_info_car_transmission)
         private val carTypeTextView: TextView = itemView.findViewById(R.id.rv_info_car_type)
+        private val carFuelTypeLabelTextView: TextView = itemView.findViewById(R.id.rv_info_car_fueltype_label)
+        private val carFuelTypeTextView: TextView = itemView.findViewById(R.id.rv_info_car_fueltype)
+        private val carInitialCostTextView: TextView = itemView.findViewById(R.id.rv_info_car_initialcost)
+        private val carPriceKmTextView: TextView = itemView.findViewById(R.id.rv_car_info_price)
+        private val carPriceHourTextView: TextView = itemView.findViewById(R.id.rv_info_car_priceperhour)
+        private val carDistanceKmTextView: TextView = itemView.findViewById(R.id.rv_info_kilometersdistance)
 
         init {
             itemView.setOnClickListener {
@@ -61,6 +70,12 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
             buildYearTextView.text = car.constructed.year.toString()
             colorTextView.text = car.color
             carTypeTextView.text = car.carType.toString()
+            carFuelTypeLabelTextView.isVisible = (car.fuelType != null)
+            carFuelTypeTextView.isVisible = car.fuelType != null
+            carFuelTypeTextView.text = car.fuelType?.toString() ?: ""
+            carInitialCostTextView.text = Helpers.formatDoubleWithOptionalDecimals(car.initialCost)
+            carPriceKmTextView.text = Helpers.formatDoubleWithOptionalDecimals(car.pricePerKilometer)
+            carPriceHourTextView.text = Helpers.formatDoubleWithOptionalDecimals(car.pricePerHour)
         }
     }
 }
