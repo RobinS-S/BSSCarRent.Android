@@ -18,6 +18,7 @@ import com.bss.carrent.viewmodel.LoginViewModel
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: LoginViewModel
@@ -32,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
+
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/Amsterdam"))
 
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
