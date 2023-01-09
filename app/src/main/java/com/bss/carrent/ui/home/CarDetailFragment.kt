@@ -92,7 +92,7 @@ class CarDetailFragment : Fragment() {
                 val imageUrls = it.imageIds.map { img -> CarApi.generateImageUrl(it.id, img)}
 
                 carDetailImagesViewpager.adapter = CarImageSliderAdapter(this, imageUrls)
-                TabLayoutMediator(tabLayout, carDetailImagesViewpager) { tab, position -> }.attach()
+                TabLayoutMediator(tabLayout, carDetailImagesViewpager) { _, _ -> }.attach()
             }
 
             carDetailSwipeRefresh.isRefreshing = false

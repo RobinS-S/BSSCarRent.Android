@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.CarDetailFragment">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/car_detail_swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.CarDetailFragment">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/car_detail_swipe_refresh"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/car_detail_images_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tab_layout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/car_detail_images_viewpager" />
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/car_detail_images_viewpager" />
 
             <TextView
                 android:id="@+id/car_detail_car_owner_label"
@@ -55,15 +55,15 @@
                 app:layout_constraintLeft_toRightOf="@id/car_detail_car_owner_label"
                 app:layout_constraintTop_toBottomOf="@id/car_detail_images_viewpager" />
 
-                <Button
-                    android:id="@+id/car_detail_owner_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
-                    android:backgroundTint="@color/red"
-                    android:text="details"
-                    app:layout_constraintStart_toEndOf="@id/car_detail_car_owner"
-                    app:layout_constraintTop_toBottomOf="@id/car_detail_images_viewpager" />
+            <Button
+                android:id="@+id/car_detail_owner_button"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@color/red"
+                android:text="details"
+                app:layout_constraintStart_toEndOf="@id/car_detail_car_owner"
+                app:layout_constraintTop_toBottomOf="@id/car_detail_images_viewpager" />
 
             <TextView
                 android:id="@+id/car_detail_brand_name_label"
@@ -129,7 +129,7 @@
                 app:layout_constraintLeft_toRightOf="@id/car_detail_color_name_label"
                 app:layout_constraintTop_toTopOf="@id/car_detail_color_name_label" />
 
-                <TextView
+            <TextView
                 android:id="@+id/car_detail_constructionyear_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -334,10 +334,10 @@
                     android:id="@+id/car_detail_km_slider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="10000"
-                    android:progress="0"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp" />
+                    android:layout_marginEnd="8dp"
+                    android:max="10000"
+                    android:progress="0" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -369,6 +369,6 @@
                 android:backgroundTint="@color/red"
                 android:text="@string/car_button_rental_options"
                 app:layout_constraintBottom_toBottomOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
