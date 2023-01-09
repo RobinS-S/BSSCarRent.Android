@@ -1,9 +1,9 @@
-package com.bss.carrent.api
+package com.bss.carrent.misc
 
 import android.content.Context
+import okhttp3.Credentials
 
-class PrefsHelper(context: Context) {
-
+class AuthHelper(context: Context) {
     private val prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(context)
 
     fun areCredentialsFilled(): Boolean {
@@ -18,6 +18,13 @@ class PrefsHelper(context: Context) {
 
     fun getPassword(): String? {
         return prefs.getString("password", "")
+    }
+
+    fun getAuthorizationHeader(): String? {
+        if(this.areCredentialsFilled()) {
+            return Credentials.basic(this.getUsername()!!, getPassword()!!)
+        }
+        return null;
     }
 
     fun update(username: String, password: String) {

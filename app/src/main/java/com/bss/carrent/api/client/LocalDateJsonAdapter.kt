@@ -1,6 +1,8 @@
-package com.bss.carrent.api
+package com.bss.carrent.api.client
 
-import com.squareup.moshi.*
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.JsonReader
+import com.squareup.moshi.JsonWriter
 import java.time.LocalDate
 
 class LocalDateJsonAdapter : JsonAdapter<LocalDate>() {

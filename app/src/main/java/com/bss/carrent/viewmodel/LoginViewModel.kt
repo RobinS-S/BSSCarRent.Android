@@ -5,19 +5,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bss.carrent.data.User
+import com.bss.carrent.data.user.UserDto
 import com.bss.carrent.repository.ProfileRepository
 import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
     private val _isError = MutableLiveData<Boolean>()
-    private val _user = MutableLiveData<User?>()
+    private val _userDto = MutableLiveData<UserDto?>()
 
-    val user: LiveData<User?>
-        get() = _user
+    val userDto: LiveData<UserDto?>
+        get() = _userDto
 
-    fun setUser(value: User?) {
-        _user.value = value
+    fun setUser(value: UserDto?) {
+        _userDto.value = value
     }
 
     val isError: LiveData<Boolean>

@@ -1,8 +1,8 @@
-package com.bss.carrent.data
+package com.bss.carrent.data.car
 
 import java.time.LocalDate
 
-data class Car(
+data class CarDto(
     val id: Long,
     val ownerId: Long,
     val brand: String,

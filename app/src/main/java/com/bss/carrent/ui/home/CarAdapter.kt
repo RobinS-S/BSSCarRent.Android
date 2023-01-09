@@ -8,23 +8,23 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bss.carrent.R
-import com.bss.carrent.data.Car
+import com.bss.carrent.data.car.CarDto
 import com.bss.carrent.misc.Helpers
 
 class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
-    private var carList: List<Car> = emptyList()
+    private var carDtoList: List<CarDto> = emptyList()
     private lateinit var listener: OnItemClickListener
 
     interface OnItemClickListener {
-        fun onItemClick(car: Car)
+        fun onItemClick(carDto: CarDto)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
 
-    fun setCarList(carList: List<Car>) {
-        this.carList = carList
+    fun setCarList(carDtoList: List<CarDto>) {
+        this.carDtoList = carDtoList
         notifyDataSetChanged()
     }
 
@@ -34,11 +34,11 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
-        holder.bind(carList[position])
+        holder.bind(carDtoList[position])
     }
 
     override fun getItemCount(): Int {
-        return carList.size
+        return carDtoList.size
     }
 
     inner class CarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -47,35 +47,43 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
         private val modelTextView: TextView = itemView.findViewById(R.id.rv_info_car_model)
         private val buildYearTextView: TextView = itemView.findViewById(R.id.rv_info_car_buildyear)
         private val colorTextView: TextView = itemView.findViewById(R.id.rv_info_car_color)
-        private val carTransmissionTextView: TextView = itemView.findViewById(R.id.rv_info_car_transmission)
+        private val carTransmissionTextView: TextView =
+            itemView.findViewById(R.id.rv_info_car_transmission)
         private val carTypeTextView: TextView = itemView.findViewById(R.id.rv_info_car_type)
-        private val carFuelTypeLabelTextView: TextView = itemView.findViewById(R.id.rv_info_car_fueltype_label)
+        private val carFuelTypeLabelTextView: TextView =
+            itemView.findViewById(R.id.rv_info_car_fueltype_label)
         private val carFuelTypeTextView: TextView = itemView.findViewById(R.id.rv_info_car_fueltype)
-        private val carInitialCostTextView: TextView = itemView.findViewById(R.id.rv_info_car_initialcost)
+        private val carInitialCostTextView: TextView =
+            itemView.findViewById(R.id.rv_info_car_initialcost)
         private val carPriceKmTextView: TextView = itemView.findViewById(R.id.rv_car_info_price)
-        private val carPriceHourTextView: TextView = itemView.findViewById(R.id.rv_info_car_priceperhour)
-        private val carDistanceKmTextView: TextView = itemView.findViewById(R.id.rv_info_kilometersdistance)
+        private val carPriceHourTextView: TextView =
+            itemView.findViewById(R.id.rv_info_car_priceperhour)
+        private val carDistanceKmTextView: TextView =
+            itemView.findViewById(R.id.rv_info_kilometersdistance)
 
         init {
             itemView.setOnClickListener {
                 val clickedPosition = bindingAdapterPosition
-                val clickedCar = carList[clickedPosition]
+                val clickedCar = carDtoList[clickedPosition]
                 listener.onItemClick(clickedCar)
             }
         }
 
-        fun bind(car: Car) {
-            brandTextView.text = car.brand
-            modelTextView.text = car.model
-            buildYearTextView.text = car.constructed.year.toString()
-            colorTextView.text = car.color
-            carTypeTextView.text = car.carType.toString()
-            carFuelTypeLabelTextView.isVisible = (car.fuelType != null)
-            carFuelTypeTextView.isVisible = car.fuelType != null
-            carFuelTypeTextView.text = car.fuelType?.toString() ?: ""
-            carInitialCostTextView.text = Helpers.formatDoubleWithOptionalDecimals(car.initialCost)
-            carPriceKmTextView.text = Helpers.formatDoubleWithOptionalDecimals(car.pricePerKilometer)
-            carPriceHourTextView.text = Helpers.formatDoubleWithOptionalDecimals(car.pricePerHour)
+        fun bind(carDto: CarDto) {
+            brandTextView.text = carDto.brand
+            modelTextView.text = carDto.model
+            buildYearTextView.text = carDto.constructed.year.toString()
+            colorTextView.text = carDto.color
+            carTypeTextView.text = carDto.carType.toString()
+            carFuelTypeLabelTextView.isVisible = (carDto.fuelType != null)
+            carFuelTypeTextView.isVisible = carDto.fuelType != null
+            carFuelTypeTextView.text = carDto.fuelType?.toString() ?: ""
+            carInitialCostTextView.text =
+                Helpers.formatDoubleWithOptionalDecimals(carDto.initialCost)
+            carPriceKmTextView.text =
+                Helpers.formatDoubleWithOptionalDecimals(carDto.pricePerKilometer)
+            carPriceHourTextView.text =
+                Helpers.formatDoubleWithOptionalDecimals(carDto.pricePerHour)
         }
     }
 }

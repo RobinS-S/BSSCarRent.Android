@@ -12,9 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bss.carrent.R
-import com.bss.carrent.api.PrefsHelper
 import com.bss.carrent.databinding.FragmentLoginBinding
 import com.bss.carrent.misc.Helpers
+import com.bss.carrent.misc.AuthHelper
 import com.bss.carrent.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
@@ -33,14 +33,14 @@ class LoginFragment : Fragment() {
         navController = Navigation.findNavController(view)
         viewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
 
-        val prefsHelper = context?.let { PrefsHelper(it) }
-        if (prefsHelper != null && prefsHelper.areCredentialsFilled()) {
-            binding.email.editText?.setText(prefsHelper.getUsername())
-            binding.password.editText?.setText(prefsHelper.getPassword())
+        val authHelper = context?.let { AuthHelper(it) }
+        if (authHelper != null && authHelper.areCredentialsFilled()) {
+            binding.email.editText?.setText(authHelper.getUsername())
+            binding.password.editText?.setText(authHelper.getPassword())
             Toast.makeText(context, "You already have credentials.", Toast.LENGTH_LONG).show()
         }
 
-        viewModel.user.observe(viewLifecycleOwner) { user ->
+        viewModel.userDto.observe(viewLifecycleOwner) { user ->
             if (user != null && _busy) {
                 binding.loginButton.isClickable = true
                 Toast.makeText(
@@ -84,8 +84,8 @@ class LoginFragment : Fragment() {
         val resetLogin: Button = binding.resetLoginDetailsButton
 
         resetLogin.setOnClickListener {
-            val prefsHelper = context?.let { PrefsHelper(it) }
-            prefsHelper?.reset()
+            val authHelper = context?.let { AuthHelper(it) }
+            authHelper?.reset()
             viewModel.setUser(null)
             binding.email.editText?.text?.clear()
             binding.password.editText?.text?.clear()
@@ -99,12 +99,12 @@ class LoginFragment : Fragment() {
         }
 
         gotoLogin.setOnClickListener {
-            val prefsHelper = context?.let { PrefsHelper(it) }
-            if (prefsHelper != null) {
+            val authHelper = context?.let { AuthHelper(it) }
+            if (authHelper != null) {
                 val textUsername = binding.email.editText?.text.toString()
                 val textPassword = binding.password.editText?.text.toString()
                 if (validateForm()) {
-                    prefsHelper.update(textUsername, textPassword)
+                    authHelper.update(textUsername, textPassword)
                     binding.loginButton.isClickable = false
                     _busy = true
                     viewModel.tryLogin(requireContext())

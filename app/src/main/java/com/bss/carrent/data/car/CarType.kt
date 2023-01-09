@@ -1,4 +1,4 @@
-package com.bss.carrent.data
+package com.bss.carrent.data.car
 
 enum class CarType : java.io.Serializable {
     FUEL_CELL,

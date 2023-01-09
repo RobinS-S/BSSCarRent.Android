@@ -9,11 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bss.carrent.R
-import com.bss.carrent.data.Car
-import com.bss.carrent.data.CarType
-import com.bss.carrent.data.CombustionFuelType
+import com.bss.carrent.data.car.CarDto
 import com.bss.carrent.databinding.FragmentHomeBinding
-import java.time.LocalDate
+import com.bss.carrent.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
 
@@ -38,14 +36,17 @@ class HomeFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         binding.carListRecyclerView.layoutManager = layoutManager
 
+        val carListSwipeRefresh: SwipeRefreshLayout = binding.carListSwipeRefresh
+        carListSwipeRefresh.isRefreshing = true
+
         carAdapter = CarAdapter()
-        carAdapter.setOnItemClickListener(object: CarAdapter.OnItemClickListener {
-            override fun onItemClick(car: Car) {
+        carAdapter.setOnItemClickListener(object : CarAdapter.OnItemClickListener {
+            override fun onItemClick(carDto: CarDto) {
                 val fragmentTransaction = parentFragmentManager.beginTransaction()
 
                 val carDetailFragment = CarDetailFragment()
                 val args = Bundle()
-                args.putSerializable("car", car)
+                args.putSerializable("carId", carDto.id)
                 carDetailFragment.arguments = args
 
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main, carDetailFragment)
@@ -56,7 +57,7 @@ class HomeFragment : Fragment() {
 
         binding.carListRecyclerView.adapter = carAdapter
 
-        homeViewModel.carList.observe(viewLifecycleOwner) { carList ->
+        homeViewModel.carDtoList.observe(viewLifecycleOwner) { carList ->
             carList?.let {
                 carAdapter.setCarList(it)
                 carAdapter.notifyDataSetChanged()
@@ -64,7 +65,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        binding.carListSwipeRefresh.setOnRefreshListener {
+        carListSwipeRefresh.setOnRefreshListener {
             homeViewModel.getCars(requireContext())
         }
 

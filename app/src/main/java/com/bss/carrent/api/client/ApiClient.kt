@@ -1,6 +1,7 @@
-package com.bss.carrent.api
+package com.bss.carrent.api.client
 
 import android.content.Context
+import com.bss.carrent.misc.AuthHelper
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -13,17 +14,15 @@ private const val BASE_URL = "https://bsscarrent.azurewebsites.net/api/"
 
 object ApiClient {
     fun <T : ApiService> createService(
-        context: Context,
         serviceClass: Class<T>
     ): T {
-        val prefsHelper = PrefsHelper(context)
 
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .add(LocalDate::class.java, LocalDateJsonAdapter())
             .build()
 
-        val authenticator = Authentication(prefsHelper.getUsername(), prefsHelper.getPassword())
+        //val authenticator = Authentication(authHelper.getUsername(), authHelper.getPassword())
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS)
 
@@ -32,7 +31,7 @@ object ApiClient {
             .followSslRedirects(false)
             .addInterceptor(loggingInterceptor)
             .retryOnConnectionFailure(false)
-            .authenticator(authenticator)
+            //.authenticator(authenticator)
 
         val retrofit = Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))

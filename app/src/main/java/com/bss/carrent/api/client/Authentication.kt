@@ -1,4 +1,4 @@
-package com.bss.carrent.api
+package com.bss.carrent.api.client
 
 import okhttp3.*
 

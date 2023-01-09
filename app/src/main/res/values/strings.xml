@@ -76,4 +76,11 @@
     <string name="car_current_kilometers">Current kilometers:</string>
     <string name="car_button_rental_options">View rental options</string>
     <string name="car_prices_sum_label">Total price:</string>
+    <string name="car_type_combustion">Combustion</string>
+    <string name="car_type_fuel_cell">Fuel cell</string>
+    <string name="car_type_electric">Electric</string>
+    <string name="fuel_type_gasoline">Gasoline</string>
+    <string name="fuel_type_diesel">Diesel</string>
+    <string name="car_type_gas">Gas</string>
+    <string name="car_detail_owner">Owner</string>
 </resources>
