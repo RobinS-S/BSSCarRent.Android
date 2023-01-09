@@ -96,6 +96,8 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
                 Glide.with(context)
                     .load(CarApi.generateImageUrl(carDto.id, imgId))
                     .into(imageView)
+            } else {
+                imageView.setImageResource(R.drawable.unknown_car);
             }
         }
     }

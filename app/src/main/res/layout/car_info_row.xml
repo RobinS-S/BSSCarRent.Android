@@ -32,7 +32,9 @@
                 android:contentDescription="Car image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_menu_gallery" />
+                app:srcCompat="@drawable/unknown_car"
+                android:scaleType="centerInside"
+                />
 
             <TextView
                 android:id="@+id/rv_car_brand_label"

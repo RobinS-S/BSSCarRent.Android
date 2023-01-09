@@ -13,9 +13,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
+import com.bss.carrent.R
+import com.bss.carrent.api.CarApi
 import com.bss.carrent.databinding.FragmentCarDetailBinding
 import com.bss.carrent.misc.Helpers
 import com.bss.carrent.viewmodel.CarDetailViewModel
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class CarDetailFragment : Fragment() {
     private var _binding: FragmentCarDetailBinding? = null
@@ -37,6 +41,7 @@ class CarDetailFragment : Fragment() {
         val root: View = binding.root
 
         val carModelName: TextView = binding.carDetailModelName
+        val carColorName: TextView = binding.carDetailColorName
         val carDetailSwipeRefresh: SwipeRefreshLayout = binding.carDetailSwipeRefresh
         val carDetailImagesViewpager: ViewPager2 = binding.carDetailImagesViewpager
         val carDetailCarOwner: TextView = binding.carDetailCarOwner
@@ -68,18 +73,28 @@ class CarDetailFragment : Fragment() {
         carDetailViewModel.carDto.observe(viewLifecycleOwner) {
             carDetailBrandName.text = it.brand
             carModelName.text = it.model
-            //carColor????
+            carColorName.text = it.color
             carDetailCurrentKilometers.text = it.kilometersCurrent.toString()
             carDetailPricePerHour.text = Helpers.formatDoubleWithOptionalDecimals(it.pricePerHour)
             carDetailPricePerKilometer.text = Helpers.formatDoubleWithOptionalDecimals(it.pricePerKilometer)
-            //licenseplate??
             carDetailYear.text = it.constructed.year.toString()
-            carDetailCarType.text = it.carType.toString()
+            carDetailCarType.setText(Helpers.getCarTypeName(it.carType))
             carDetailApk.text = Helpers.formatShortDate(it.apkUntil)
             carDetailFuelTypeLabel.isVisible = it.fuelType != null
-            carDetailFuelType.text = it.fuelType.toString()
+            if(it.fuelType != null) {
+                carDetailFuelType.setText(Helpers.getCombustionFuelTypeName(it.fuelType))
+            }
             carDetailFuelType.isVisible = it.fuelType != null
             carDetailHireprice.text = Helpers.formatDoubleWithOptionalDecimals(it.initialCost)
+
+            if(it.imageIds != null && it.imageIds.isNotEmpty()) {
+                val tabLayout: TabLayout = binding.tabLayout
+                val imageUrls = it.imageIds.map { img -> CarApi.generateImageUrl(it.id, img)}
+
+                carDetailImagesViewpager.adapter = CarImageSliderAdapter(this, imageUrls)
+                TabLayoutMediator(tabLayout, carDetailImagesViewpager) { tab, position -> }.attach()
+            }
+
             carDetailSwipeRefresh.isRefreshing = false
         }
         carDetailViewModel.userDto.observe(viewLifecycleOwner) {
