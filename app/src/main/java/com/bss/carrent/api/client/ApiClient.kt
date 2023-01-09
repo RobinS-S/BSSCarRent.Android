@@ -10,9 +10,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.time.LocalDate
 
-private const val BASE_URL = "https://bsscarrent.azurewebsites.net/api/"
-
 object ApiClient {
+    const val BASE_URL = "https://bsscarrent.azurewebsites.net/api/"
+
     fun <T : ApiService> createService(
         serviceClass: Class<T>
     ): T {

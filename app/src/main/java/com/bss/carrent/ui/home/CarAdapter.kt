@@ -1,5 +1,6 @@
 package com.bss.carrent.ui.home
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,12 +9,15 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bss.carrent.R
+import com.bss.carrent.api.CarApi
 import com.bss.carrent.data.car.CarDto
 import com.bss.carrent.misc.Helpers
+import com.bumptech.glide.Glide
 
 class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
     private var carDtoList: List<CarDto> = emptyList()
     private lateinit var listener: OnItemClickListener
+    private lateinit var context: Context
 
     interface OnItemClickListener {
         fun onItemClick(carDto: CarDto)
@@ -30,6 +34,7 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.car_info_row, parent, false)
+        this.context = parent.context
         return CarViewHolder(view)
     }
 
@@ -84,6 +89,14 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
                 Helpers.formatDoubleWithOptionalDecimals(carDto.pricePerKilometer)
             carPriceHourTextView.text =
                 Helpers.formatDoubleWithOptionalDecimals(carDto.pricePerHour)
+
+            if(carDto.imageIds != null && carDto.imageIds.isNotEmpty()) {
+                val imgId = carDto.imageIds.first()
+
+                Glide.with(context)
+                    .load(CarApi.generateImageUrl(carDto.id, imgId))
+                    .into(imageView)
+            }
         }
     }
 }
