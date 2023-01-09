@@ -118,8 +118,8 @@
                 android:layout_marginLeft="4dp"
                 android:text="..."
                 android:textSize="22dp"
-                app:layout_constraintLeft_toRightOf="@id/car_detail_model_name_label"
-                app:layout_constraintTop_toTopOf="@id/car_detail_model_name_label" />
+                app:layout_constraintLeft_toRightOf="@id/car_detail_color_name_label"
+                app:layout_constraintTop_toTopOf="@id/car_detail_color_name_label" />
 
                 <TextView
                 android:id="@+id/car_detail_constructionyear_label"
