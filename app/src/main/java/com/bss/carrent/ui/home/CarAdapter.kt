@@ -79,10 +79,16 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
             modelTextView.text = carDto.model
             buildYearTextView.text = carDto.constructed.year.toString()
             colorTextView.text = carDto.color
-            carTypeTextView.text = carDto.carType.toString()
+            carTypeTextView.setText(Helpers.getCarTypeName(carDto.carType))
             carFuelTypeLabelTextView.isVisible = (carDto.fuelType != null)
             carFuelTypeTextView.isVisible = carDto.fuelType != null
-            carFuelTypeTextView.text = carDto.fuelType?.toString() ?: ""
+
+            if(carDto.fuelType != null) {
+                carFuelTypeTextView.setText(Helpers.getCombustionFuelTypeName(carDto.fuelType))
+            } else {
+                carFuelTypeTextView.text = ""
+            }
+
             carInitialCostTextView.text =
                 Helpers.formatDoubleWithOptionalDecimals(carDto.initialCost)
             carPriceKmTextView.text =
