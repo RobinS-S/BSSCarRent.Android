@@ -8,16 +8,14 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.bss.carrent.R
-import com.bss.carrent.data.Invoice
-import com.bss.carrent.databinding.FragmentInvoiceBinding
+import com.bss.carrent.data.InvoiceDto
+import com.bss.carrent.databinding.InvoiceDetailFragmentBinding
 
 class InvoiceDetailFragment : Fragment() {
 
-    private var _binding: FragmentInvoiceBinding? = null
+    private var _binding: InvoiceDetailFragmentBinding? = null
 
-    private lateinit var invoice: Invoice
+    private lateinit var invoice: InvoiceDto
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -29,25 +27,24 @@ class InvoiceDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        invoice = arguments?.getSerializable("invoice") as Invoice
+        invoice = arguments?.getSerializable("invoice") as InvoiceDto
 
         val invoiceDetailViewModel =
-            ViewModelProvider(this).get(InvoiceDetailViewModel::class.java)
+            ViewModelProvider(this)[InvoiceDetailViewModel::class.java]
 
-        _binding = FragmentInvoiceBinding.inflate(inflater, container, false)
+        _binding = InvoiceDetailFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val invoiceDetailId: TextView = binding.invoiceIdValue
-        val payButton: Button = binding.payInvoiceButton
-        invoiceDetailViewModel.text.observe(viewLifecycleOwner) {
-            invoiceDetailId.text = it
-        }
-        payButton.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.pay_invoice)
-        }
+        val invoiceId: TextView = binding.invoiceDetailIdValue
+        val invoiceTotalPrice: TextView = binding.invoiceDetailTotalPriceValue
 
-        invoiceDetailViewModel.setText(invoice.id)
+        invoiceId.text = invoice.id.toString()
+        invoiceTotalPrice.text = invoice.totalPrice.toString()
 
+//        val payButton: Button = binding.payInvoiceButton
+//        payButton.setOnClickListener { view ->
+//            view.findNavController().navigate(R.id.pay_invoice)
+//        }
         return root
     }
 

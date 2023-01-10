@@ -126,4 +126,8 @@
     <string name="hint_phone_international_code">Int. code</string>
     <string name="hint_phone_number">Phone number</string>
     <string name="hint_birth_date">Birthdate</string>
+    <string name="invoice_total_price">Total amount:</string>
+    <string name="invoiceid">-</string>
+    <string name="invoicetotalprice">-</string>
+    <string name="invoice_total_price_label">Total</string>
 </resources>

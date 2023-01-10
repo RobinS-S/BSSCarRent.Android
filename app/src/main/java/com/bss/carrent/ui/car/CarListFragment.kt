@@ -41,6 +41,7 @@ class CarListFragment : Fragment() {
         carAdapter = CarAdapter()
         carAdapter.setOnItemClickListener(object : CarAdapter.OnItemClickListener {
             override fun onItemClick(carDto: CarDto) {
+                parentFragmentManager.popBackStack()
                 val fragmentTransaction = parentFragmentManager.beginTransaction()
 
                 val carDetailFragment = CarDetailFragment()
@@ -50,7 +51,7 @@ class CarListFragment : Fragment() {
 
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main, carDetailFragment)
                 fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+                fragmentTransaction.commitAllowingStateLoss()
             }
         })
 

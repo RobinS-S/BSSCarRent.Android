@@ -32,15 +32,15 @@
 
     <fragment
         android:id="@+id/nav_invoices"
-        android:name="com.bss.carrent.ui.invoice.InvoiceFragment"
+        android:name="com.bss.carrent.ui.invoice.InvoiceListFragment"
         android:label="@string/menu_invoices"
-        tools:layout="@layout/fragment_invoices" />
+        tools:layout="@layout/invoice_list_fragment" />
 
     <fragment
         android:id="@+id/nav_invoice"
-        android:name="com.bss.carrent.ui.invoice.InvoiceDetailFragment"
+        android:name="com.bss.carrent.ui.invoice.InvoiceListFragment"
         android:label="@string/menu_invoice"
-        tools:layout="@layout/fragment_invoice">
+        tools:layout="@layout/invoice_list_fragment">
     </fragment>
 
 </navigation>

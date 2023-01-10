@@ -4,20 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bss.carrent.R
-import com.bss.carrent.data.Invoice
-import com.bss.carrent.databinding.FragmentInvoicesBinding
+import com.bss.carrent.data.InvoiceDto
+import com.bss.carrent.databinding.InvoiceListFragmentBinding
 
+class InvoiceListFragment : Fragment() {
 
-class InvoiceFragment : Fragment() {
-
-    private var _binding: FragmentInvoicesBinding? = null
+    private var _binding: InvoiceListFragmentBinding? = null
     private lateinit var invoiceAdapter: InvoiceAdapter
 
     // This property is only valid between onCreateView and
@@ -32,7 +28,7 @@ class InvoiceFragment : Fragment() {
         val invoiceViewModel =
             ViewModelProvider(this)[InvoiceViewModel::class.java]
 
-        _binding = FragmentInvoicesBinding.inflate(inflater, container, false)
+        _binding = InvoiceListFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val layoutManager = LinearLayoutManager(context)
@@ -40,17 +36,17 @@ class InvoiceFragment : Fragment() {
 
         invoiceAdapter = InvoiceAdapter()
         invoiceAdapter.setOnItemClickListener(object: InvoiceAdapter.OnItemClickListener {
-            override fun onItemClick(invoice: Invoice) {
+            override fun onItemClick(invoice: InvoiceDto) {
+                parentFragmentManager.popBackStack()
                 val fragmentTransaction = parentFragmentManager.beginTransaction()
 
                 val invoiceDetailFragment = InvoiceDetailFragment()
                 val args = Bundle()
                 args.putSerializable("invoice", invoice)
                 invoiceDetailFragment.arguments = args
-
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main, invoiceDetailFragment)
                 fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+                fragmentTransaction.commitAllowingStateLoss()
             }
         })
 

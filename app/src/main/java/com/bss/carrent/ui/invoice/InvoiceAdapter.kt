@@ -8,21 +8,21 @@ import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bss.carrent.R
-import com.bss.carrent.data.Invoice
+import com.bss.carrent.data.InvoiceDto
 
 class InvoiceAdapter : RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder>() {
-    private var invoiceList: List<Invoice> = emptyList()
+    private var invoiceList: List<InvoiceDto> = emptyList()
     private lateinit var listener: OnItemClickListener
 
     interface OnItemClickListener {
-        fun onItemClick(invoice: Invoice)
+        fun onItemClick(invoice: InvoiceDto)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
 
-    fun setInvoiceList(invoiceList: List<Invoice>) {
+    fun setInvoiceList(invoiceList: List<InvoiceDto>) {
         this.invoiceList = invoiceList
         notifyDataSetChanged()
     }
@@ -60,7 +60,7 @@ class InvoiceAdapter : RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder>() 
             }
         }
 
-        fun bind(invoice: Invoice) {
+        fun bind(invoice: InvoiceDto) {
             invoiceIdTextView.text = invoice.id.toString()
             invoiceInitialCostTextView.text = invoice.initialCost.toString()
             invoiceMileageTotalTextView.text = invoice.mileageTotal.toString()

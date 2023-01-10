@@ -27,8 +27,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-
-
     <TextView
         android:id="@+id/invoice_id_label"
         android:layout_width="wrap_content"
@@ -41,15 +39,39 @@
         app:layout_constraintTop_toTopOf="@id/text_invoice" />
 
     <TextView
-        android:id="@+id/invoice_id_value"
+        android:id="@+id/invoice_detail_id_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="28dp"
         android:maxWidth="280dp"
         android:maxLines="1"
-        android:text="@string/empty_invoiceid"
+        android:text="@string/invoiceid"
         app:layout_constraintStart_toEndOf="@id/invoice_id_label"
+        app:layout_constraintTop_toTopOf="@id/text_invoice" />
+
+    <TextView
+        android:id="@+id/invoice_detail_total_price_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="258dp"
+        android:text="@string/invoice_total_price_label"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/text_invoice"
+        app:layout_constraintTop_toTopOf="@id/text_invoice" />
+
+    <TextView
+        android:id="@+id/invoice_detail_total_price_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="248dp"
+        android:maxWidth="280dp"
+        android:maxLines="1"
+        android:textSize="32dp"
+        android:text="@string/invoicetotalprice"
+        app:layout_constraintStart_toEndOf="@id/invoice_detail_total_price_label"
         app:layout_constraintTop_toTopOf="@id/text_invoice" />
 
 
