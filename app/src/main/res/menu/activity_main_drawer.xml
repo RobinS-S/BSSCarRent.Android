@@ -20,5 +20,6 @@
             android:id="@+id/nav_register"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Register" />
+
     </group>
 </menu>

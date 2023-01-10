@@ -42,6 +42,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="nav_header_title">Car Rental Made Easy</string>
     <string name="nav_header_subtitle">Avans Informatica</string>
+
     <string name="email">E-mail address</string>
     <string name="password">Password</string>
     <string name="log_out">Log out</string>
@@ -91,6 +92,29 @@
     <string name="select_a_date">Select a date</string>
     <string name="rental_list_select_rental_type">Rental type</string>
     <string name="menu_rental_list">Rental list</string>
+    <string name="menu_invoice">Invoice</string>
+    <string name="invoice_id">Invoice:</string>
+    <string name="empty_invoiceid">-</string>
+    <string name="menu_invoices">Invoices</string>
+    <string name="invoice_initialcost">Initial cost</string>
+    <string name="empty_invoiceinitialcost">-</string>
+    <string name="invoice_mileagetotal">Mileage total</string>
+    <string name="empty_invoicemileagetotal">-</string>
+    <string name="invoice_mileagecosts">Mileage costs</string>
+    <string name="empty_invoicemileagecosts">-</string>
+    <string name="invoice_kmpackage">km Package</string>
+    <string name="empty_invoicekmpackage">-</string>
+    <string name="invoice_totalprice">Total price</string>
+    <string name="empty_invoicetotalprice">-</string>
+    <string name="invoice_totalhoursused">Hours used</string>
+    <string name="empty_invoicetotalhoursused">-</string>
+    <string name="invoice_totalhourprice">Total hour price</string>
+    <string name="empty_invoicetotalhourprice">-</string>
+    <string name="empty_invoiceispayd">-</string>
+    <string name="pay_invoice_button_state">GONE</string>
+    <string name="invoice_payment_text">Invoice payment</string>
+    <string name="invoice_payment_text_warning">With clicking pay you accept to make use of your debt card.</string>
+
     <string name="now_setting_from">Now setting from</string>
     <string name="now_setting_until">Now setting until</string>
     <string name="time_span_taken">This time span is already taken. Please change your time.</string>
