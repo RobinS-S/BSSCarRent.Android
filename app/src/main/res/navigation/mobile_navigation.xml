@@ -41,16 +41,6 @@
         android:name="com.bss.carrent.ui.invoice.InvoiceDetailFragment"
         android:label="@string/menu_invoice"
         tools:layout="@layout/fragment_invoice">
-        <action
-            android:id="@+id/navigate_to_pay_invoice"
-            app:destination="@id/pay_invoice" />
     </fragment>
-
-    <activity
-        android:id="@+id/pay_invoice"
-        android:name="com.bss.carrent.ui.invoice.PayActivity"
-        android:label="@string/action_pay_invoice"
-        tools:layout="@layout/activity_pay">
-    </activity>
 
 </navigation>

@@ -28,11 +28,5 @@
                 android:value="" />
         </activity>
 
-        <activity
-            android:name=".ui.invoice.PayActivity"
-            android:exported="true"
-            >
-        </activity>
-
     </application>
 </manifest>
