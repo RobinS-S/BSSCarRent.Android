@@ -1,7 +1,5 @@
 package com.bss.carrent.api.client
 
-import android.content.Context
-import com.bss.carrent.misc.AuthHelper
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -31,7 +29,7 @@ object ApiClient {
             .followSslRedirects(false)
             .addInterceptor(loggingInterceptor)
             .retryOnConnectionFailure(false)
-            //.authenticator(authenticator)
+        //.authenticator(authenticator)
 
         val retrofit = Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))

@@ -3,41 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_car_list">
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.bss.carrent.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/nav_car_list"
+        android:name="com.bss.carrent.ui.car.CarListFragment"
+        android:label="@string/menu_car_list"
+        tools:layout="@layout/car_list_fragment" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.bss.carrent.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
-
-    <fragment
-        android:id="@+id/nav_home"
-        android:name="com.bss.carrent.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.bss.carrent.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.bss.carrent.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_rentals"
+        android:name="com.bss.carrent.ui.rental.RentalListFragment"
+        android:label="Rental list"
+        tools:layout="@layout/rental_list_fragment" />
 
     <fragment
         android:id="@+id/nav_login"
-        android:name="com.bss.carrent.ui.login.LoginFragment"
+        android:name="com.bss.carrent.ui.auth.LoginFragment"
         android:label="Login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/login_fragment" />
+
+    <fragment
+        android:id="@+id/nav_register"
+        android:name="com.bss.carrent.ui.auth.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/register_fragment" />
+
 </navigation>

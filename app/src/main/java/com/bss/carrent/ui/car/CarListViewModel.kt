@@ -1,4 +1,4 @@
-package com.bss.carrent.viewmodel
+package com.bss.carrent.ui.car
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -9,7 +9,7 @@ import com.bss.carrent.data.car.CarDto
 import com.bss.carrent.repository.CarRepository
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class CarListViewModel : ViewModel() {
     private val _carDtoList = MutableLiveData<List<CarDto>>()
     private val _isError = MutableLiveData<Boolean>()
 
@@ -30,7 +30,7 @@ class HomeViewModel : ViewModel() {
     fun getCars(context: Context) {
         viewModelScope.launch {
             val repository = CarRepository()
-            val retrievedCars = repository.getAll(context)
+            val retrievedCars = repository.getAll()
             if (retrievedCars == null) {
                 setIsError(true)
             } else {

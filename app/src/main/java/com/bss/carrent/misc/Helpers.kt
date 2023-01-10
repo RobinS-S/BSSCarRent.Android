@@ -26,7 +26,7 @@ object Helpers {
     }
 
     fun getCarTypeName(value: CarType): Int {
-        return when(value) {
+        return when (value) {
             CarType.COMBUSTION -> R.string.car_type_combustion
             CarType.FUEL_CELL -> R.string.car_type_fuel_cell
             CarType.BATTERY_ELECTRIC -> R.string.car_type_electric
@@ -34,7 +34,7 @@ object Helpers {
     }
 
     fun getCombustionFuelTypeName(value: CombustionFuelType): Int {
-        return when(value) {
+        return when (value) {
             CombustionFuelType.GASOLINE -> R.string.fuel_type_gasoline
             CombustionFuelType.DIESEL -> R.string.fuel_type_diesel
             CombustionFuelType.GAS -> R.string.car_type_gas

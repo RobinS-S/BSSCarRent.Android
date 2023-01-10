@@ -119,30 +119,6 @@
                 app:layout_constraintTop_toBottomOf="@id/rv_info_car_buildyear" />
 
             <TextView
-                android:id="@+id/rv_info_car_transmission_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="2dp"
-                android:maxLines="1"
-                android:text="@string/car_transmission_label"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_info_car_color" />
-
-            <TextView
-                android:id="@+id/rv_info_car_transmission"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="2dp"
-                android:maxWidth="280dp"
-                android:maxLines="1"
-                android:text="@string/empty_cartransmission"
-                app:layout_constraintStart_toEndOf="@id/rv_info_car_transmission_label"
-                app:layout_constraintTop_toBottomOf="@id/rv_info_car_color" />
-
-            <TextView
                 android:id="@+id/rv_info_car_cartype_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -152,7 +128,7 @@
                 android:text="@string/car_cartype_label"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_info_car_transmission_label" />
+                app:layout_constraintTop_toBottomOf="@id/rv_info_car_color_label" />
 
             <TextView
                 android:id="@+id/rv_info_car_type"
@@ -164,7 +140,7 @@
                 android:maxLines="1"
                 android:text="@string/empty_cartype"
                 app:layout_constraintStart_toEndOf="@id/rv_info_car_cartype_label"
-                app:layout_constraintTop_toBottomOf="@id/rv_info_car_transmission" />
+                app:layout_constraintTop_toBottomOf="@id/rv_info_car_color" />
 
             <TextView
                 android:id="@+id/rv_info_car_fueltype_label"

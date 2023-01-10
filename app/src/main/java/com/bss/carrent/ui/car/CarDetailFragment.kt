@@ -1,12 +1,10 @@
-package com.bss.carrent.ui.home
+package com.bss.carrent.ui.car
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.SeekBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -15,14 +13,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.bss.carrent.R
 import com.bss.carrent.api.CarApi
-import com.bss.carrent.databinding.FragmentCarDetailBinding
+import com.bss.carrent.databinding.CarDetailFragmentBinding
 import com.bss.carrent.misc.Helpers
-import com.bss.carrent.viewmodel.CarDetailViewModel
+import com.bss.carrent.ui.rental.RentalCreateFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class CarDetailFragment : Fragment() {
-    private var _binding: FragmentCarDetailBinding? = null
+    private var _binding: CarDetailFragmentBinding? = null
     private var carId: Long = -1
 
     private val binding get() = _binding!!
@@ -37,7 +35,7 @@ class CarDetailFragment : Fragment() {
         val carDetailViewModel =
             ViewModelProvider(this)[CarDetailViewModel::class.java]
 
-        _binding = FragmentCarDetailBinding.inflate(inflater, container, false)
+        _binding = CarDetailFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val carModelName: TextView = binding.carDetailModelName
@@ -56,19 +54,8 @@ class CarDetailFragment : Fragment() {
         val carDetailPricePerKilometer: TextView = binding.carDetailPricePerKilometer
         val carDetailHireprice: TextView = binding.carDetailHireprice
         val carDetailCurrentKilometers: TextView = binding.carDetailCurrentKilometers
-        val carDetailPriceTotalLabel: TextView = binding.carDetailPriceTotalLabel
-        val carDetailPriceTotal: TextView = binding.carDetailPriceTotal
         val carDetailButtonViewRentalOptions: Button = binding.carDetailButtonViewRentalOptions
-        val carKmSeekBar: SeekBar = binding.carDetailKmSlider
         carDetailSwipeRefresh.isRefreshing = true
-
-        carDetailSwipeRefresh.isEnabled = false
-        carKmSeekBar.setOnTouchListener { _, event ->
-            when (event.action) {
-                MotionEvent.ACTION_UP -> carDetailSwipeRefresh.isEnabled = true
-            }
-            false
-        }
 
         carDetailViewModel.carDto.observe(viewLifecycleOwner) {
             carDetailBrandName.text = it.brand
@@ -76,20 +63,21 @@ class CarDetailFragment : Fragment() {
             carColorName.text = it.color
             carDetailCurrentKilometers.text = it.kilometersCurrent.toString()
             carDetailPricePerHour.text = Helpers.formatDoubleWithOptionalDecimals(it.pricePerHour)
-            carDetailPricePerKilometer.text = Helpers.formatDoubleWithOptionalDecimals(it.pricePerKilometer)
+            carDetailPricePerKilometer.text =
+                Helpers.formatDoubleWithOptionalDecimals(it.pricePerKilometer)
             carDetailYear.text = it.constructed.year.toString()
             carDetailCarType.setText(Helpers.getCarTypeName(it.carType))
             carDetailApk.text = Helpers.formatShortDate(it.apkUntil)
             carDetailFuelTypeLabel.isVisible = it.fuelType != null
-            if(it.fuelType != null) {
+            if (it.fuelType != null) {
                 carDetailFuelType.setText(Helpers.getCombustionFuelTypeName(it.fuelType))
             }
             carDetailFuelType.isVisible = it.fuelType != null
             carDetailHireprice.text = Helpers.formatDoubleWithOptionalDecimals(it.initialCost)
 
-            if(it.imageIds != null && it.imageIds.isNotEmpty()) {
+            if (it.imageIds != null && it.imageIds.isNotEmpty()) {
                 val tabLayout: TabLayout = binding.tabLayout
-                val imageUrls = it.imageIds.map { img -> CarApi.generateImageUrl(it.id, img)}
+                val imageUrls = it.imageIds.map { img -> CarApi.generateImageUrl(it.id, img) }
 
                 carDetailImagesViewpager.adapter = CarImageSliderAdapter(this, imageUrls)
                 TabLayoutMediator(tabLayout, carDetailImagesViewpager) { _, _ -> }.attach()
@@ -105,6 +93,19 @@ class CarDetailFragment : Fragment() {
             carDetailViewModel.getCar(requireContext(), carId)
         }
         carDetailViewModel.getCar(requireContext(), carId)
+
+        carDetailButtonViewRentalOptions.setOnClickListener {
+            val fragmentTransaction = parentFragmentManager.beginTransaction()
+
+            val rentalCreateFragment = RentalCreateFragment()
+            val args = Bundle()
+            args.putSerializable("car", carDetailViewModel.carDto.value)
+            rentalCreateFragment.arguments = args
+
+            fragmentTransaction.replace(R.id.nav_host_fragment_content_main, rentalCreateFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
 
         return root
     }

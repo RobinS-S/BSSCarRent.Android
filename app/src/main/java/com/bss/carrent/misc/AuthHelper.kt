@@ -21,7 +21,7 @@ class AuthHelper(context: Context) {
     }
 
     fun getAuthorizationHeader(): String? {
-        if(this.areCredentialsFilled()) {
+        if (this.areCredentialsFilled()) {
             return Credentials.basic(this.getUsername()!!, getPassword()!!)
         }
         return null;

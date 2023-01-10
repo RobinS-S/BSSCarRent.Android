@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -12,9 +13,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bss.carrent.databinding.ActivityMainBinding
-import com.bss.carrent.misc.Helpers
 import com.bss.carrent.misc.AuthHelper
-import com.bss.carrent.viewmodel.LoginViewModel
+import com.bss.carrent.misc.Helpers
+import com.bss.carrent.ui.auth.LoginViewModel
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
@@ -27,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var authHelper: AuthHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -49,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_login
+                R.id.nav_car_list, R.id.nav_rentals, R.id.nav_register, R.id.nav_login
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -58,7 +61,6 @@ class MainActivity : AppCompatActivity() {
         authHelper = AuthHelper(applicationContext)
 
         viewModel.userDto.observe(this) { user ->
-            val navView = findViewById<NavigationView>(R.id.nav_view)
             val headerLayout = navView.getHeaderView(0)
             val textView = headerLayout.findViewById<TextView>(R.id.subNavTitle)
             if (user == null) {

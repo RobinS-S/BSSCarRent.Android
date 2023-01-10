@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.CarDetailFragment">
+    tools:context=".ui.car.CarDetailFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/car_detail_swipe_refresh"
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="@string/car_detail_owner"
+                android:text="..."
                 android:textSize="22dp"
                 app:layout_constraintLeft_toRightOf="@id/car_detail_car_owner_label"
                 app:layout_constraintTop_toBottomOf="@id/car_detail_images_viewpager" />
@@ -303,61 +303,6 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/car_detail_current_kilometers_label" />
-
-            <TextView
-                android:id="@+id/car_detail_price_total_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/car_prices_sum_label"
-                android:textSize="22dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/car_detail_button_view_rental_options"
-                app:layout_constraintLeft_toLeftOf="parent" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintBottom_toTopOf="@id/car_detail_price_total">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="0"
-                    android:textSize="22dp" />
-
-                <SeekBar
-                    android:id="@+id/car_detail_km_slider"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:max="10000"
-                    android:progress="0" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="8dp"
-                    android:text="10.000"
-                    android:textSize="22dp" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/car_detail_price_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="..."
-                android:textSize="22dp"
-                app:layout_constraintBottom_toTopOf="@id/car_detail_button_view_rental_options"
-                app:layout_constraintLeft_toRightOf="@id/car_detail_price_total_label" />
 
             <Button
                 android:id="@+id/car_detail_button_view_rental_options"

@@ -1,4 +1,4 @@
-package com.bss.carrent.ui.login
+package com.bss.carrent.ui.auth
 
 import android.os.Bundle
 import android.util.Patterns
@@ -7,19 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bss.carrent.R
-import com.bss.carrent.databinding.FragmentLoginBinding
-import com.bss.carrent.misc.Helpers
+import com.bss.carrent.databinding.LoginFragmentBinding
 import com.bss.carrent.misc.AuthHelper
-import com.bss.carrent.viewmodel.LoginViewModel
+import com.bss.carrent.misc.Helpers
 
 class LoginFragment : Fragment() {
     private lateinit var navController: NavController
-    private var _binding: FragmentLoginBinding? = null
+    private var _binding: LoginFragmentBinding? = null
     private lateinit var viewModel: LoginViewModel
     private var _busy = false
 
@@ -42,14 +42,20 @@ class LoginFragment : Fragment() {
 
         viewModel.userDto.observe(viewLifecycleOwner) { user ->
             if (user != null && _busy) {
-                binding.loginButton.isClickable = true
                 Toast.makeText(
                     context,
                     "Logged in as ${Helpers.getFormattedName(user)}",
                     Toast.LENGTH_LONG
                 ).show()
-                navController.navigate(R.id.nav_home)
+                navController.navigate(R.id.nav_car_list)
                 _busy = false
+            }
+
+            if (user != null) {
+                binding.loginButton.isVisible = false
+                binding.resetLoginDetailsButton.isVisible = true
+            } else if (user == null) {
+                binding.resetLoginDetailsButton.isVisible = false
             }
         }
 
@@ -77,7 +83,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        _binding = LoginFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val gotoLogin: Button = binding.loginButton
@@ -96,6 +102,8 @@ class LoginFragment : Fragment() {
                 "You have logged out.",
                 Toast.LENGTH_LONG
             ).show()
+            binding.resetLoginDetailsButton.isVisible = false
+            binding.loginButton.isVisible = true
         }
 
         gotoLogin.setOnClickListener {
@@ -116,7 +124,6 @@ class LoginFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        viewModel.setIsError(false)
         super.onDestroyView()
         _binding = null
     }

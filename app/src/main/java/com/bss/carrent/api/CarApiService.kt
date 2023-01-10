@@ -25,16 +25,30 @@ interface CarApiService : ApiService {
     suspend fun getCarImageIds(@Path("id") id: Long): Response<List<Long>>
 
     @POST("${CarApi.CONTROLLER_NAME}/{id}/images")
-    suspend fun uploadCarImage(@Header("Authorization") authHeader: String, @Path("id") id: Long, @Part image: MultipartBody.Part): Response<Long>
+    suspend fun uploadCarImage(
+        @Header("Authorization") authHeader: String,
+        @Path("id") id: Long,
+        @Part image: MultipartBody.Part
+    ): Response<Long>
 
     @POST("${CarApi.CONTROLLER_NAME}")
-    suspend fun createCar(@Header("Authorization") authHeader: String, carDto: CarDto): Response<CarDto>
+    suspend fun createCar(
+        @Header("Authorization") authHeader: String,
+        @Body carDto: CarDto
+    ): Response<CarDto>
 
     @PUT("${CarApi.CONTROLLER_NAME}/{id}")
-    suspend fun updateCar(@Header("Authorization") authHeader: String, @Path("id") id: Long, carUpdateDto: CarUpdateDto): Response<CarDto>
+    suspend fun updateCar(
+        @Header("Authorization") authHeader: String,
+        @Path("id") id: Long,
+        @Body carUpdateDto: CarUpdateDto
+    ): Response<CarDto>
 
     @DELETE("${CarApi.CONTROLLER_NAME}/{id}")
-    suspend fun deleteCar(@Header("Authorization") authHeader: String, @Path("id") id: Long): Response<Any>
+    suspend fun deleteCar(
+        @Header("Authorization") authHeader: String,
+        @Path("id") id: Long
+    ): Response<Any>
 }
 
 object CarApi {

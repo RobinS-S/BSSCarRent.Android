@@ -4,6 +4,7 @@ import android.content.Context
 import com.bss.carrent.api.UserApiService
 import com.bss.carrent.api.client.ApiClient
 import com.bss.carrent.data.user.UserDto
+import com.bss.carrent.data.user.UserRegisterDto
 import com.bss.carrent.misc.AuthHelper
 import java.io.IOException
 
@@ -42,5 +43,18 @@ class ProfileRepository {
             }
         }
         return null
+    }
+
+    suspend fun register(registerDto: UserRegisterDto): UserDto? {
+        val profileApiService =
+            ApiClient.createService(UserApiService::class.java)
+        return try {
+            val car = profileApiService.register(registerDto)
+            if (car.code() == 200) {
+                car.body()
+            } else throw IOException()
+        } catch (e: IOException) {
+            null
+        }
     }
 }

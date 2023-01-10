@@ -1,4 +1,4 @@
-package com.bss.carrent.ui.home
+package com.bss.carrent.ui.car
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -52,8 +52,6 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
         private val modelTextView: TextView = itemView.findViewById(R.id.rv_info_car_model)
         private val buildYearTextView: TextView = itemView.findViewById(R.id.rv_info_car_buildyear)
         private val colorTextView: TextView = itemView.findViewById(R.id.rv_info_car_color)
-        private val carTransmissionTextView: TextView =
-            itemView.findViewById(R.id.rv_info_car_transmission)
         private val carTypeTextView: TextView = itemView.findViewById(R.id.rv_info_car_type)
         private val carFuelTypeLabelTextView: TextView =
             itemView.findViewById(R.id.rv_info_car_fueltype_label)
@@ -83,7 +81,7 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
             carFuelTypeLabelTextView.isVisible = (carDto.fuelType != null)
             carFuelTypeTextView.isVisible = carDto.fuelType != null
 
-            if(carDto.fuelType != null) {
+            if (carDto.fuelType != null) {
                 carFuelTypeTextView.setText(Helpers.getCombustionFuelTypeName(carDto.fuelType))
             } else {
                 carFuelTypeTextView.text = ""
@@ -96,7 +94,7 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
             carPriceHourTextView.text =
                 Helpers.formatDoubleWithOptionalDecimals(carDto.pricePerHour)
 
-            if(carDto.imageIds != null && carDto.imageIds.isNotEmpty()) {
+            if (carDto.imageIds != null && carDto.imageIds.isNotEmpty()) {
                 val imgId = carDto.imageIds.first()
 
                 Glide.with(context)

@@ -1,4 +1,4 @@
-package com.bss.carrent.ui.home
+package com.bss.carrent.ui.car
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,12 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bss.carrent.R
 import com.bss.carrent.data.car.CarDto
-import com.bss.carrent.databinding.FragmentHomeBinding
-import com.bss.carrent.viewmodel.HomeViewModel
+import com.bss.carrent.databinding.CarListFragmentBinding
 
-class HomeFragment : Fragment() {
+class CarListFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: com.bss.carrent.databinding.CarListFragmentBinding? = null
     private lateinit var carAdapter: CarAdapter
 
     // This property is only valid between onCreateView and
@@ -27,10 +26,10 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this)[HomeViewModel::class.java]
+        val carListViewModel =
+            ViewModelProvider(this)[CarListViewModel::class.java]
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = CarListFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val layoutManager = LinearLayoutManager(context)
@@ -57,7 +56,7 @@ class HomeFragment : Fragment() {
 
         binding.carListRecyclerView.adapter = carAdapter
 
-        homeViewModel.carDtoList.observe(viewLifecycleOwner) { carList ->
+        carListViewModel.carDtoList.observe(viewLifecycleOwner) { carList ->
             carList?.let {
                 carAdapter.setCarList(it)
                 carAdapter.notifyDataSetChanged()
@@ -66,10 +65,10 @@ class HomeFragment : Fragment() {
         }
 
         carListSwipeRefresh.setOnRefreshListener {
-            homeViewModel.getCars(requireContext())
+            carListViewModel.getCars(requireContext())
         }
 
-        homeViewModel.getCars(requireContext())
+        carListViewModel.getCars(requireContext())
 
         return root
     }

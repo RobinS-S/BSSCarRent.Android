@@ -1,4 +1,4 @@
-package com.bss.carrent.viewmodel
+package com.bss.carrent.ui.auth
 
 import android.content.Context
 import androidx.lifecycle.LiveData
