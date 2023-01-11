@@ -1,14 +1,22 @@
 package com.bss.carrent.ui.invoice
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bss.carrent.R
 import com.bss.carrent.data.InvoiceDto
+import com.bss.carrent.repository.InvoiceRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
 
 class InvoiceAdapter : RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder>() {
     private var invoiceList: List<InvoiceDto> = emptyList()
@@ -49,15 +57,10 @@ class InvoiceAdapter : RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder>() 
         private val invoiceTotalPriceTextView : TextView = itemView.findViewById(R.id.invoice_totalprice_value)
         private val invoiceTotalhoursUsedTextView : TextView = itemView.findViewById(R.id.invoice_totalhoursused_value)
         private val invoiceTotalhourPriceTextView : TextView = itemView.findViewById(R.id.invoice_totalhourprice_value)
-        private val invoiceIsPaydTextView : TextView = itemView.findViewById(R.id.invoice_ispayd_value)
-        private val invoiceIsPaydButtonView : TextView = itemView.findViewById(R.id.pay_invoice_button)
+        private val invoiceIsPaidTextView : TextView = itemView.findViewById(R.id.invoice_ispaid_value)
+        private val invoicePayButton : Button = itemView.findViewById(R.id.pay_invoice_button)
 
         init {
-            itemView.setOnClickListener {
-                val clickedPosition = bindingAdapterPosition
-                val clickedInvoice = invoiceList[clickedPosition]
-                listener.onItemClick(clickedInvoice)
-            }
         }
 
         fun bind(invoice: InvoiceDto) {
@@ -69,8 +72,13 @@ class InvoiceAdapter : RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder>() 
             invoiceTotalPriceTextView.text = invoice.totalPrice.toString()
             invoiceTotalhoursUsedTextView.text = invoice.totalHoursUsed.toString()
             invoiceTotalhourPriceTextView.text = invoice.totalHourPrice.toString()
-            invoiceIsPaydTextView.text = invoice.isPaid.toString()
-            //invoiceIsPaydButtonView.text = View.VISIBLE.toString()
+            invoiceIsPaidTextView.text = invoice.isPaid.toString()
+            invoicePayButton.visibility = if(!invoice.isPaid) View.VISIBLE else View.INVISIBLE
+            invoicePayButton.setOnClickListener {
+                    val repository = InvoiceRepository()
+                    var action = InvoiceListFragmentDirections.actionNavInvoicesToNavInvoice(invoice)
+                    itemView.findNavController().navigate(action)
+            }
         }
     }
 }

@@ -34,13 +34,25 @@
         android:id="@+id/nav_invoices"
         android:name="com.bss.carrent.ui.invoice.InvoiceListFragment"
         android:label="@string/menu_invoices"
-        tools:layout="@layout/invoice_list_fragment" />
+        tools:layout="@layout/invoice_list_fragment" >
+        <action
+            android:id="@+id/action_nav_invoices_to_nav_invoice"
+            app:destination="@id/nav_invoice">
+            <argument
+                android:name="invoice"
+                app:argType="com.bss.carrent.data.InvoiceDto"
+                app:nullable="true" />
+        </action>
+    </fragment>
 
     <fragment
         android:id="@+id/nav_invoice"
-        android:name="com.bss.carrent.ui.invoice.InvoiceListFragment"
+        android:name="com.bss.carrent.ui.invoice.InvoiceDetailFragment"
         android:label="@string/menu_invoice"
-        tools:layout="@layout/invoice_list_fragment">
+        tools:layout="@layout/invoice_detail_fragment">
+        <argument
+            android:name="invoice"
+            app:argType="com.bss.carrent.data.InvoiceDto" />
     </fragment>
 
 </navigation>

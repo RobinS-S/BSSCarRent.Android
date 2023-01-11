@@ -93,7 +93,7 @@
     <string name="rental_list_select_rental_type">Rental type</string>
     <string name="menu_rental_list">Rental list</string>
     <string name="menu_invoice">Invoice</string>
-    <string name="invoice_id">Invoice:</string>
+    <string name="invoice_id">Invoice number:</string>
     <string name="empty_invoiceid">-</string>
     <string name="menu_invoices">Invoices</string>
     <string name="invoice_initialcost">Initial cost</string>
@@ -130,4 +130,6 @@
     <string name="invoiceid">-</string>
     <string name="invoicetotalprice">-</string>
     <string name="invoice_total_price_label">Total</string>
+    <string name="invoicecurrency">€</string>
+    <string name="action_back">Back</string>
 </resources>
