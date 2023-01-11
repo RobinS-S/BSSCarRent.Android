@@ -1,17 +1,27 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.BSSCarRent" parent="Theme.MaterialComponents.DayNight">
+    <style name="Theme.BSSCarRent" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorSecondaryVariant</item>
+        <item name="android:actionBarStyle">?attr/colorSecondaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.BSSCarRent.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Set the splash screen background, animated icon, and animation duration. -->
+        <item name="windowSplashScreenBackground">?attr/colorSecondaryVariant</item>
+
+        <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
+             animated drawable. One of these is required. -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_bss_logo_round</item>
+
+        <!-- Set the theme of the Activity that directly follows your splash screen. -->
+        <!-- Required -->
+        <item name="postSplashScreenTheme">@style/Theme.BSSCarRent</item>
+        <item name="android:statusBarColor">?attr/colorSecondaryVariant</item>
     </style>
 
-    <style name="Theme.BSSCarRent.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.BSSCarRent.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-    <style name="Theme.BSSCarRent.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+    <style name="Theme.BSSCarRent.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Dark" />
 </resources>

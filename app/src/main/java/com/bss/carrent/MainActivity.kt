@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
@@ -28,9 +29,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var authHelper: AuthHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val splashScreen = installSplashScreen()
-
+        if (savedInstanceState != null) {
+            this.setTheme(R.style.Theme_BSSCarRent);
+        }
         super.onCreate(savedInstanceState)
+
+        if (savedInstanceState == null) {
+            this.installSplashScreen();
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
