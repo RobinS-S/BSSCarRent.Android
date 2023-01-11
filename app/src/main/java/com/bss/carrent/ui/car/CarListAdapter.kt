@@ -14,7 +14,7 @@ import com.bss.carrent.data.car.CarDto
 import com.bss.carrent.misc.Helpers
 import com.bumptech.glide.Glide
 
-class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
+class CarListAdapter : RecyclerView.Adapter<CarListAdapter.CarViewHolder>() {
     private var carDtoList: List<CarDto> = emptyList()
     private lateinit var listener: OnItemClickListener
     private lateinit var context: Context

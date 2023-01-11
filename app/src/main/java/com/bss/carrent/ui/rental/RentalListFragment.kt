@@ -20,7 +20,6 @@ class RentalListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
-        viewModel = ViewModelProvider(requireActivity())[RentalListViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -28,9 +27,11 @@ class RentalListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = RentalListFragmentBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(requireActivity())[RentalListViewModel::class.java]
         val root: View = binding.root
+
+        viewModel.getRentals(requireContext(), "mine")
 
         return root
     }

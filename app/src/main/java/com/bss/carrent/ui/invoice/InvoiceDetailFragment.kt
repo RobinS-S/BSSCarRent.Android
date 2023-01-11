@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bss.carrent.R
-import com.bss.carrent.data.InvoiceDto
 import com.bss.carrent.databinding.InvoiceDetailFragmentBinding
 
 class InvoiceDetailFragment : Fragment() {
