@@ -7,6 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 object ApiClient {
     const val BASE_URL = "https://bsscarrent.azurewebsites.net/api/"
@@ -18,9 +19,9 @@ object ApiClient {
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .add(LocalDate::class.java, LocalDateJsonAdapter())
+            .add(LocalDateTime::class.java, LocalDateTimeJsonAdapter())
             .build()
 
-        //val authenticator = Authentication(authHelper.getUsername(), authHelper.getPassword())
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS)
 
@@ -29,7 +30,6 @@ object ApiClient {
             .followSslRedirects(false)
             .addInterceptor(loggingInterceptor)
             .retryOnConnectionFailure(false)
-        //.authenticator(authenticator)
 
         val retrofit = Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))

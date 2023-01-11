@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="car_type_names">
+        <item>Fuel cell</item>
+        <item>Electric</item>
+        <item>Combustion</item>
+    </string-array>
+    <string-array name="fuel_type_names">
+        <item>Gasoline</item>
+        <item>Diesel</item>
+        <item>Gas</item>
+    </string-array>
+</resources>

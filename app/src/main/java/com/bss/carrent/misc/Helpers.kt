@@ -40,4 +40,8 @@ object Helpers {
             CombustionFuelType.GAS -> R.string.car_type_gas
         }
     }
+
+    fun getFormattedPhone(phoneInternationalCode: String, phoneNumber: String): String {
+        return "+${phoneInternationalCode}-${phoneNumber}"
+    }
 }
