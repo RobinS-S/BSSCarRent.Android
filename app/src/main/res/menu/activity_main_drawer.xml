@@ -13,6 +13,11 @@
             android:icon="@drawable/ic_menu_home"
             android:title="@string/menu_rental_list" />
         <item
+            android:id="@id/nav_invoices"
+            android:icon="@drawable/ic_menu_invoice"
+            android:title="@string/menu_invoice" />
+
+        <item
             android:id="@+id/nav_login"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Login" />
@@ -20,5 +25,6 @@
             android:id="@+id/nav_register"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Register" />
+
     </group>
 </menu>

@@ -95,6 +95,7 @@ class CarDetailFragment : Fragment() {
         carDetailViewModel.getCar(requireContext(), carId)
 
         carDetailButtonViewRentalOptions.setOnClickListener {
+            parentFragmentManager.popBackStack()
             val fragmentTransaction = parentFragmentManager.beginTransaction()
 
             val rentalCreateFragment = RentalCreateFragment()
@@ -104,7 +105,7 @@ class CarDetailFragment : Fragment() {
 
             fragmentTransaction.replace(R.id.nav_host_fragment_content_main, rentalCreateFragment)
             fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            fragmentTransaction.commitAllowingStateLoss()
         }
 
         return root
