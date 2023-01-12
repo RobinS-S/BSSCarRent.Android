@@ -12,7 +12,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:cardBackgroundColor="@color/lightGray"
+        app:cardBackgroundColor="?attr/colorSecondary"
         app:cardCornerRadius="8dp"
         app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -200,16 +200,27 @@
                 app:layout_constraintStart_toEndOf="@id/invoice_totalhourprice_label"
                 app:layout_constraintTop_toTopOf="@id/invoice_totalhourprice_label" />
 
+            <TextView
+                android:id="@+id/invoice_is_paid_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/is_paid_label"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/invoice_totalhourprice_label" />
 
             <TextView
                 android:id="@+id/invoice_ispaid_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="144dp"
+                android:layout_marginStart="4dp"
+                android:maxWidth="280dp"
+                android:maxLines="1"
                 android:text="@string/empty_invoiceispayd"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/invoice_is_paid_label"
+                app:layout_constraintTop_toTopOf="@id/invoice_is_paid_label" />
 
             <Button
                 android:id="@+id/pay_invoice_button"
