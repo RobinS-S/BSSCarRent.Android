@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -18,6 +19,7 @@ import com.bss.carrent.databinding.CarDetailFragmentBinding
 import com.bss.carrent.misc.Helpers
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.launch
 
 class CarDetailFragment : Fragment() {
     private var _binding: CarDetailFragmentBinding? = null
@@ -88,9 +90,13 @@ class CarDetailFragment : Fragment() {
         }
 
         carDetailSwipeRefresh.setOnRefreshListener {
+            lifecycleScope.launch {
+                carDetailViewModel.getCar(requireContext(), args.carId)
+            }
+        }
+        lifecycleScope.launch {
             carDetailViewModel.getCar(requireContext(), args.carId)
         }
-        carDetailViewModel.getCar(requireContext(), args.carId)
 
         carDetailButtonViewRentalOptions.setOnClickListener {
             if (carDetailViewModel.carDto.value != null) {
