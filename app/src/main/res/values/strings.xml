@@ -150,4 +150,7 @@
     <string name="rental_tenant">Tenant</string>
     <string name="rental_owner">Owner</string>
     <string name="rental_car">Car</string>
+    <string name="rental_deliver_button">Deliver car</string>
+    <string name="rental_cancel_button">Cancel</string>
+    <string name="rental_pickup_car_button">Pickup car</string>
 </resources>
