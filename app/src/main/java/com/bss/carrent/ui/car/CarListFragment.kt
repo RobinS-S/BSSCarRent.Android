@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bss.carrent.data.car.CarDto
 import com.bss.carrent.databinding.CarListFragmentBinding
+import kotlinx.coroutines.launch
 
 class CarListFragment : Fragment() {
 
@@ -57,10 +59,14 @@ class CarListFragment : Fragment() {
         }
 
         carListSwipeRefresh.setOnRefreshListener {
-            carListViewModel.getCars(requireContext())
+            lifecycleScope.launch {
+                carListViewModel.getCars(requireContext())
+            }
         }
 
-        carListViewModel.getCars(requireContext())
+        lifecycleScope.launch {
+            carListViewModel.getCars(requireContext())
+        }
 
         return root
     }

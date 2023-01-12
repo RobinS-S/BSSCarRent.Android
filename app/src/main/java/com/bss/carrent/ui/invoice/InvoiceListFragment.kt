@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bss.carrent.data.InvoiceDto
 import com.bss.carrent.databinding.InvoiceListFragmentBinding
+import kotlinx.coroutines.launch
 
 class InvoiceListFragment : Fragment() {
 
@@ -50,10 +52,14 @@ class InvoiceListFragment : Fragment() {
         }
 
         binding.invoicesListSwipeRefresh.setOnRefreshListener {
-            invoiceViewModel.getInvoices(requireContext())
+            lifecycleScope.launch {
+                invoiceViewModel.getInvoices(requireContext())
+            }
         }
 
-        invoiceViewModel.getInvoices(requireContext())
+        lifecycleScope.launch {
+            invoiceViewModel.getInvoices(requireContext())
+        }
 
         return root
     }
