@@ -27,9 +27,17 @@ class RentalListViewModel : ViewModel() {
         _rentalDtoList.value = value
     }
 
-    fun getRentals(context: Context) {
+    fun getRentals(context: Context, value: String) {
         viewModelScope.launch {
             val repository = RentalRepository()
+            val rentals =
+                if (value == "mine") repository.getMine(context) else repository.getOwned(context)
+            if (rentals == null) {
+                setIsError(true)
+            } else {
+                setIsError(false)
+                setRentalList(rentals)
+            }
         }
     }
 }

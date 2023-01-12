@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.car.CarEditFragment">
+
+    <TextView
+        android:id="@+id/car_detail_brand_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/car_brand_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/car_detail_brand_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:text="..."
+        app:layout_constraintLeft_toRightOf="@id/car_detail_brand_name_label"
+        app:layout_constraintTop_toTopOf="@id/car_detail_brand_name_label" />
+
+    <TextView
+        android:id="@+id/car_detail_model_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="@string/car_model_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_brand_name" />
+
+    <EditText
+        android:id="@+id/car_detail_model_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:text="..."
+        app:layout_constraintLeft_toRightOf="@id/car_detail_model_name_label"
+        app:layout_constraintTop_toTopOf="@id/car_detail_model_name_label" />
+
+    <TextView
+        android:id="@+id/car_detail_color_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="@string/car_color_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_model_name" />
+
+    <EditText
+        android:id="@+id/car_detail_color_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:text="..."
+        app:layout_constraintLeft_toRightOf="@id/car_detail_color_name_label"
+        app:layout_constraintTop_toTopOf="@id/car_detail_color_name_label" />
+
+    <TextView
+        android:id="@+id/car_detail_constructionyear_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="@string/car_buildyear_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_color_name" />
+
+    <EditText
+        android:id="@+id/car_detail_constructionyear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:text="..."
+        app:layout_constraintLeft_toRightOf="@id/car_detail_constructionyear_label"
+        app:layout_constraintTop_toTopOf="@id/car_detail_constructionyear_label" />
+
+    <TextView
+        android:id="@+id/car_detail_cartype_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="@string/car_cartype_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_constructionyear" />
+
+    <Spinner
+        android:id="@+id/car_detail_cartype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/car_type_names"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.023"
+        app:layout_constraintStart_toEndOf="@+id/car_detail_cartype_label"
+        app:layout_constraintTop_toBottomOf="@+id/car_detail_constructionyear"
+        app:layout_constraintVertical_bias="0.009" />
+
+    <TextView
+        android:id="@+id/car_detail_apk_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/car_apk_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/car_detail_cartype_label" />
+
+    <EditText
+        android:id="@+id/car_detail_apk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:text="..."
+        app:layout_constraintLeft_toRightOf="@id/car_detail_apk_label"
+        app:layout_constraintTop_toTopOf="@id/car_detail_apk_label" />
+
+    <TextView
+        android:id="@+id/car_detail_fueltype_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/car_fueltype_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_apk" />
+
+    <Spinner
+        android:id="@+id/car_detail_fueltype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginEnd="172dp"
+        android:entries="@array/fuel_type_names"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/car_detail_fueltype_label"
+        app:layout_constraintTop_toTopOf="@id/car_detail_fueltype_label"
+        app:layout_constraintVertical_bias="0.01" />
+
+    <TextView
+        android:id="@+id/car_detail_price_per_hour_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="@string/car_priceperhour_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/car_detail_brand_name_label" />
+
+    <EditText
+        android:id="@+id/car_detail_price_per_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="..."
+        android:textColor="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_price_per_hour_label" />
+
+    <TextView
+        android:id="@+id/car_detail_price_per_kilometer_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="@string/car_priceperkilometer_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_price_per_hour" />
+
+    <EditText
+        android:id="@+id/car_detail_price_per_kilometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="..."
+        android:textColor="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_price_per_kilometer_label" />
+
+    <TextView
+        android:id="@+id/car_detail_hireprice_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="@string/car_hireprice_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_price_per_kilometer" />
+
+    <EditText
+        android:id="@+id/car_detail_hireprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="..."
+        android:textColor="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_hireprice_label" />
+
+    <TextView
+        android:id="@+id/car_detail_current_kilometers_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/car_current_kilometers"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_hireprice" />
+
+    <EditText
+        android:id="@+id/car_detail_current_kilometers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="..."
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_current_kilometers_label" />
+
+
+    <Button
+        android:id="@+id/car_save_edits_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="?attr/colorSecondary"
+        android:text="@string/car_edit_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="8dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

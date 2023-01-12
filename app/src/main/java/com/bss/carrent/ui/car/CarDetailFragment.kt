@@ -9,19 +9,21 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
-import com.bss.carrent.R
 import com.bss.carrent.api.CarApi
 import com.bss.carrent.databinding.CarDetailFragmentBinding
 import com.bss.carrent.misc.Helpers
-import com.bss.carrent.ui.rental.RentalCreateFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.launch
 
 class CarDetailFragment : Fragment() {
     private var _binding: CarDetailFragmentBinding? = null
-    private var carId: Long = -1
+    private val args: CarDetailFragmentArgs by navArgs()
 
     private val binding get() = _binding!!
 
@@ -30,8 +32,6 @@ class CarDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        carId = arguments?.getSerializable("carId") as Long
-
         val carDetailViewModel =
             ViewModelProvider(this)[CarDetailViewModel::class.java]
 
@@ -90,22 +90,30 @@ class CarDetailFragment : Fragment() {
         }
 
         carDetailSwipeRefresh.setOnRefreshListener {
-            carDetailViewModel.getCar(requireContext(), carId)
+            lifecycleScope.launch {
+                carDetailViewModel.getCar(requireContext(), args.carId)
+            }
         }
-        carDetailViewModel.getCar(requireContext(), carId)
+        lifecycleScope.launch {
+            carDetailViewModel.getCar(requireContext(), args.carId)
+        }
 
         carDetailButtonViewRentalOptions.setOnClickListener {
-            parentFragmentManager.popBackStack()
-            val fragmentTransaction = parentFragmentManager.beginTransaction()
+            if (carDetailViewModel.carDto.value != null) {
+                val action = CarDetailFragmentDirections.actionNavCarDetailsToNavCreateRental(
+                    carDetailViewModel.carDto.value!!
+                )
+                requireParentFragment().findNavController().navigate(action)
+            }
+        }
 
-            val rentalCreateFragment = RentalCreateFragment()
-            val args = Bundle()
-            args.putSerializable("car", carDetailViewModel.carDto.value)
-            rentalCreateFragment.arguments = args
-
-            fragmentTransaction.replace(R.id.nav_host_fragment_content_main, rentalCreateFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commitAllowingStateLoss()
+        carDetailOwnerButton.setOnClickListener {
+            if (carDetailViewModel.userDto.value != null) {
+                val action = CarDetailFragmentDirections.actionNavCarDetailsToNavUser(
+                    carDetailViewModel.userDto.value!!
+                )
+                requireParentFragment().findNavController().navigate(action)
+            }
         }
 
         return root

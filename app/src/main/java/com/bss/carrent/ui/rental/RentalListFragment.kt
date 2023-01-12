@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bss.carrent.databinding.RentalListFragmentBinding
+import kotlinx.coroutines.launch
 
 class RentalListFragment : Fragment() {
     private lateinit var navController: NavController
@@ -20,7 +22,6 @@ class RentalListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
-        viewModel = ViewModelProvider(requireActivity())[RentalListViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -28,9 +29,13 @@ class RentalListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = RentalListFragmentBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(requireActivity())[RentalListViewModel::class.java]
         val root: View = binding.root
+
+        lifecycleScope.launch {
+            viewModel.getRentals(requireContext(), "mine")
+        }
 
         return root
     }

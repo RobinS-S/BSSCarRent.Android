@@ -9,7 +9,73 @@
         android:id="@+id/nav_car_list"
         android:name="com.bss.carrent.ui.car.CarListFragment"
         android:label="@string/menu_car_list"
-        tools:layout="@layout/car_list_fragment" />
+        tools:layout="@layout/car_list_fragment" >
+        <action
+            android:id="@+id/action_nav_car_list_to_nav_car_details"
+            app:destination="@id/nav_car_details">
+            <argument
+                android:name="carId"
+                app:argType="long" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_own_car_list"
+        android:name="com.bss.carrent.ui.car.CarOwnListFragment"
+        android:label="@string/menu_own_cars_list"
+        tools:layout="@layout/car_own_list_fragment">
+        <action
+            android:id="@+id/action_nav_own_car_list_to_nav_car_edit"
+            app:destination="@id/nav_car_edit">
+            <argument
+                android:name="car"
+                app:argType="com.bss.carrent.data.car.CarDto" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_car_details"
+        android:name="com.bss.carrent.ui.car.CarDetailFragment"
+        android:label="@string/car_detail"
+        tools:layout="@layout/car_detail_fragment">
+        <argument
+            android:name="carId"
+            app:argType="long" />
+            <action
+                android:id="@+id/action_nav_car_details_to_nav_create_rental"
+                app:destination="@id/nav_create_rental">
+                <argument
+                    android:name="car"
+                    app:argType="com.bss.carrent.data.car.CarDto" />
+        </action>
+        <action
+            android:id="@+id/action_nav_car_details_to_nav_user"
+            app:destination="@id/nav_user">
+            <argument
+                android:name="user"
+                app:argType="com.bss.carrent.data.user.UserDto" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_car_edit"
+        android:name="com.bss.carrent.ui.car.CarEditFragment"
+        android:label="@string/car_edit"
+        tools:layout="@layout/car_edit_fragment">
+        <argument
+            android:name="car"
+            app:argType="com.bss.carrent.data.car.CarDto" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_create_rental"
+        android:name="com.bss.carrent.ui.rental.RentalCreateFragment"
+        android:label="@string/rental_create"
+        tools:layout="@layout/rental_create_fragment">
+        <argument
+            android:name="car"
+            app:argType="com.bss.carrent.data.car.CarDto" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_rentals"
@@ -53,6 +119,16 @@
         <argument
             android:name="invoice"
             app:argType="com.bss.carrent.data.InvoiceDto" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_user"
+        android:name="com.bss.carrent.ui.user.UserDetailFragment"
+        android:label="@string/user_detail"
+        tools:layout="@layout/user_detail_fragment">
+        <argument
+            android:name="user"
+            app:argType="com.bss.carrent.data.user.UserDto" />
     </fragment>
 
 </navigation>

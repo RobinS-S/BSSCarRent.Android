@@ -4,16 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bss.carrent.R
 import com.bss.carrent.data.InvoiceDto
-import com.bss.carrent.data.car.CarDto
 import com.bss.carrent.databinding.InvoiceListFragmentBinding
-import com.bss.carrent.ui.car.CarAdapter
+import kotlinx.coroutines.launch
 
 class InvoiceListFragment : Fragment() {
 
@@ -55,10 +52,14 @@ class InvoiceListFragment : Fragment() {
         }
 
         binding.invoicesListSwipeRefresh.setOnRefreshListener {
-            invoiceViewModel.getInvoices(requireContext())
+            lifecycleScope.launch {
+                invoiceViewModel.getInvoices(requireContext())
+            }
         }
 
-        invoiceViewModel.getInvoices(requireContext())
+        lifecycleScope.launch {
+            invoiceViewModel.getInvoices(requireContext())
+        }
 
         return root
     }

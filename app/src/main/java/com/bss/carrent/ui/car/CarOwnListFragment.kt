@@ -11,12 +11,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bss.carrent.data.car.CarDto
-import com.bss.carrent.databinding.CarListFragmentBinding
+import com.bss.carrent.databinding.CarOwnListFragmentBinding
 import kotlinx.coroutines.launch
 
-class CarListFragment : Fragment() {
+class CarOwnListFragment : Fragment() {
 
-    private var _binding: CarListFragmentBinding? = null
+    private var _binding: CarOwnListFragmentBinding? = null
     private lateinit var carListAdapter: CarListAdapter
 
     // This property is only valid between onCreateView and
@@ -28,10 +28,10 @@ class CarListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val carListViewModel =
-            ViewModelProvider(this)[CarListViewModel::class.java]
+        val carOwnViewModel =
+            ViewModelProvider(this)[CarOwnViewModel::class.java]
 
-        _binding = CarListFragmentBinding.inflate(inflater, container, false)
+        _binding = CarOwnListFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val layoutManager = LinearLayoutManager(context)
@@ -43,14 +43,14 @@ class CarListFragment : Fragment() {
         carListAdapter = CarListAdapter()
         carListAdapter.setOnItemClickListener(object : CarListAdapter.OnItemClickListener {
             override fun onItemClick(carDto: CarDto) {
-                var action = CarListFragmentDirections.actionNavCarListToNavCarDetails(carDto.id)
+                var action = CarOwnListFragmentDirections.actionNavOwnCarListToNavCarEdit(carDto)
                 requireParentFragment().findNavController().navigate(action)
             }
         })
 
         binding.carListRecyclerView.adapter = carListAdapter
 
-        carListViewModel.carDtoList.observe(viewLifecycleOwner) { carList ->
+        carOwnViewModel.carDtoList.observe(viewLifecycleOwner) { carList ->
             carList?.let {
                 carListAdapter.setCarList(it)
                 carListAdapter.notifyDataSetChanged()
@@ -60,12 +60,12 @@ class CarListFragment : Fragment() {
 
         carListSwipeRefresh.setOnRefreshListener {
             lifecycleScope.launch {
-                carListViewModel.getCars(requireContext())
+                carOwnViewModel.getMyCars(requireContext())
             }
         }
 
         lifecycleScope.launch {
-            carListViewModel.getCars(requireContext())
+            carOwnViewModel.getMyCars(requireContext())
         }
 
         return root

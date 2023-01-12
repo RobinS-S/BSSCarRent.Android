@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bss.carrent.R
-import com.bss.carrent.data.InvoiceDto
 import com.bss.carrent.databinding.InvoiceDetailFragmentBinding
 import kotlinx.coroutines.launch
 

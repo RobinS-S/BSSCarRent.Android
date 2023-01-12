@@ -13,8 +13,9 @@ import com.bss.carrent.api.CarApi
 import com.bss.carrent.data.car.CarDto
 import com.bss.carrent.misc.Helpers
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.coroutineScope
 
-class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
+class CarListAdapter : RecyclerView.Adapter<CarListAdapter.CarViewHolder>() {
     private var carDtoList: List<CarDto> = emptyList()
     private lateinit var listener: OnItemClickListener
     private lateinit var context: Context
@@ -96,7 +97,6 @@ class CarAdapter : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
 
             if (carDto.imageIds != null && carDto.imageIds.isNotEmpty()) {
                 val imgId = carDto.imageIds.first()
-
                 Glide.with(context)
                     .load(CarApi.generateImageUrl(carDto.id, imgId))
                     .into(imageView)
