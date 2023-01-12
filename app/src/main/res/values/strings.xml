@@ -126,6 +126,7 @@
     <string name="hint_phone_international_code">Int. code</string>
     <string name="hint_phone_number">Phone number</string>
     <string name="hint_birth_date">Birthdate</string>
+    <string name="menu_own_cars_list">Owned cars</string>
     <string name="invoice_total_price">Total amount:</string>
     <string name="invoiceid">-</string>
     <string name="invoicetotalprice">-</string>
@@ -133,4 +134,21 @@
     <string name="invoicecurrency">€</string>
     <string name="action_back">Back</string>
     <string name="is_paid_label">Invoice is</string>
+    <string name="car_edit">Edit car</string>
+    <string name="car_detail">Car details</string>
+    <string name="rental_create">Create rental</string>
+    <string name="user_phone_number">Phone number</string>
+    <string name="user_last_name">Last name</string>
+    <string name="user_infix">Infix</string>
+    <string name="user_first_name">First name</string>
+    <string name="user_detail">User details</string>
+    <string name="rental_datetime_from">Reserved from:</string>
+    <string name="rental_datetime_until">Reserved until:</string>
+    <string name="rental_delivered_at">Delivered at:</string>
+    <string name="rental_picked_up">Picked up at:</string>
+    <string name="rental_total_mileage">Total mileage:</string>
+    <string name="rental_drivingstyle_score">Driving-style score:</string>
+    <string name="rental_tenant">Tenant</string>
+    <string name="rental_owner">Owner</string>
+    <string name="rental_car">Car</string>
 </resources>

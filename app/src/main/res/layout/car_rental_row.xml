@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="?attr/colorSecondary"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/rental_reservation_start_datetime_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/rental_datetime_from"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/rental_reservation_start_datetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:maxWidth="280dp"
+                android:maxLines="1"
+                android:text="..."
+                app:layout_constraintStart_toEndOf="@id/rental_reservation_start_datetime_label"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/rental_reservation_end_datetime_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/rental_datetime_until"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rental_reservation_start_datetime_label" />
+
+            <TextView
+                android:id="@+id/rental_reservation_end_datetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:maxWidth="280dp"
+                android:maxLines="1"
+                android:text="..."
+                app:layout_constraintStart_toEndOf="@id/rental_reservation_end_datetime_label"
+                app:layout_constraintTop_toBottomOf="@id/rental_reservation_start_datetime_label" />
+
+            <TextView
+                android:id="@+id/rental_delivered_datetime_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/rental_delivered_at"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rental_reservation_end_datetime" />
+
+            <TextView
+                android:id="@+id/rental_delivered_datetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:maxWidth="280dp"
+                android:maxLines="1"
+                android:text="..."
+                app:layout_constraintStart_toEndOf="@id/rental_delivered_datetime_label"
+                app:layout_constraintTop_toBottomOf="@id/rental_reservation_end_datetime" />
+
+            <TextView
+                android:id="@+id/rental_pickup_datetime_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/rental_picked_up"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rental_delivered_datetime_label" />
+
+            <TextView
+                android:id="@+id/rental_pickup_datetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:maxWidth="280dp"
+                android:maxLines="1"
+                android:text="..."
+                app:layout_constraintStart_toEndOf="@id/rental_pickup_datetime_label"
+                app:layout_constraintTop_toBottomOf="@id/rental_delivered_datetime_label" />
+
+            <TextView
+                android:id="@+id/rental_total_mileage_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/rental_total_mileage"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rental_pickup_datetime_label" />
+
+            <TextView
+                android:id="@+id/rental_total_mileage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:maxWidth="280dp"
+                android:maxLines="1"
+                android:text="..."
+                app:layout_constraintStart_toEndOf="@id/rental_total_mileage_label"
+                app:layout_constraintTop_toBottomOf="@id/rental_pickup_datetime_label" />
+
+            <TextView
+                android:id="@+id/rental_drivingstyle_score_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/rental_drivingstyle_score"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rental_total_mileage" />
+
+            <TextView
+                android:id="@+id/rental_drivingstyle_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:maxWidth="280dp"
+                android:maxLines="1"
+                android:text="..."
+                app:layout_constraintStart_toEndOf="@id/rental_drivingstyle_score_label"
+                app:layout_constraintTop_toBottomOf="@id/rental_total_mileage" />
+
+            <TextView
+                android:id="@+id/rental_tenant_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/rental_tenant"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/rental_tenant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:maxWidth="280dp"
+                android:maxLines="1"
+                android:text="..."
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rental_tenant_label" />
+
+            <TextView
+                android:id="@+id/rental_owner_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/rental_owner"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rental_tenant" />
+
+            <TextView
+                android:id="@+id/rental_owner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:maxWidth="280dp"
+                android:maxLines="1"
+                android:text="..."
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rental_owner_label" />
+
+            <TextView
+                android:id="@+id/rental_car_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/rental_car"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rental_owner" />
+
+            <TextView
+                android:id="@+id/rental_car"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:maxWidth="280dp"
+                android:maxLines="1"
+                android:text="..."
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rental_car_label" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,8 +17,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:textAlignment="center"
         android:text="@string/invoice_payment_text"
+        android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,8 +69,8 @@
         android:layout_marginTop="248dp"
         android:maxWidth="280dp"
         android:maxLines="1"
-        android:textSize="32dp"
         android:text="@string/invoicecurrency"
+        android:textSize="32dp"
         app:layout_constraintStart_toEndOf="@id/invoice_detail_total_price_label"
         app:layout_constraintTop_toTopOf="@id/text_invoice" />
 
@@ -82,8 +82,8 @@
         android:layout_marginTop="248dp"
         android:maxWidth="280dp"
         android:maxLines="1"
-        android:textSize="32dp"
         android:text="@string/invoicetotalprice"
+        android:textSize="32dp"
         app:layout_constraintStart_toEndOf="@id/invoice_detail_total_price_currency"
         app:layout_constraintTop_toTopOf="@id/text_invoice" />
 
@@ -113,8 +113,8 @@
         android:layout_marginBottom="48dp"
         android:text="@string/action_back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHorizontal_bias="0.10"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.2" />
 
     <Button

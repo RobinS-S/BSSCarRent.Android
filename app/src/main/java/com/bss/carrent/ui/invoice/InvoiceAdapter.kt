@@ -28,7 +28,8 @@ class InvoiceAdapter : RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder>() 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InvoiceViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.invoice_info_row, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.invoice_info_row, parent, false)
         return InvoiceViewHolder(view)
     }
 
@@ -42,15 +43,23 @@ class InvoiceAdapter : RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder>() 
 
     inner class InvoiceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val invoiceIdTextView: TextView = itemView.findViewById(R.id.invoice_id_value)
-        private val invoiceInitialCostTextView : TextView = itemView.findViewById(R.id.invoice_initialcost_value)
-        private val invoiceMileageTotalTextView : TextView = itemView.findViewById(R.id.invoice_mileagetotal_value)
-        private val invoiceMileageCostsTextView : TextView = itemView.findViewById(R.id.invoice_mileagecosts_value)
-        private val invoicekmPackageTextView : TextView = itemView.findViewById(R.id.invoice_kmpackage_value)
-        private val invoiceTotalPriceTextView : TextView = itemView.findViewById(R.id.invoice_totalprice_value)
-        private val invoiceTotalhoursUsedTextView : TextView = itemView.findViewById(R.id.invoice_totalhoursused_value)
-        private val invoiceTotalhourPriceTextView : TextView = itemView.findViewById(R.id.invoice_totalhourprice_value)
-        private val invoiceIsPaidTextView : TextView = itemView.findViewById(R.id.invoice_ispaid_value)
-        private val invoicePayButton : Button = itemView.findViewById(R.id.pay_invoice_button)
+        private val invoiceInitialCostTextView: TextView =
+            itemView.findViewById(R.id.invoice_initialcost_value)
+        private val invoiceMileageTotalTextView: TextView =
+            itemView.findViewById(R.id.invoice_mileagetotal_value)
+        private val invoiceMileageCostsTextView: TextView =
+            itemView.findViewById(R.id.invoice_mileagecosts_value)
+        private val invoicekmPackageTextView: TextView =
+            itemView.findViewById(R.id.invoice_kmpackage_value)
+        private val invoiceTotalPriceTextView: TextView =
+            itemView.findViewById(R.id.invoice_totalprice_value)
+        private val invoiceTotalhoursUsedTextView: TextView =
+            itemView.findViewById(R.id.invoice_totalhoursused_value)
+        private val invoiceTotalhourPriceTextView: TextView =
+            itemView.findViewById(R.id.invoice_totalhourprice_value)
+        private val invoiceIsPaidTextView: TextView =
+            itemView.findViewById(R.id.invoice_ispaid_value)
+        private val invoicePayButton: Button = itemView.findViewById(R.id.pay_invoice_button)
 
         fun bind(invoice: InvoiceDto) {
             invoiceIdTextView.text = invoice.id.toString()
@@ -62,7 +71,7 @@ class InvoiceAdapter : RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder>() 
             invoiceTotalhoursUsedTextView.text = invoice.totalHoursUsed.toString()
             invoiceTotalhourPriceTextView.text = invoice.totalHourPrice.toString()
             invoiceIsPaidTextView.text = invoice.isPaid.toString()
-            invoicePayButton.visibility = if(!invoice.isPaid) View.VISIBLE else View.INVISIBLE
+            invoicePayButton.visibility = if (!invoice.isPaid) View.VISIBLE else View.INVISIBLE
             invoicePayButton.setOnClickListener {
                 var action = InvoiceListFragmentDirections.actionNavInvoicesToNavInvoice(invoice)
                 itemView.findNavController().navigate(action)

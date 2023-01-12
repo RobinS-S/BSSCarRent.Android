@@ -8,7 +8,7 @@ data class RentalDto(
     val reservedUntil: LocalDateTime,
     val deliveredAt: LocalDateTime?,
     val mileageTotal: Long,
-    val drivingStyleScore: Double,
+    val drivingStyleScore: Double?,
     val kmPackage: Long,
     val tenantId: Long,
     val carId: Long

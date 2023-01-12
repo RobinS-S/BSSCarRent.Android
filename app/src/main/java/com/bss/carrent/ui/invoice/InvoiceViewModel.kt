@@ -31,7 +31,7 @@ class InvoiceViewModel : ViewModel() {
         viewModelScope.launch {
             val repository = InvoiceRepository()
             val retrievedInvoices = repository.getMyInvoices(context)
-            if(retrievedInvoices == null) {
+            if (retrievedInvoices == null) {
                 setIsError(true)
             } else {
                 setIsError(false)
