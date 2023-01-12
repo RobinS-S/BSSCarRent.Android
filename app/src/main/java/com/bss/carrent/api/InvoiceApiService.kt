@@ -5,6 +5,7 @@ import com.bss.carrent.data.InvoiceDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface InvoiceApiService : ApiService {
@@ -14,7 +15,7 @@ interface InvoiceApiService : ApiService {
     @GET("invoice/owned")
     suspend fun getOwnedInvoices(@Header("Authorization") authHeader: String): Response<List<InvoiceDto>>
 
-    @GET("invoice/{id}/pay")
+    @POST("invoice/{id}/pay")
     suspend fun payInvoice(
         @Header("Authorization") authHeader: String,
         @Path("id") id: Long

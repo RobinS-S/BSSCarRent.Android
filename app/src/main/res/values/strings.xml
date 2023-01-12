@@ -133,6 +133,7 @@
     <string name="invoice_total_price_label">Total</string>
     <string name="invoicecurrency">€</string>
     <string name="action_back">Back</string>
+    <string name="is_paid_label">Invoice is</string>
     <string name="car_edit">Edit car</string>
     <string name="car_detail">Car details</string>
     <string name="rental_create">Create rental</string>

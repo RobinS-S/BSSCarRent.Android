@@ -9,8 +9,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bss.carrent.R
 import com.bss.carrent.data.InvoiceDto
-import com.bss.carrent.repository.InvoiceRepository
-
 
 class InvoiceAdapter : RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder>() {
     private var invoiceList: List<InvoiceDto> = emptyList()
@@ -63,9 +61,6 @@ class InvoiceAdapter : RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder>() 
             itemView.findViewById(R.id.invoice_ispaid_value)
         private val invoicePayButton: Button = itemView.findViewById(R.id.pay_invoice_button)
 
-        init {
-        }
-
         fun bind(invoice: InvoiceDto) {
             invoiceIdTextView.text = invoice.id.toString()
             invoiceInitialCostTextView.text = invoice.initialCost.toString()
@@ -78,7 +73,6 @@ class InvoiceAdapter : RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder>() 
             invoiceIsPaidTextView.text = invoice.isPaid.toString()
             invoicePayButton.visibility = if (!invoice.isPaid) View.VISIBLE else View.INVISIBLE
             invoicePayButton.setOnClickListener {
-                val repository = InvoiceRepository()
                 var action = InvoiceListFragmentDirections.actionNavInvoicesToNavInvoice(invoice)
                 itemView.findNavController().navigate(action)
             }
