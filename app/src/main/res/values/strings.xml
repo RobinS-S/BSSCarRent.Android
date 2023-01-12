@@ -151,4 +151,19 @@
     <string name="rental_tenant">Tenant</string>
     <string name="rental_owner">Owner</string>
     <string name="rental_car">Car</string>
+    <string name="rental_create_price_warning">Note: these prices are not final. Damage, bringing the car back late, driving more kilometers than booked and misbehavior may result in financial penalties.</string>
+    <string name="rental_create_place_reservation">Place reservation</string>
+    <string name="rental_price_per_km">Price per km</string>
+    <string name="rental_amount_of_kilometers">Amount of kilometers:</string>
+    <string name="rental_create_end_warning">Bring back before this time, or penalties may apply</string>
+    <string name="rental_create_start_warning">Pick up on/after this time</string>
+    <string name="rental_slot_available">Available during this time.</string>
+    <string name="rental_create_slot_unavailable">Please pick a time and date that isn\'t between this time.</string>
+    <string name="rental_create_slot_unavailable_at_time">This car is already rented out during this time:</string>
+    <string name="change">Change</string>
+    <string name="start">Start:</string>
+    <string name="end">End:</string>
+    <string name="rental_initial_cost">Initial cost:</string>
+    <string name="rental_create_total_price">Total price</string>
+    <string name="rental_create_calculated_km_price">Calculated KM price:</string>
 </resources>
