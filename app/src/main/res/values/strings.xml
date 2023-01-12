@@ -3,8 +3,6 @@
     <string name="title_car_list">Car list</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-
-    <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_register">Register</string>
@@ -16,9 +14,6 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="button_login">Login</string>
-
-    <!--TODO: put strings in the right group -->
-    <!-- Strings related to -->
     <string name="action_add_car">New</string>
     <string name="action_show_rentals">My Rentals</string>
     <string name="action_rented_cars">Rented</string>
@@ -42,7 +37,6 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="nav_header_title">Car Rental Made Easy</string>
     <string name="nav_header_subtitle">Avans Informatica</string>
-
     <string name="email">E-mail address</string>
     <string name="password">Password</string>
     <string name="log_out">Log out</string>
@@ -53,7 +47,6 @@
     <string name="empty_cartype">Car type</string>
     <string name="empty_carprice">Car price</string>
     <string name="empty_cartransmission">Car transmission</string>
-
     <string name="car_model_label">Model</string>
     <string name="car_buildyear_label">Buildyear</string>
     <string name="car_color_label">Color</string>
@@ -68,7 +61,6 @@
     <string name="car_kilometersdistance_label">Distance to car</string>
     <string name="car_fueltype_label">Fuel type</string>
     <string name="car_fueltype">\?</string>
-
     <string name="car_detail_car_owner_label">Car owned by:</string>
     <string name="car_brand_label">Brand:</string>
     <string name="car_apk_label">APK up to:</string>
@@ -114,7 +106,6 @@
     <string name="pay_invoice_button_state">GONE</string>
     <string name="invoice_payment_text">Invoice payment</string>
     <string name="invoice_payment_text_warning">With clicking pay you accept to make use of your debt card.</string>
-
     <string name="now_setting_from">Now setting from</string>
     <string name="now_setting_until">Now setting until</string>
     <string name="time_span_taken">This time span is already taken. Please change your time.</string>
@@ -134,6 +125,11 @@
     <string name="invoicecurrency">€</string>
     <string name="action_back">Back</string>
     <string name="is_paid_label">Invoice is</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="light_mode">Light mode</string>
+    <string name="auto_mode">Auto mode</string>
+    <string name="theme_selector_title">Theme selector</string>
+    <string name="auto_theme">Auto theme</string>
     <string name="car_edit">Edit car</string>
     <string name="car_detail">Car details</string>
     <string name="rental_create">Create rental</string>

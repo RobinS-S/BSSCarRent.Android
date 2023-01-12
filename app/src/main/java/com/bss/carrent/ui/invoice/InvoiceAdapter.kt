@@ -70,7 +70,7 @@ class InvoiceAdapter : RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder>() 
             invoiceTotalPriceTextView.text = invoice.totalPrice.toString()
             invoiceTotalhoursUsedTextView.text = invoice.totalHoursUsed.toString()
             invoiceTotalhourPriceTextView.text = invoice.totalHourPrice.toString()
-            invoiceIsPaidTextView.text = invoice.isPaid.toString()
+            invoiceIsPaidTextView.text = if(invoice.isPaid) "paid" else "not paid"
             invoicePayButton.visibility = if (!invoice.isPaid) View.VISIBLE else View.INVISIBLE
             invoicePayButton.setOnClickListener {
                 var action = InvoiceListFragmentDirections.actionNavInvoicesToNavInvoice(invoice)
