@@ -133,4 +133,9 @@
     <string name="invoicecurrency">€</string>
     <string name="action_back">Back</string>
     <string name="is_paid_label">Invoice is</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="light_mode">Light mode</string>
+    <string name="auto_mode">Auto mode</string>
+    <string name="theme_selector_title">Theme selector</string>
+    <string name="auto_theme">Auto theme</string>
 </resources>
