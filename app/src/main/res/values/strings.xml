@@ -145,7 +145,7 @@
     <string name="rental_datetime_from">Reserved from:</string>
     <string name="rental_datetime_until">Reserved until:</string>
     <string name="rental_delivered_at">Delivered at:</string>
-    <string name="rental_picked_up">Picked up at:</string>
+    <string name="rental_picked_up">Picked up:</string>
     <string name="rental_total_mileage">Total mileage:</string>
     <string name="rental_drivingstyle_score">Driving-style score:</string>
     <string name="rental_tenant">Tenant</string>
@@ -164,6 +164,8 @@
     <string name="start">Start:</string>
     <string name="end">End:</string>
     <string name="rental_initial_cost">Initial cost:</string>
-    <string name="rental_create_total_price">Total price</string>
+    <string name="rental_create_total_price">Total price:</string>
     <string name="rental_create_calculated_km_price">Calculated KM price:</string>
+    <string name="my_rentals">My rentals</string>
+    <string name="owned_rentals">Owned rentals</string>
 </resources>
