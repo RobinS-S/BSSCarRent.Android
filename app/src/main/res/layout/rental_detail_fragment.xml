@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
+        android:text="-"
         app:layout_constraintStart_toEndOf="@id/rental_detail_reserved_from_label"
         app:layout_constraintTop_toTopOf="@id/rental_detail_reserved_from_label" />
 
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
+        android:text="-"
         app:layout_constraintStart_toEndOf="@id/rental_detail_reserved_until_label"
         app:layout_constraintTop_toTopOf="@id/rental_detail_reserved_until_label" />
 
@@ -52,118 +52,60 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:text="@string/rental_picked_up"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rental_detail_reserved_until_label" />
+        app:layout_constraintTop_toBottomOf="@+id/rental_detail_kilometer_package_label"
+        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/rental_detail_picked_up_at"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
+        android:layout_marginStart="12dp"
+        android:text="-"
         app:layout_constraintStart_toEndOf="@id/rental_detail_picked_up_at_label"
-        app:layout_constraintTop_toTopOf="@id/rental_detail_picked_up_at_label" />
+        app:layout_constraintTop_toTopOf="@id/rental_detail_picked_up_at_label"
+        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/rental_detail_mileage_total_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:text="@string/invoice_mileagetotal"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rental_detail_picked_up_at_label" />
+        app:layout_constraintTop_toBottomOf="@+id/rental_detail_reserved_until_label" />
 
     <TextView
         android:id="@+id/rental_detail_mileage_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
+        android:text="-"
         app:layout_constraintStart_toEndOf="@id/rental_detail_mileage_total_label"
         app:layout_constraintTop_toTopOf="@id/rental_detail_mileage_total_label" />
-
-    <TextView
-        android:id="@+id/rental_detail_tenant_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/rental_tenant"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rental_detail_mileage_total_label" />
-
-    <TextView
-        android:id="@+id/rental_detail_tenant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@id/rental_detail_tenant_label"
-        app:layout_constraintTop_toTopOf="@id/rental_detail_tenant_label" />
-
-    <TextView
-        android:id="@+id/rental_detail_car_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/rental_car"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rental_detail_tenant_label" />
-
-    <TextView
-        android:id="@+id/rental_detail_car"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@id/rental_detail_car_label"
-        app:layout_constraintTop_toTopOf="@id/rental_detail_car_label" />
-
-    <TextView
-        android:id="@+id/rental_detail_owner_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/rental_owner"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rental_detail_car_label" />
-
-    <TextView
-        android:id="@+id/rental_detail_owner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@id/rental_detail_owner_label"
-        app:layout_constraintTop_toTopOf="@id/rental_detail_owner_label" />
 
     <TextView
         android:id="@+id/rental_detail_kilometer_package_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:text="@string/rental_km_package"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rental_detail_owner_label" />
+        app:layout_constraintTop_toBottomOf="@+id/rental_detail_mileage_total_label" />
 
     <TextView
         android:id="@+id/rental_detail_kilometer_package"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
+        android:text="-"
         app:layout_constraintStart_toEndOf="@id/rental_detail_kilometer_package_label"
         app:layout_constraintTop_toTopOf="@id/rental_detail_kilometer_package_label" />
 
@@ -172,19 +114,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:text="@string/rental_drivingstyle_score"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rental_detail_kilometer_package_label" />
+        app:layout_constraintTop_toBottomOf="@+id/rental_detail_picked_up_at_label" />
 
     <TextView
         android:id="@+id/rental_detail_drivingstyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
+        android:text="-"
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@id/rental_detail_drivingstyle_label"
         app:layout_constraintTop_toTopOf="@id/rental_detail_drivingstyle_label" />
@@ -206,20 +148,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
+        android:text="-"
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@id/rental_detail_delivered_at_label"
         app:layout_constraintTop_toTopOf="@id/rental_detail_delivered_at_label" />
-
-    <ImageView
-        android:id="@+id/rental_detail_car_image"
-        app:layout_constraintTop_toBottomOf="@id/rental_detail_delivered_at_label"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -257,6 +189,26 @@
         android:text="@string/rental_deliver_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/rental_detail_view_tenant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="15dp"
+        android:text="View tenant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/rental_detail_view_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
+        android:text="View owner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rental_detail_view_tenant" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

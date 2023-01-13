@@ -110,7 +110,7 @@ class CarDetailFragment : Fragment() {
         carDetailOwnerButton.setOnClickListener {
             if (carDetailViewModel.userDto.value != null) {
                 val action = CarDetailFragmentDirections.actionNavCarDetailsToNavUser(
-                    carDetailViewModel.userDto.value!!
+                    carDetailViewModel.userDto.value!!.id
                 )
                 requireParentFragment().findNavController().navigate(action)
             }

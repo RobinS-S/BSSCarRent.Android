@@ -30,8 +30,8 @@ class CarEditFragment : Fragment() {
 
         _binding = CarEditFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        binding.carDetailBrandName.text?.clear()
-        binding.carDetailBrandName.text?.append(args.car.brand)
+        binding.carDetailBrandNameEdit.text?.clear()
+        binding.carDetailBrandNameEdit.text?.append(args.car.brand)
 
         binding.carDetailModelName.text?.clear()
         binding.carDetailModelName.text?.append(args.car.model)

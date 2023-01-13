@@ -5,6 +5,7 @@ import com.bss.carrent.data.car.CarType
 import com.bss.carrent.data.car.CombustionFuelType
 import com.bss.carrent.data.user.UserDto
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 object Helpers {
@@ -22,6 +23,11 @@ object Helpers {
 
     fun formatShortDate(value: LocalDate): String {
         val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        return value.format(formatter)
+    }
+
+    fun formatDateTime(value: LocalDateTime): String {
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
         return value.format(formatter)
     }
 

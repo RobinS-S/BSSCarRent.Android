@@ -7,9 +7,12 @@ data class RentalDto(
     val reservedFrom: LocalDateTime,
     val reservedUntil: LocalDateTime,
     val deliveredAt: LocalDateTime?,
+    val pickedUpAt: LocalDateTime?,
     val mileageTotal: Long,
     val drivingStyleScore: Double?,
     val kmPackage: Long,
     val tenantId: Long,
-    val carId: Long
+    val ownerId: Long,
+    val carId: Long,
+    val cancelled: Boolean
 ) : java.io.Serializable
