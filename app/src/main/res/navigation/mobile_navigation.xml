@@ -9,7 +9,7 @@
         android:id="@+id/nav_car_list"
         android:name="com.bss.carrent.ui.car.CarListFragment"
         android:label="@string/menu_car_list"
-        tools:layout="@layout/car_list_fragment" >
+        tools:layout="@layout/car_list_fragment">
         <action
             android:id="@+id/action_nav_car_list_to_nav_car_details"
             app:destination="@id/nav_car_details">
@@ -41,12 +41,12 @@
         <argument
             android:name="carId"
             app:argType="long" />
-            <action
-                android:id="@+id/action_nav_car_details_to_nav_create_rental"
-                app:destination="@id/nav_create_rental">
-                <argument
-                    android:name="car"
-                    app:argType="com.bss.carrent.data.car.CarDto" />
+        <action
+            android:id="@+id/action_nav_car_details_to_nav_create_rental"
+            app:destination="@id/nav_create_rental">
+            <argument
+                android:name="car"
+                app:argType="com.bss.carrent.data.car.CarDto" />
         </action>
         <action
             android:id="@+id/action_nav_car_details_to_nav_user"
@@ -98,7 +98,7 @@
         android:id="@+id/nav_rentals"
         android:name="com.bss.carrent.ui.rental.RentalListFragment"
         android:label="Rental list"
-        tools:layout="@layout/rental_list_fragment" >
+        tools:layout="@layout/rental_list_fragment">
         <action
             android:id="@+id/action_nav_rentals_to_nav_rental_details"
             app:destination="@id/nav_rental_details" />
@@ -121,7 +121,7 @@
         android:id="@+id/nav_invoices"
         android:name="com.bss.carrent.ui.invoice.InvoiceListFragment"
         android:label="@string/menu_invoices"
-        tools:layout="@layout/invoice_list_fragment" >
+        tools:layout="@layout/invoice_list_fragment">
         <action
             android:id="@+id/action_nav_invoices_to_nav_invoice"
             app:destination="@id/nav_invoice">

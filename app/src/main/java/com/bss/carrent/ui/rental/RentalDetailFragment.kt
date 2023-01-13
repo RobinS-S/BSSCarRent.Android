@@ -32,8 +32,10 @@ class RentalDetailFragment : Fragment() {
         binding.rentalDetailReservedUntil.text = Helpers.formatDateTime(args.rental.reservedUntil)
         binding.rentalDetailMileageTotal.text = args.rental.mileageTotal.toString()
         binding.rentalDetailKilometerPackage.text = args.rental.kmPackage.toString()
-        binding.rentalDetailPickedUpAt.text = if(args.rental.pickedUpAt != null) Helpers.formatDateTime(args.rental.pickedUpAt!!) else "-"
-        binding.rentalDetailDeliveredAt.text = if(args.rental.deliveredAt != null) Helpers.formatDateTime(args.rental.deliveredAt!!) else "-"
+        binding.rentalDetailPickedUpAt.text =
+            if (args.rental.pickedUpAt != null) Helpers.formatDateTime(args.rental.pickedUpAt!!) else "-"
+        binding.rentalDetailDeliveredAt.text =
+            if (args.rental.deliveredAt != null) Helpers.formatDateTime(args.rental.deliveredAt!!) else "-"
 
         binding.rentalDetailViewTenant.setOnClickListener {
             val action = RentalDetailFragmentDirections.actionNavRentalDetailsToNavUser(

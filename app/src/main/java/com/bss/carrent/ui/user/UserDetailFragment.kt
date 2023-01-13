@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bss.carrent.databinding.UserDetailFragmentBinding
 import com.bss.carrent.misc.Helpers
-import com.bss.carrent.ui.car.CarDetailViewModel
 import com.bss.userrent.ui.user.UserDetailViewModel
 import kotlinx.coroutines.launch
 
@@ -33,7 +32,7 @@ class UserDetailFragment : Fragment() {
 
         _binding = UserDetailFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        
+
         userDetailViewModel.userDto.observe(viewLifecycleOwner) {
             binding.firstName.text = it.firstName
             binding.infix.text = it.infix ?: "-"

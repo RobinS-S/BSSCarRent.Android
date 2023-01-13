@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -40,18 +39,22 @@ class RentalCreateFragment : Fragment() {
         _binding = RentalCreateFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.rentalCreateKmPrice.text = Helpers.formatDoubleWithOptionalDecimals(args.car.pricePerKilometer)
-        binding.rentalInitialCost.text = Helpers.formatDoubleWithOptionalDecimals(args.car.initialCost)
+        binding.rentalCreateKmPrice.text =
+            Helpers.formatDoubleWithOptionalDecimals(args.car.pricePerKilometer)
+        binding.rentalInitialCost.text =
+            Helpers.formatDoubleWithOptionalDecimals(args.car.initialCost)
         binding.editTextLayoutKmPackage.doOnTextChanged { text, start, count, after ->
-            if(!text.isNullOrBlank()) {
+            if (!text.isNullOrBlank()) {
                 val num = binding.editTextLayoutKmPackage.text.toString().toInt()
-                binding.rentalCreateCalculatedKmPrice.text = Helpers.formatDoubleWithOptionalDecimals(num * args.car.pricePerKilometer)
+                binding.rentalCreateCalculatedKmPrice.text =
+                    Helpers.formatDoubleWithOptionalDecimals(num * args.car.pricePerKilometer)
             }
         }
 
         binding.rentalCreateChangeStartDateButton.setOnClickListener {
             val cal: Calendar = Calendar.getInstance()
-            val datePickerDialog = DatePickerDialog(requireContext(),
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
                 { view, year, monthOfYear, dayOfMonth ->
                     val selectedDate = LocalDate.of(year, monthOfYear + 1, dayOfMonth)
                     binding.rentalCreateStartDate.text = Helpers.formatShortDate(selectedDate)

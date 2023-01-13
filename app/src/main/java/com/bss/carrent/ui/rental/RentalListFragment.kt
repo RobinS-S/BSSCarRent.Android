@@ -13,11 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bss.carrent.R
-import com.bss.carrent.data.car.CarDto
 import com.bss.carrent.data.rental.RentalDto
 import com.bss.carrent.databinding.RentalListFragmentBinding
-import com.bss.carrent.ui.car.CarListAdapter
-import com.bss.carrent.ui.car.CarListFragmentDirections
 import kotlinx.coroutines.launch
 
 class RentalListFragment : Fragment() {
@@ -51,7 +48,8 @@ class RentalListFragment : Fragment() {
         rentalListAdapter = RentalListAdapter()
         rentalListAdapter.setOnItemClickListener(object : RentalListAdapter.OnItemClickListener {
             override fun onItemClick(rentalDto: RentalDto) {
-                var action = RentalListFragmentDirections.actionNavRentalsToNavRentalDetails(rentalDto)
+                var action =
+                    RentalListFragmentDirections.actionNavRentalsToNavRentalDetails(rentalDto)
                 requireParentFragment().findNavController().navigate(action)
             }
         })

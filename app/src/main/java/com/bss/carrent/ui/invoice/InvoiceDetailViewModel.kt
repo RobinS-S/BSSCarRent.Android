@@ -10,6 +10,6 @@ class InvoiceDetailViewModel : ViewModel() {
 
     suspend fun payInvoice(context: Context, id: Long): InvoiceDto? {
         val repository = InvoiceRepository()
-        return repository.payInvoice(context,id)
+        return repository.payInvoice(context, id)
     }
 }
