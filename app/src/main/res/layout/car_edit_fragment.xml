@@ -297,10 +297,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/car_detail_current_kilometers_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/car_detail_current_kilometers_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_current_kilometers_label">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/car_detail_current_kilometers"

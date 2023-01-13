@@ -1,18 +1,14 @@
-package com.bss.carrent.ui.car
+package com.bss.userrent.ui.user
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bss.carrent.data.car.CarDto
 import com.bss.carrent.data.user.UserDto
-import com.bss.carrent.repository.CarRepository
 import com.bss.carrent.repository.ProfileRepository
 import kotlinx.coroutines.launch
 
-class CarDetailViewModel : ViewModel() {
-    private val _car = MutableLiveData<CarDto>()
+class UserDetailViewModel : ViewModel() {
     private val _user = MutableLiveData<UserDto>()
     private val _isError = MutableLiveData<Boolean>()
 
@@ -23,13 +19,6 @@ class CarDetailViewModel : ViewModel() {
         _isError.value = value
     }
 
-    val carDto: LiveData<CarDto>
-        get() = _car
-
-    private fun setCar(value: CarDto) {
-        _car.value = value
-    }
-
     val userDto: LiveData<UserDto>
         get() = _user
 
@@ -37,20 +26,15 @@ class CarDetailViewModel : ViewModel() {
         _user.value = value
     }
 
-    fun getCar(context: Context, id: Long) {
+    fun getUser(id: Long) {
         viewModelScope.launch {
-            val carRepository = CarRepository()
             val profileRepository = ProfileRepository()
-            val retrievedCar = carRepository.getCar(id)
-            if (retrievedCar == null) {
+            val retrievedUser = profileRepository.getProfileForUser(id)
+            if (retrievedUser == null) {
                 setIsError(true)
             } else {
                 setIsError(false)
-                setCar(retrievedCar)
-                val owner = profileRepository.getProfileForUser(retrievedCar.ownerId)
-                if (owner != null) {
-                    setUser(owner)
-                }
+                setUser(retrievedUser)
             }
         }
     }
