@@ -164,4 +164,8 @@
     <string name="rental_create_calculated_km_price">Calculated KM price:</string>
     <string name="my_rentals">My rentals</string>
     <string name="owned_rentals">Owned rentals</string>
+    <string name="yourcarishere">Your car location</string>
+    <string name="erroroccurred">Error</string>
+    <string name="youarehere">Your location</string>
+    <string name="google_maps_key" translatable="false">key</string>
 </resources>

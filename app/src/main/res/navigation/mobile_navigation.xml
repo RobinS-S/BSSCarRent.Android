@@ -131,4 +131,10 @@
             app:argType="com.bss.carrent.data.user.UserDto" />
     </fragment>
 
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="com.bss.carrent.ui.car.MapsFragment"
+        android:label="Map"
+        tools:layout="@layout/maps_fragment" />
+
 </navigation>
