@@ -65,6 +65,16 @@
                 app:layout_constraintStart_toEndOf="@id/car_detail_car_owner"
                 app:layout_constraintTop_toBottomOf="@id/car_detail_images_viewpager" />
 
+            <Button
+                android:id="@+id/car_detail_maps_button"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:backgroundTint="?attr/colorSecondaryVariant"
+                android:text="@string/view_map"
+                app:layout_constraintBottom_toTopOf="@+id/car_detail_button_view_rental_options"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <TextView
                 android:id="@+id/car_detail_brand_name_label"
                 android:layout_width="wrap_content"
@@ -308,12 +318,12 @@
                 android:id="@+id/car_detail_button_view_rental_options"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:backgroundTint="?attr/colorSecondaryVariant"
                 android:text="@string/car_button_rental_options"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

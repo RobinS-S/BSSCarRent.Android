@@ -55,7 +55,7 @@
     <string name="car_initialcost_label">Initiele kosten €</string>
     <string name="car_initialcost">500</string>
     <string name="car_priceperhour">2</string>
-    <string name="car_kilometersdistance">2.05 km</string>
+    <string name="car_kilometersdistance">- km</string>
     <string name="car_fueltype_label">Brandstof</string>
     <string name="car_fueltype">\?</string>
     <string name="car_kilometersdistance_label">Afstand naar auto</string>
@@ -175,4 +175,6 @@
     <string name="current_language">Taal</string>
     <string name="current_language_value">-</string>
     <string name="register">Registreer</string>
+    <string name="location">Location</string>
+    <string name="view_map">View map</string>
 </resources>

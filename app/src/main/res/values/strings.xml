@@ -191,4 +191,6 @@
     <string name="car_create_button">Create</string>
     <string name="my_invoices">My invoices</string>
     <string name="owned_invoices">Owned invoices</string>
+    <string name="location">Location</string>
+    <string name="view_map">View map</string>
 </resources>

@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.bss.carrent.R
 import com.bss.carrent.misc.GeoLocationManager
+import com.bss.carrent.ui.rental.RentalCreateFragmentArgs
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -22,7 +24,8 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class MapsFragment : Fragment() {
+class CarMapFragment : Fragment() {
+    private val args: CarMapFragmentArgs by navArgs()
 
     private var locationPermissions = arrayOf(
         Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -76,8 +79,7 @@ class MapsFragment : Fragment() {
         )
         ownUserMarker?.isVisible = false
 
-        //TODO: Car location has a temporary fixed location, replace with real car location
-        val yourCarLocation = LatLng(51.587083, 4.798504)
+        val yourCarLocation = LatLng(args.car.lat, args.car.lng)
 
         googleMap.addMarker(
             MarkerOptions().position(yourCarLocation).title(getString(R.string.yourcarishere))

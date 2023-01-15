@@ -107,6 +107,15 @@ class CarDetailFragment : Fragment() {
             }
         }
 
+        binding.carDetailMapsButton.setOnClickListener {
+            if (carDetailViewModel.carDto.value != null) {
+                val action = CarDetailFragmentDirections.actionNavCarDetailsToNavMap(
+                    carDetailViewModel.carDto.value!!
+                )
+                requireParentFragment().findNavController().navigate(action)
+            }
+        }
+
         carDetailOwnerButton.setOnClickListener {
             if (carDetailViewModel.userDto.value != null) {
                 val action = CarDetailFragmentDirections.actionNavCarDetailsToNavUser(

@@ -163,7 +163,7 @@
         <Button
             android:id="@+id/rental_cancel_button"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="@string/rental_cancel_button" />
@@ -171,7 +171,7 @@
         <Button
             android:id="@+id/rental_pickup_button"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
@@ -182,9 +182,8 @@
     <Button
         android:id="@+id/rental_deliver_car_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/rental_deliver_button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -204,11 +203,19 @@
         android:id="@+id/rental_detail_view_owner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="15dp"
         android:text="View owner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rental_detail_view_tenant" />
+
+    <Button
+        android:id="@+id/rental_detail_view_car"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:text="View car"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rental_detail_view_owner" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
