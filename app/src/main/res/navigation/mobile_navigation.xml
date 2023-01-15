@@ -107,13 +107,13 @@
     <fragment
         android:id="@+id/nav_login"
         android:name="com.bss.carrent.ui.auth.LoginFragment"
-        android:label="Login"
+        android:label="@string/login"
         tools:layout="@layout/login_fragment" />
 
     <fragment
         android:id="@+id/nav_register"
         android:name="com.bss.carrent.ui.auth.RegisterFragment"
-        android:label="Register"
+        android:label="@string/register"
         tools:layout="@layout/register_fragment" />
 
 
@@ -151,5 +151,17 @@
             android:name="userId"
             app:argType="long" />
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="com.bss.carrent.ui.car.MapsFragment"
+        android:label="@string/map"
+        tools:layout="@layout/maps_fragment" />
+
+    <fragment
+        android:id="@+id/nav_preferences"
+        android:name="com.bss.carrent.ui.user.PreferencesFragment"
+        android:label="@string/preferences"
+        tools:layout="@layout/preferences" />
 
 </navigation>

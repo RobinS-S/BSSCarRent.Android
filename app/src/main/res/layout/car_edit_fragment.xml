@@ -173,6 +173,34 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/car_detail_licenseplate_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/car_license_plate"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/car_detail_apk_label" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/car_detail_licenseplate_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/car_detail_licenseplate_label"
+        app:layout_constraintStart_toEndOf="@id/car_detail_licenseplate_label"
+        app:layout_constraintTop_toTopOf="@id/car_detail_licenseplate_label">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/car_detail_licenseplate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ff-ff-ff" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
         android:id="@+id/car_detail_fueltype_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -183,7 +211,7 @@
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/car_detail_apk_label" />
+        app:layout_constraintTop_toBottomOf="@id/car_detail_licenseplate_label" />
 
     <Spinner
         android:id="@+id/car_detail_fueltype"
@@ -284,6 +312,34 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:id="@+id/car_detail_initialprice_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="@string/car_initialcost_label"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_hireprice_layout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/car_detail_initialprice_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/car_detail_initialprice_label">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/car_detail_initialprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="Initial cost"
+            android:textColor="@color/red" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
         android:id="@+id/car_detail_current_kilometers_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -293,7 +349,7 @@
         android:textSize="22dp"
         android:textStyle="bold"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/car_detail_hireprice_layout" />
+        app:layout_constraintTop_toBottomOf="@id/car_detail_initialprice_layout" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/car_detail_current_kilometers_layout"

@@ -25,11 +25,16 @@
         <item
             android:id="@+id/nav_login"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Login" />
+            android:title="@string/login" />
         <item
             android:id="@+id/nav_register"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Register" />
+            android:title="@string/register" />
+
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/map" />
 
         <item
             android:id="@+id/switch_auto_theme"
@@ -37,9 +42,9 @@
             app:actionViewClass="androidx.appcompat.widget.SwitchCompat" />
 
         <item
-            android:id="@+id/switch_dark_theme"
-            android:title="@string/dark_mode"
-            app:actionViewClass="androidx.appcompat.widget.SwitchCompat" />
+            android:id="@+id/nav_preferences"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/preferences" />
 
     </group>
 </menu>
