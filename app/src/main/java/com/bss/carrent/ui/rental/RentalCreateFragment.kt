@@ -1,19 +1,27 @@
 package com.bss.carrent.ui.rental
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bss.carrent.databinding.RentalCreateFragmentBinding
 import com.bss.carrent.misc.Helpers
+import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
 import java.util.*
 
 class RentalCreateFragment : Fragment() {
@@ -28,6 +36,25 @@ class RentalCreateFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
         viewModel = ViewModelProvider(requireActivity())[RentalCreateViewModel::class.java]
+
+        val layoutManager = LinearLayoutManager(context)
+        binding.rentalCreateTimeslotsView.layoutManager = layoutManager
+
+        viewModel.hoursCost.observe(viewLifecycleOwner) {
+            binding.rentalCreateHourPriceCalculated.text = Helpers.formatCurrency(it)
+        }
+
+        val adapter = RentalCreateSlotAdapter()
+        binding.rentalCreateTimeslotsView.adapter = adapter
+
+        viewModel.usedTimeSlots.observe(viewLifecycleOwner) { usedTimeSlots ->
+            adapter.setSlotList(usedTimeSlots)
+            adapter.notifyDataSetChanged()
+        }
+
+        lifecycleScope.launch {
+            viewModel.getUsedSlots(requireContext(), args.car.id)
+        }
     }
 
     override fun onCreateView(
@@ -40,28 +67,85 @@ class RentalCreateFragment : Fragment() {
         val root: View = binding.root
 
         binding.rentalCreateKmPrice.text =
-            Helpers.formatDoubleWithOptionalDecimals(args.car.pricePerKilometer)
+            Helpers.formatCurrency(args.car.pricePerKilometer)
         binding.rentalInitialCost.text =
-            Helpers.formatDoubleWithOptionalDecimals(args.car.initialCost)
+            Helpers.formatCurrency(args.car.initialCost)
         binding.editTextLayoutKmPackage.doOnTextChanged { text, start, count, after ->
-            if (!text.isNullOrBlank()) {
+            if (!text.isNullOrBlank() && text.length < 7) {
                 val num = binding.editTextLayoutKmPackage.text.toString().toInt()
                 binding.rentalCreateCalculatedKmPrice.text =
-                    Helpers.formatDoubleWithOptionalDecimals(num * args.car.pricePerKilometer)
+                    Helpers.formatCurrency(num * args.car.pricePerKilometer)
+            } else {
+                binding.rentalCreateCalculatedKmPrice.text = "-"
             }
         }
 
+        // fix your SHIT DUDE
+        // From date/time
         binding.rentalCreateChangeStartDateButton.setOnClickListener {
-            val cal: Calendar = Calendar.getInstance()
+            val calendar = Calendar.getInstance()
+            val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                val selectedDate = LocalDate.of(year, month + 1, dayOfMonth)
+                binding.rentalCreateStartDate.text = Helpers.formatShortDate(selectedDate)
+                viewModel.setReservedFromDate(selectedDate)
+                viewModel.calculateHoursCost(args.car.pricePerHour)
+                updateAvailability()
+            }
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
-                { view, year, monthOfYear, dayOfMonth ->
-                    val selectedDate = LocalDate.of(year, monthOfYear + 1, dayOfMonth)
-                    binding.rentalCreateStartDate.text = Helpers.formatShortDate(selectedDate)
-                }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)
+                dateSetListener,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
             )
-            datePickerDialog.datePicker.maxDate = cal.timeInMillis
             datePickerDialog.show()
+        }
+
+        binding.rentalCreateChangeStartTimeButton.setOnClickListener {
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+                val selectedTime = LocalTime.of(hour, minute)
+                binding.rentalCreateStartTime.text = selectedTime.toString()
+                viewModel.setReservedFromTime(selectedTime)
+                viewModel.calculateHoursCost(args.car.pricePerHour)
+                updateAvailability()
+            }
+            val now = LocalDateTime.now()
+            val timePickerDialog =
+                TimePickerDialog(requireContext(), timeSetListener, now.hour, now.minute, true)
+            timePickerDialog.show()
+        }
+        // Until date/time
+        binding.rentalCreateChangeEndDateButton.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                val selectedDate = LocalDate.of(year, month + 1, dayOfMonth)
+                binding.rentalCreateEndDate.text = Helpers.formatShortDate(selectedDate)
+                viewModel.setReservedUntilDate(selectedDate)
+                viewModel.calculateHoursCost(args.car.pricePerHour)
+                updateAvailability()
+            }
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
+                dateSetListener,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
+            datePickerDialog.show()
+        }
+
+        binding.rentalCreateChangeEndTimeButton.setOnClickListener {
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+                val selectedTime = LocalTime.of(hour, minute)
+                binding.rentalCreateEndTime.text = selectedTime.toString()
+                viewModel.setReservedUntilTime(selectedTime)
+                viewModel.calculateHoursCost(args.car.pricePerHour)
+                updateAvailability()
+            }
+            val now = LocalDateTime.now()
+            val timePickerDialog =
+                TimePickerDialog(requireContext(), timeSetListener, now.hour, now.minute, true)
+            timePickerDialog.show()
         }
 
         return root
@@ -70,5 +154,25 @@ class RentalCreateFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+    private fun updateAvailability() {
+        val available: Boolean = viewModel.isCurrentTimeDateAvailable() ?: return
+        if (available) {
+            binding.rentalCreateUnavailableText.visibility = GONE
+            binding.rentalCreateUnavailableDatetime.visibility = GONE
+            binding.rentalCreateUnavailableText3.visibility = GONE
+            binding.rentalCreateAvailable.visibility = VISIBLE
+        } else {
+            binding.rentalCreateAvailable.visibility = GONE
+            binding.rentalCreateUnavailableDatetime.text =
+                "${Helpers.formatDateTime(viewModel.getFullFromDateTime()!!)} - ${
+                    Helpers.formatDateTime(viewModel.getFullUntilDateTime()!!)
+                }"
+            binding.rentalCreateUnavailableText.visibility = VISIBLE
+            binding.rentalCreateUnavailableDatetime.visibility = VISIBLE
+            binding.rentalCreateUnavailableText3.visibility = VISIBLE
+        }
     }
 }

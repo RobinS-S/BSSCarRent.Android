@@ -7,7 +7,7 @@ import com.bss.carrent.data.InvoiceDto
 import com.bss.carrent.data.rental.RentalCreateDto
 import com.bss.carrent.data.rental.RentalDto
 import com.bss.carrent.data.rental.RentalPeriodDto
-import com.bss.carrent.misc.AuthHelper
+import com.bss.carrent.misc.PrefsHelper
 import java.io.IOException
 
 class RentalRepository {
@@ -15,11 +15,11 @@ class RentalRepository {
         val rentalApiService =
             ApiClient.createService(RentalApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
+        val prefsHelper = PrefsHelper(context)
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
                 val rentals =
-                    rentalApiService.getCarRentals(authHelper.getAuthorizationHeader()!!, id)
+                    rentalApiService.getCarRentals(prefsHelper.getAuthorizationHeader()!!, id)
                 if (rentals.code() == 200) {
                     rentals.body()
                 } else throw IOException()
@@ -34,11 +34,11 @@ class RentalRepository {
         val rentalApiService =
             ApiClient.createService(RentalApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
+        val prefsHelper = PrefsHelper(context)
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
                 val periods =
-                    rentalApiService.getCarRentalPeriods(authHelper.getAuthorizationHeader()!!, id)
+                    rentalApiService.getCarRentalPeriods(prefsHelper.getAuthorizationHeader()!!, id)
                 if (periods.code() == 200) {
                     periods.body()
                 } else throw IOException()
@@ -53,10 +53,10 @@ class RentalRepository {
         val rentalApiService =
             ApiClient.createService(RentalApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
+        val prefsHelper = PrefsHelper(context)
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
-                val rentals = rentalApiService.getMyRentals(authHelper.getAuthorizationHeader()!!)
+                val rentals = rentalApiService.getMyRentals(prefsHelper.getAuthorizationHeader()!!)
                 if (rentals.code() == 200) {
                     rentals.body()
                 } else throw IOException()
@@ -71,11 +71,11 @@ class RentalRepository {
         val rentalApiService =
             ApiClient.createService(RentalApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
+        val prefsHelper = PrefsHelper(context)
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
                 val rentals =
-                    rentalApiService.getOwnedRentals(authHelper.getAuthorizationHeader()!!)
+                    rentalApiService.getOwnedRentals(prefsHelper.getAuthorizationHeader()!!)
                 if (rentals.code() == 200) {
                     rentals.body()
                 } else throw IOException()
@@ -90,11 +90,11 @@ class RentalRepository {
         val rentalApiService =
             ApiClient.createService(RentalApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
+        val prefsHelper = PrefsHelper(context)
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
                 val rental = rentalApiService.createRental(
-                    authHelper.getAuthorizationHeader()!!,
+                    prefsHelper.getAuthorizationHeader()!!,
                     rentalCreateDto
                 )
                 if (rental.code() == 200) {
@@ -111,11 +111,11 @@ class RentalRepository {
         val rentalApiService =
             ApiClient.createService(RentalApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
+        val prefsHelper = PrefsHelper(context)
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
                 val rental =
-                    rentalApiService.markRentalAsPickedUp(authHelper.getAuthorizationHeader()!!, id)
+                    rentalApiService.markRentalAsPickedUp(prefsHelper.getAuthorizationHeader()!!, id)
                 if (rental.code() == 200) {
                     rental.body()
                 } else throw IOException()
@@ -130,11 +130,11 @@ class RentalRepository {
         val rentalApiService =
             ApiClient.createService(RentalApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
+        val prefsHelper = PrefsHelper(context)
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
                 val invoice = rentalApiService.markRentalAsDelivered(
-                    authHelper.getAuthorizationHeader()!!,
+                    prefsHelper.getAuthorizationHeader()!!,
                     id
                 )
                 if (invoice.code() == 200) {
@@ -151,11 +151,11 @@ class RentalRepository {
         val rentalApiService =
             ApiClient.createService(RentalApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
+        val prefsHelper = PrefsHelper(context)
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
                 val rental =
-                    rentalApiService.getCurrentRental(authHelper.getAuthorizationHeader()!!)
+                    rentalApiService.getCurrentRental(prefsHelper.getAuthorizationHeader()!!)
                 if (rental.code() == 200) {
                     rental.body()
                 } else throw IOException()
@@ -170,11 +170,11 @@ class RentalRepository {
         val rentalApiService =
             ApiClient.createService(RentalApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
+        val prefsHelper = PrefsHelper(context)
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
                 val rental =
-                    rentalApiService.deleteCurrentRental(authHelper.getAuthorizationHeader()!!)
+                    rentalApiService.deleteCurrentRental(prefsHelper.getAuthorizationHeader()!!)
                 if (rental.code() == 200) {
                     rental.body()
                 } else throw IOException()

@@ -20,7 +20,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bss.carrent.databinding.ActivityMainBinding
-import com.bss.carrent.misc.AuthHelper
+import com.bss.carrent.misc.PrefsHelper
 import com.bss.carrent.misc.Helpers
 import com.bss.carrent.ui.auth.LoginViewModel
 import com.google.android.material.navigation.NavigationView
@@ -31,9 +31,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var viewModel: LoginViewModel
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private lateinit var authHelper: AuthHelper
-    private lateinit var switchAutoTheme: SwitchCompat
-    private lateinit var switchDarkTheme: SwitchCompat
+    private lateinit var prefsHelper: PrefsHelper
 
     private lateinit var sensorManager: SensorManager
     private lateinit var lightSensor: Sensor
@@ -70,71 +68,37 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 R.id.nav_register,
                 R.id.nav_login,
                 R.id.switch_auto_theme,
-                R.id.switch_dark_theme
+                R.id.switch_dark_theme,
+                R.id.nav_preferences
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val menuItemAutoTheme = navView.menu.findItem(R.id.switch_auto_theme)
-        val menuItemDarkTheme = navView.menu.findItem(R.id.switch_dark_theme)
-
-        switchAutoTheme = menuItemAutoTheme.actionView as SwitchCompat
-        switchAutoTheme.isChecked = true
-
-        switchDarkTheme = menuItemDarkTheme.actionView as SwitchCompat
-        switchDarkTheme.isChecked = false
-
-
-        switchAutoTheme.setOnClickListener() {
-            switchDarkTheme.isEnabled = !switchAutoTheme.isChecked
-
-            if (switchDarkTheme.isEnabled) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                switchDarkTheme.isChecked = false
-            }
-        }
-
-        switchDarkTheme.setOnCheckedChangeListener { _, value ->
-            if (!switchAutoTheme.isChecked) {
-                switchDarkTheme.isClickable = true
-                when (value) {
-                    true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                }
-            }
-        }
-
-        authHelper = AuthHelper(applicationContext)
+        prefsHelper = PrefsHelper(applicationContext)
 
         viewModel.userDto.observe(this) { user ->
             val headerLayout = navView.getHeaderView(0)
             val textView = headerLayout.findViewById<TextView>(R.id.subNavTitle)
             if (user == null) {
                 textView.setText(R.string.nav_header_subtitle)
-                authHelper.reset()
+                prefsHelper.resetCredentials()
             } else {
                 textView.text = "Logged in as ${Helpers.getFormattedName(user)}"
             }
         }
-        if (authHelper.areCredentialsFilled()) {
+        if (prefsHelper.areCredentialsFilled()) {
             try {
                 viewModel.tryLogin(applicationContext, true)
             } catch (e: IOException) {
                 viewModel.setUser(null)
             }
         }
+        prefsHelper.loadTheme()
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
     }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -153,20 +117,18 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onSensorChanged(event: SensorEvent?) {
         if (event!!.sensor.type == Sensor.TYPE_LIGHT) {
-            if (this.switchAutoTheme.isChecked) {
-                val lux = event.values.get(0)
+            val theme = this.prefsHelper.getTheme()
+            if (theme == "auto") {
+                val lux = event.values[0]
                 if (lux > 30000) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    switchDarkTheme.isChecked = false
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    switchDarkTheme.isChecked = true
                 }
             }
         }
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
-        //nothing!
     }
 }

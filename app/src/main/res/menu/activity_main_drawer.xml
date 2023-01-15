@@ -32,14 +32,9 @@
             android:title="Register" />
 
         <item
-            android:id="@+id/switch_auto_theme"
-            android:title="@string/auto_theme"
-            app:actionViewClass="androidx.appcompat.widget.SwitchCompat" />
-
-        <item
-            android:id="@+id/switch_dark_theme"
-            android:title="@string/dark_mode"
-            app:actionViewClass="androidx.appcompat.widget.SwitchCompat" />
+            android:id="@+id/nav_preferences"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/preferences" />
 
     </group>
 </menu>

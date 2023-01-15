@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bss.carrent.databinding.RentalDetailFragmentBinding
 import com.bss.carrent.misc.Helpers
+import com.bss.carrent.ui.car.CarDetailFragmentDirections
 
 class RentalDetailFragment : Fragment() {
     private var _binding: RentalDetailFragmentBinding? = null
@@ -46,6 +47,13 @@ class RentalDetailFragment : Fragment() {
         binding.rentalDetailViewOwner.setOnClickListener {
             val action = RentalDetailFragmentDirections.actionNavRentalDetailsToNavUser(
                 args.rental.ownerId
+            )
+            requireParentFragment().findNavController().navigate(action)
+        }
+
+        binding.rentalDetailViewCar.setOnClickListener {
+            val action = RentalDetailFragmentDirections.actionNavRentalDetailsToNavCarDetails(
+                args.rental.carId
             )
             requireParentFragment().findNavController().navigate(action)
         }
