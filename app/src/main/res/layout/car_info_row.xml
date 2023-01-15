@@ -165,7 +165,7 @@
                 android:maxLines="1"
                 android:text="@string/car_fueltype_label"
                 android:visibility="invisible"
-                app:layout_constraintStart_toEndOf="@id/rv_info_car_cartype_label"
+                app:layout_constraintStart_toEndOf="@id/rv_info_car_fueltype_label"
                 app:layout_constraintTop_toBottomOf="@id/rv_info_car_type" />
 
             <TextView

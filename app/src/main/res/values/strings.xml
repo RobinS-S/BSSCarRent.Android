@@ -187,4 +187,6 @@
         <item>nl</item>
     </string-array>
     <string name="rental_detail">Rental detail</string>
+    <string name="car_license_plate">License plate:</string>
+    <string name="car_create_button">Create</string>
 </resources>
