@@ -54,7 +54,7 @@ class LoginFragment : Fragment() {
             if (user != null) {
                 binding.loginButton.isVisible = false
                 binding.resetLoginDetailsButton.isVisible = true
-            } else if (user == null) {
+            } else {
                 binding.resetLoginDetailsButton.isVisible = false
             }
         }

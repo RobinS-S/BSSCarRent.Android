@@ -6,11 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Switch
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.bss.carrent.R
@@ -38,7 +34,7 @@ class PreferencesFragment : Fragment() {
         _binding = PreferencesBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val languageTextView: TextView = binding.languageValue
-       languageTextView.text = currentLanguage
+        languageTextView.text = currentLanguage
 
         val spinner = view?.findViewById<Spinner>(R.id.spinner_language)
         // set up adapter for the spinner
@@ -54,11 +50,16 @@ class PreferencesFragment : Fragment() {
 
         if (spinner != null) {
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
                     // get the selected language
                     val selectedLanguage = parent?.getItemAtPosition(position).toString()
                     // check if the selected language is different from the current language
-                    if(selectedLanguage != currentLanguage) {
+                    if (selectedLanguage != currentLanguage) {
                         // set the new locale
                         setNewLocale(requireContext(), selectedLanguage)
                         // update the current language
@@ -74,7 +75,7 @@ class PreferencesFragment : Fragment() {
             }
         }
 
-        val switchAutoTheme:Switch = binding.switchAutoTheme
+        val switchAutoTheme: Switch = binding.switchAutoTheme
         val switchDarkTheme = binding.switchDarkTheme
 
 

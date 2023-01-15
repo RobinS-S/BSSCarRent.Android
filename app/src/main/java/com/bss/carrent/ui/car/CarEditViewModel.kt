@@ -1,6 +1,5 @@
 package com.bss.carrent.ui.car
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,7 +26,7 @@ class CarEditViewModel : ViewModel() {
         _carDto.value = value
     }
 
-    fun getCar(context: Context, id: Long) {
+    fun getCar(id: Long) {
         viewModelScope.launch {
             val repository = CarRepository()
             val retrievedCar = repository.getCar(id)

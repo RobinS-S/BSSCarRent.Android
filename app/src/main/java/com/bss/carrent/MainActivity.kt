@@ -15,7 +15,10 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.ui.*
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.bss.carrent.databinding.ActivityMainBinding
 import com.bss.carrent.misc.AuthHelper
 import com.bss.carrent.misc.Helpers
@@ -104,7 +107,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
-    
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
@@ -136,6 +139,5 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
-        //nothing!
     }
 }

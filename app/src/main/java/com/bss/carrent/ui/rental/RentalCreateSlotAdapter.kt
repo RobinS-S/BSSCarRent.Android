@@ -11,7 +11,8 @@ class RentalCreateSlotAdapter : RecyclerView.Adapter<RentalCreateSlotAdapter.Slo
     private var slotList: List<RentalPeriodDto> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SlotViewHolder {
-        val binding = RentalCreateSlotBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            RentalCreateSlotBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SlotViewHolder(binding)
     }
 
@@ -29,9 +30,14 @@ class RentalCreateSlotAdapter : RecyclerView.Adapter<RentalCreateSlotAdapter.Slo
     }
 
 
-    inner class SlotViewHolder(val binding: RentalCreateSlotBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class SlotViewHolder(val binding: RentalCreateSlotBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(slotDto: RentalPeriodDto) {
-            binding.textView.text = String.format("%s - %s", Helpers.formatDateTime(slotDto.reservedFrom), Helpers.formatDateTime(slotDto.reservedUntil))
+            binding.textView.text = String.format(
+                "%s - %s",
+                Helpers.formatDateTime(slotDto.reservedFrom),
+                Helpers.formatDateTime(slotDto.reservedUntil)
+            )
         }
     }
 }

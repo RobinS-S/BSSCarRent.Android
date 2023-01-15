@@ -39,7 +39,6 @@ class ProfileRepository {
         } catch (e: IOException) {
             null
         }
-        return null
     }
 
     suspend fun register(registerDto: UserRegisterDto): UserDto? {

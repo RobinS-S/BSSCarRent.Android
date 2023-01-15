@@ -16,7 +16,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bss.carrent.data.rental.RentalPeriodDto
 import com.bss.carrent.databinding.RentalCreateFragmentBinding
 import com.bss.carrent.misc.Helpers
 import kotlinx.coroutines.launch
@@ -86,13 +85,19 @@ class RentalCreateFragment : Fragment() {
         binding.rentalCreateChangeStartDateButton.setOnClickListener {
             val calendar = Calendar.getInstance()
             val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                val selectedDate = LocalDate.of(year, month+1, dayOfMonth)
+                val selectedDate = LocalDate.of(year, month + 1, dayOfMonth)
                 binding.rentalCreateStartDate.text = Helpers.formatShortDate(selectedDate)
                 viewModel.setReservedFromDate(selectedDate)
                 viewModel.calculateHoursCost(args.car.pricePerHour)
                 updateAvailability()
             }
-            val datePickerDialog = DatePickerDialog(requireContext(), dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
+                dateSetListener,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
             datePickerDialog.show()
         }
 
@@ -105,20 +110,27 @@ class RentalCreateFragment : Fragment() {
                 updateAvailability()
             }
             val now = LocalDateTime.now()
-            val timePickerDialog = TimePickerDialog(requireContext(), timeSetListener, now.hour, now.minute, true)
+            val timePickerDialog =
+                TimePickerDialog(requireContext(), timeSetListener, now.hour, now.minute, true)
             timePickerDialog.show()
         }
         // Until date/time
         binding.rentalCreateChangeEndDateButton.setOnClickListener {
             val calendar = Calendar.getInstance()
             val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                val selectedDate = LocalDate.of(year, month+1, dayOfMonth)
+                val selectedDate = LocalDate.of(year, month + 1, dayOfMonth)
                 binding.rentalCreateEndDate.text = Helpers.formatShortDate(selectedDate)
                 viewModel.setReservedUntilDate(selectedDate)
                 viewModel.calculateHoursCost(args.car.pricePerHour)
                 updateAvailability()
             }
-            val datePickerDialog = DatePickerDialog(requireContext(), dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
+                dateSetListener,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
             datePickerDialog.show()
         }
 
@@ -154,7 +166,10 @@ class RentalCreateFragment : Fragment() {
             binding.rentalCreateAvailable.visibility = VISIBLE
         } else {
             binding.rentalCreateAvailable.visibility = GONE
-            binding.rentalCreateUnavailableDatetime.text = "${Helpers.formatDateTime(viewModel.getFullFromDateTime()!!)} - ${Helpers.formatDateTime(viewModel.getFullUntilDateTime()!!)}"
+            binding.rentalCreateUnavailableDatetime.text =
+                "${Helpers.formatDateTime(viewModel.getFullFromDateTime()!!)} - ${
+                    Helpers.formatDateTime(viewModel.getFullUntilDateTime()!!)
+                }"
             binding.rentalCreateUnavailableText.visibility = VISIBLE
             binding.rentalCreateUnavailableDatetime.visibility = VISIBLE
             binding.rentalCreateUnavailableText3.visibility = VISIBLE

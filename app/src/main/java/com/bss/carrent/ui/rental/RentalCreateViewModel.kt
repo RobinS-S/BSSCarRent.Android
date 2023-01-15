@@ -75,7 +75,7 @@ class RentalCreateViewModel : ViewModel() {
         viewModelScope.launch {
             val repository = RentalRepository()
             val usedSlots = repository.getPeriodsForCarId(context, carId)
-            if(usedSlots != null) {
+            if (usedSlots != null) {
                 val comparator = compareBy<RentalPeriodDto> { it.reservedFrom }
                 usedSlots.sortedWith(comparator)
                 _usedTimeSlots.value = usedSlots!!
@@ -86,36 +86,42 @@ class RentalCreateViewModel : ViewModel() {
     fun isCurrentTimeDateAvailable(): Boolean? {
         val from = getFullFromDateTime()
         val until = getFullUntilDateTime()
-        if(from == null || until == null) return null
-        if(until.isBefore(from)) return null
-        if(_usedTimeSlots.value == null) return null
-        for(slot in _usedTimeSlots.value!!) {
-            if(isBetween(slot.reservedFrom, from, until)) return false
-            if(isBetween(slot.reservedUntil, from, until)) return false
+        if (from == null || until == null) return null
+        if (until.isBefore(from)) return null
+        if (_usedTimeSlots.value == null) return null
+        for (slot in _usedTimeSlots.value!!) {
+            if (isBetween(slot.reservedFrom, from, until)) return false
+            if (isBetween(slot.reservedUntil, from, until)) return false
         }
         return true
     }
 
-    private fun isBetween(checkDateTime: LocalDateTime, startDateTime: LocalDateTime, endDateTime: LocalDateTime): Boolean {
-        return checkDateTime.isAfter(startDateTime) && checkDateTime.isBefore(endDateTime) || checkDateTime.isEqual(startDateTime) || checkDateTime.isEqual(endDateTime)
+    private fun isBetween(
+        checkDateTime: LocalDateTime,
+        startDateTime: LocalDateTime,
+        endDateTime: LocalDateTime
+    ): Boolean {
+        return checkDateTime.isAfter(startDateTime) && checkDateTime.isBefore(endDateTime) || checkDateTime.isEqual(
+            startDateTime
+        ) || checkDateTime.isEqual(endDateTime)
     }
 
     fun calculateHoursCost(carHourCost: Double): Double? {
-        if(reservedFromTime.value == null || reservedFromDate.value == null || reservedUntilTime.value == null || reservedUntilDate.value == null) return null
+        if (reservedFromTime.value == null || reservedFromDate.value == null || reservedUntilTime.value == null || reservedUntilDate.value == null) return null
         val duration = Duration.between(getFullFromDateTime(), getFullUntilDateTime())
-        if(duration.isNegative) return null
+        if (duration.isNegative) return null
         val result = duration.toHours() * carHourCost
         _hoursCost.value = result
         return result
     }
 
     fun getFullFromDateTime(): LocalDateTime? {
-        if(this.reservedFromDate.value == null || this.reservedFromTime.value == null) return null
+        if (this.reservedFromDate.value == null || this.reservedFromTime.value == null) return null
         return LocalDateTime.of(this.reservedFromDate.value, this.reservedFromTime.value)
     }
 
     fun getFullUntilDateTime(): LocalDateTime? {
-        if(this.reservedUntilDate.value == null || this.reservedUntilTime.value == null) return null
+        if (this.reservedUntilDate.value == null || this.reservedUntilTime.value == null) return null
         return LocalDateTime.of(this.reservedUntilDate.value, this.reservedUntilTime.value)
     }
 }
