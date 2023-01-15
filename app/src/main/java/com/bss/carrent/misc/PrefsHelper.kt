@@ -1,9 +1,10 @@
 package com.bss.carrent.misc
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import okhttp3.Credentials
 
-class AuthHelper(context: Context) {
+class PrefsHelper(context: Context) {
     private val prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(context)
 
     fun areCredentialsFilled(): Boolean {
@@ -20,6 +21,10 @@ class AuthHelper(context: Context) {
         return prefs.getString("password", "")
     }
 
+    fun getTheme(): String? {
+        return prefs.getString("theme", "")
+    }
+
     fun getAuthorizationHeader(): String? {
         if (this.areCredentialsFilled()) {
             return Credentials.basic(this.getUsername()!!, getPassword()!!)
@@ -27,16 +32,32 @@ class AuthHelper(context: Context) {
         return null;
     }
 
-    fun update(username: String, password: String) {
+    fun updateCredentials(username: String, password: String) {
         val preferenceEditor = prefs.edit()
         preferenceEditor.putString("username", username)
         preferenceEditor.putString("password", password)
         preferenceEditor.apply()
     }
 
-    fun reset() {
+    fun updateTheme(value: String) {
         val preferenceEditor = prefs.edit()
-        preferenceEditor.clear()
+        preferenceEditor.putString("theme", value)
+        preferenceEditor.apply()
+        loadTheme()
+    }
+
+    fun loadTheme() {
+        when (getTheme()) {
+            "dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            "light" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            null -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        }
+    }
+
+    fun resetCredentials() {
+        val preferenceEditor = prefs.edit()
+        preferenceEditor.remove("username")
+        preferenceEditor.remove("password")
         preferenceEditor.apply()
     }
 }

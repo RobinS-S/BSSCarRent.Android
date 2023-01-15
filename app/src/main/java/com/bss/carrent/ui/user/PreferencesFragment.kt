@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.bss.carrent.R
 import com.bss.carrent.databinding.PreferencesBinding
+import com.bss.carrent.misc.PrefsHelper
 import java.util.*
 
 class PreferencesFragment : Fragment() {
@@ -77,24 +78,45 @@ class PreferencesFragment : Fragment() {
 
         val switchAutoTheme: Switch = binding.switchAutoTheme
         val switchDarkTheme = binding.switchDarkTheme
-
+        val prefsHelper = PrefsHelper(requireContext())
 
         switchAutoTheme.setOnClickListener() {
             switchDarkTheme.isEnabled = !switchAutoTheme.isChecked
 
             if (switchDarkTheme.isEnabled) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                prefsHelper.updateTheme("auto")
                 switchDarkTheme.isChecked = false
             }
         }
 
         switchDarkTheme.setOnCheckedChangeListener { _, value ->
             if (!switchAutoTheme.isChecked) {
-                switchDarkTheme.isClickable = true
+                switchDarkTheme.isEnabled = true
                 when (value) {
-                    true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    true -> prefsHelper.updateTheme("dark")
+                    false -> prefsHelper.updateTheme("light")
                 }
+            }
+        }
+
+        when(prefsHelper.getTheme()) {
+            "auto" -> {
+                switchAutoTheme.isEnabled = true
+                switchAutoTheme.isChecked = true
+                switchDarkTheme.isChecked = false
+                switchDarkTheme.isEnabled = false
+            }
+            "light" -> {
+                switchAutoTheme.isChecked = false
+                switchDarkTheme.isChecked = false
+                switchDarkTheme.isEnabled = true
+                switchAutoTheme.isEnabled = true
+            }
+            "dark" -> {
+                switchAutoTheme.isChecked = false
+                switchDarkTheme.isChecked = true
+                switchDarkTheme.isEnabled = true
+                switchAutoTheme.isEnabled = true
             }
         }
 

@@ -5,7 +5,7 @@ import com.bss.carrent.api.UserApiService
 import com.bss.carrent.api.client.ApiClient
 import com.bss.carrent.data.user.UserDto
 import com.bss.carrent.data.user.UserRegisterDto
-import com.bss.carrent.misc.AuthHelper
+import com.bss.carrent.misc.PrefsHelper
 import java.io.IOException
 
 class ProfileRepository {
@@ -13,10 +13,10 @@ class ProfileRepository {
         val profileApiService =
             ApiClient.createService(UserApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
+        val prefsHelper = PrefsHelper(context)
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
-                val profile = profileApiService.getProfile(authHelper.getAuthorizationHeader()!!)
+                val profile = profileApiService.getProfile(prefsHelper.getAuthorizationHeader()!!)
                 if (profile.code() == 200) {
                     profile.body()
                 } else throw IOException()

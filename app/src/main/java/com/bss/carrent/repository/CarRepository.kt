@@ -5,7 +5,7 @@ import com.bss.carrent.api.CarApiService
 import com.bss.carrent.api.client.ApiClient
 import com.bss.carrent.data.car.CarDto
 import com.bss.carrent.data.car.CarUpdateDto
-import com.bss.carrent.misc.AuthHelper
+import com.bss.carrent.misc.PrefsHelper
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -31,10 +31,10 @@ class CarRepository {
         val carApiService =
             ApiClient.createService(CarApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
+        val prefsHelper = PrefsHelper(context)
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
-                val cars = carApiService.getMyCars(authHelper.getAuthorizationHeader()!!)
+                val cars = carApiService.getMyCars(prefsHelper.getAuthorizationHeader()!!)
                 if (cars.code() == 200) {
                     cars.body()
                 } else throw IOException()
@@ -72,11 +72,11 @@ class CarRepository {
     suspend fun createCar(context: Context, carDto: CarDto): CarDto? {
         val carApiService =
             ApiClient.createService(CarApiService::class.java)
-        val authHelper = AuthHelper(context)
+        val prefsHelper = PrefsHelper(context)
 
-        if (authHelper.areCredentialsFilled()) {
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
-                val car = carApiService.createCar(authHelper.getAuthorizationHeader()!!, carDto)
+                val car = carApiService.createCar(prefsHelper.getAuthorizationHeader()!!, carDto)
                 if (car.code() == 200) {
                     car.body()
                 } else throw IOException()
@@ -90,12 +90,12 @@ class CarRepository {
     suspend fun updateCar(context: Context, id: Long, carUpdateDto: CarUpdateDto): CarDto? {
         val carApiService =
             ApiClient.createService(CarApiService::class.java)
-        val authHelper = AuthHelper(context)
+        val prefsHelper = PrefsHelper(context)
 
-        if (authHelper.areCredentialsFilled()) {
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
                 val car =
-                    carApiService.updateCar(authHelper.getAuthorizationHeader()!!, id, carUpdateDto)
+                    carApiService.updateCar(prefsHelper.getAuthorizationHeader()!!, id, carUpdateDto)
                 if (car.code() == 200) {
                     car.body()
                 } else throw IOException()
@@ -109,11 +109,11 @@ class CarRepository {
     suspend fun deleteCar(context: Context, id: Long): Any? {
         val carApiService =
             ApiClient.createService(CarApiService::class.java)
-        val authHelper = AuthHelper(context)
+        val prefsHelper = PrefsHelper(context)
 
-        if (authHelper.areCredentialsFilled()) {
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
-                val car = carApiService.deleteCar(authHelper.getAuthorizationHeader()!!, id)
+                val car = carApiService.deleteCar(prefsHelper.getAuthorizationHeader()!!, id)
                 if (car.code() == 200) {
                     car.body()
                 } else throw IOException()
@@ -127,16 +127,16 @@ class CarRepository {
     suspend fun uploadCarImage(context: Context, id: Long, image: File): Long? {
         val carApiService =
             ApiClient.createService(CarApiService::class.java)
-        val authHelper = AuthHelper(context)
+        val prefsHelper = PrefsHelper(context)
 
-        if (authHelper.areCredentialsFilled()) {
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
                 val imagePart = MultipartBody.Part.createFormData(
                     "image", image.name,
                     image.asRequestBody("image/*".toMediaTypeOrNull())
                 )
                 val imgId = carApiService.uploadCarImage(
-                    authHelper.getAuthorizationHeader()!!,
+                    prefsHelper.getAuthorizationHeader()!!,
                     id,
                     imagePart
                 )

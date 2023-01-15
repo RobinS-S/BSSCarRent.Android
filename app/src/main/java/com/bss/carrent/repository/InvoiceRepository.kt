@@ -4,7 +4,7 @@ import android.content.Context
 import com.bss.carrent.api.InvoiceApiService
 import com.bss.carrent.api.client.ApiClient
 import com.bss.carrent.data.InvoiceDto
-import com.bss.carrent.misc.AuthHelper
+import com.bss.carrent.misc.PrefsHelper
 import java.io.IOException
 
 class InvoiceRepository {
@@ -12,11 +12,11 @@ class InvoiceRepository {
         val invoiceApiService =
             ApiClient.createService(InvoiceApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
+        val prefsHelper = PrefsHelper(context)
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
                 val invoices =
-                    invoiceApiService.getMyInvoices(authHelper.getAuthorizationHeader()!!)
+                    invoiceApiService.getMyInvoices(prefsHelper.getAuthorizationHeader()!!)
                 if (invoices.code() == 200) {
                     invoices.body()
                 } else throw IOException()
@@ -31,11 +31,11 @@ class InvoiceRepository {
         val invoiceApiService =
             ApiClient.createService(InvoiceApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
+        val prefsHelper = PrefsHelper(context)
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
                 val invoices =
-                    invoiceApiService.getOwnedInvoices(authHelper.getAuthorizationHeader()!!)
+                    invoiceApiService.getOwnedInvoices(prefsHelper.getAuthorizationHeader()!!)
                 if (invoices.code() == 200) {
                     invoices.body()
                 } else throw IOException()
@@ -50,11 +50,11 @@ class InvoiceRepository {
         val invoiceApiService =
             ApiClient.createService(InvoiceApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
+        val prefsHelper = PrefsHelper(context)
+        if (prefsHelper.areCredentialsFilled()) {
             return try {
                 val invoice =
-                    invoiceApiService.payInvoice(authHelper.getAuthorizationHeader()!!, id)
+                    invoiceApiService.payInvoice(prefsHelper.getAuthorizationHeader()!!, id)
                 if (invoice.code() == 200) {
                     invoice.body()
                 } else throw IOException()

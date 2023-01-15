@@ -14,7 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.bss.carrent.R
 import com.bss.carrent.databinding.LoginFragmentBinding
-import com.bss.carrent.misc.AuthHelper
+import com.bss.carrent.misc.PrefsHelper
 import com.bss.carrent.misc.Helpers
 
 class LoginFragment : Fragment() {
@@ -33,10 +33,10 @@ class LoginFragment : Fragment() {
         navController = Navigation.findNavController(view)
         viewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
 
-        val authHelper = context?.let { AuthHelper(it) }
-        if (authHelper != null && authHelper.areCredentialsFilled()) {
-            binding.email.editText?.setText(authHelper.getUsername())
-            binding.password.editText?.setText(authHelper.getPassword())
+        val prefsHelper = context?.let { PrefsHelper(it) }
+        if (prefsHelper != null && prefsHelper.areCredentialsFilled()) {
+            binding.email.editText?.setText(prefsHelper.getUsername())
+            binding.password.editText?.setText(prefsHelper.getPassword())
             Toast.makeText(context, "You already have credentials.", Toast.LENGTH_LONG).show()
         }
 
@@ -90,8 +90,8 @@ class LoginFragment : Fragment() {
         val resetLogin: Button = binding.resetLoginDetailsButton
 
         resetLogin.setOnClickListener {
-            val authHelper = context?.let { AuthHelper(it) }
-            authHelper?.reset()
+            val prefsHelper = context?.let { PrefsHelper(it) }
+            prefsHelper?.resetCredentials()
             viewModel.setUser(null)
             binding.email.editText?.text?.clear()
             binding.password.editText?.text?.clear()
@@ -107,12 +107,12 @@ class LoginFragment : Fragment() {
         }
 
         gotoLogin.setOnClickListener {
-            val authHelper = context?.let { AuthHelper(it) }
-            if (authHelper != null) {
+            val prefsHelper = context?.let { PrefsHelper(it) }
+            if (prefsHelper != null) {
                 val textUsername = binding.email.editText?.text.toString()
                 val textPassword = binding.password.editText?.text.toString()
                 if (validateForm()) {
-                    authHelper.update(textUsername, textPassword)
+                    prefsHelper.updateCredentials(textUsername, textPassword)
                     binding.loginButton.isClickable = false
                     _busy = true
                     viewModel.tryLogin(requireContext())
