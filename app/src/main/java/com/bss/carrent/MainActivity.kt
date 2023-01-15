@@ -7,6 +7,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -15,10 +16,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import com.bss.carrent.databinding.ActivityMainBinding
 import com.bss.carrent.misc.AuthHelper
 import com.bss.carrent.misc.Helpers
@@ -64,40 +62,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_car_list, R.id.nav_rentals, R.id.nav_invoices, R.id.nav_register, R.id.nav_login, R.id.nav_map, R.id.switch_auto_theme, R.id.switch_dark_theme
+                R.id.nav_car_list, R.id.nav_rentals, R.id.nav_invoices, R.id.nav_register, R.id.nav_login, R.id.nav_map, R.id.switch_auto_theme, R.id.switch_dark_theme, R.id.nav_preferences
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        val menuItemAutoTheme = navView.menu.findItem(R.id.switch_auto_theme)
-        val menuItemDarkTheme = navView.menu.findItem(R.id.switch_dark_theme)
-
-        switchAutoTheme = menuItemAutoTheme.actionView as SwitchCompat
-        switchAutoTheme.isChecked = true
-
-        switchDarkTheme = menuItemDarkTheme.actionView as SwitchCompat
-        switchDarkTheme.isChecked = false
-
-
-        switchAutoTheme.setOnClickListener() {
-            switchDarkTheme.isEnabled = !switchAutoTheme.isChecked
-
-            if (switchDarkTheme.isEnabled) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                switchDarkTheme.isChecked = false
-            }
-        }
-
-        switchDarkTheme.setOnCheckedChangeListener { _, value ->
-            if (!switchAutoTheme.isChecked) {
-                switchDarkTheme.isClickable = true
-                when (value) {
-                    true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                }
-            }
-        }
 
         authHelper = AuthHelper(applicationContext)
 
@@ -123,13 +92,16 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
 
-
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        val navController = findNavController(R.id.nav_preferences)
+//        return item.onNavDestinationSelected(navController)
+//    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
