@@ -27,20 +27,17 @@ class ProfileRepository {
         return null
     }
 
-    suspend fun getProfileForUser(context: Context, userId: Long): UserDto? {
+    suspend fun getProfileForUser(userId: Long): UserDto? {
         val profileApiService =
             ApiClient.createService(UserApiService::class.java)
 
-        val authHelper = AuthHelper(context)
-        if (authHelper.areCredentialsFilled()) {
-            return try {
-                val profile = profileApiService.getUserProfile(userId)
-                if (profile.code() == 200) {
-                    profile.body()
-                } else throw IOException()
-            } catch (e: IOException) {
-                null
-            }
+        return try {
+            val profile = profileApiService.getUserProfile(userId)
+            if (profile.code() == 200) {
+                profile.body()
+            } else throw IOException()
+        } catch (e: IOException) {
+            null
         }
         return null
     }

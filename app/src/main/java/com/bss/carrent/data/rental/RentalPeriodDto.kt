@@ -6,5 +6,5 @@ data class RentalPeriodDto(
     val reservedFrom: LocalDateTime,
     val reservedUntil: LocalDateTime,
     val carId: Long,
-    val isCancelled: Boolean
+    val cancelled: Boolean
 ) : java.io.Serializable

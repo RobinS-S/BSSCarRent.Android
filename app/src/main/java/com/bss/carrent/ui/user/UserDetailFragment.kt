@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bss.carrent.databinding.UserDetailFragmentBinding
 import com.bss.carrent.misc.Helpers
+import com.bss.userrent.ui.user.UserDetailViewModel
+import kotlinx.coroutines.launch
 
 class UserDetailFragment : Fragment() {
     private var _binding: UserDetailFragmentBinding? = null
@@ -23,14 +27,23 @@ class UserDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val userDetailViewModel =
+            ViewModelProvider(this)[UserDetailViewModel::class.java]
 
         _binding = UserDetailFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        binding.firstName.text = args.user.firstName
-        binding.infix.text = args.user.infix
-        binding.lastName.text = args.user.lastName
-        binding.phoneNumber.text =
-            Helpers.getFormattedPhone(args.user.phoneInternationalCode, args.user.phoneNumber)
+
+        userDetailViewModel.userDto.observe(viewLifecycleOwner) {
+            binding.firstName.text = it.firstName
+            binding.infix.text = it.infix ?: "-"
+            binding.lastName.text = it.lastName
+            binding.phoneNumber.text =
+                Helpers.getFormattedPhone(it.phoneInternationalCode, it.phoneNumber)
+        }
+
+        lifecycleScope.launch {
+            userDetailViewModel.getUser(args.userId)
+        }
 
         return root
     }

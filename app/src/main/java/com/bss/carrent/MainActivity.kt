@@ -61,7 +61,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_car_list, R.id.nav_rentals, R.id.nav_invoices, R.id.nav_register, R.id.nav_login, R.id.nav_map, R.id.switch_auto_theme, R.id.switch_dark_theme, R.id.nav_preferences
+                R.id.nav_car_list,
+                R.id.nav_rentals,
+                R.id.nav_invoices,
+                R.id.nav_register,
+                R.id.nav_login,
+                R.id.nav_map,
+                R.id.switch_auto_theme,
+                R.id.switch_dark_theme,
+                R.id.nav_preferences
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -96,7 +104,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
-
+    
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
