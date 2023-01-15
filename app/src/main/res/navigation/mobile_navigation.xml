@@ -72,9 +72,6 @@
         <argument
             android:name="car"
             app:argType="com.bss.carrent.data.car.CarDto" />
-        <action
-            android:id="@+id/action_nav_car_edit_to_nav_own_car_list"
-            app:destination="@id/nav_own_car_list" />
     </fragment>
 
     <fragment

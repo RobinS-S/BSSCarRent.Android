@@ -8,6 +8,7 @@ import java.text.DecimalFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 
 object Helpers {
     fun getFormattedName(userDto: UserDto): String {
@@ -25,6 +26,16 @@ object Helpers {
     fun formatShortDate(value: LocalDate): String {
         val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
         return value.format(formatter)
+    }
+
+    fun parseShortDate(value: String): LocalDate? {
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        return try {
+            LocalDate.parse(value, formatter)
+        } catch (e: DateTimeParseException) {
+            null
+        }
+        return null
     }
 
     fun formatDateTime(value: LocalDateTime): String {
