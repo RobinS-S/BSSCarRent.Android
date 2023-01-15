@@ -1,4 +1,4 @@
-package com.bss.carrent.ui.user
+package com.bss.carrent.ui
 
 import android.content.Context
 import android.content.res.Configuration
@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.bss.carrent.R
 import com.bss.carrent.databinding.PreferencesBinding
@@ -20,8 +19,6 @@ class PreferencesFragment : Fragment() {
 
     private var _binding: PreferencesBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -31,14 +28,12 @@ class PreferencesFragment : Fragment() {
     ): View? {
         currentLanguage = Locale.getDefault().language
 
-//        val view = inflater.inflate(R.layout.preferences, container, false)
         _binding = PreferencesBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val languageTextView: TextView = binding.languageValue
         languageTextView.text = currentLanguage
 
         val spinner = view?.findViewById<Spinner>(R.id.spinner_language)
-        // set up adapter for the spinner
         val adapter = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.languages,
@@ -57,16 +52,10 @@ class PreferencesFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    // get the selected language
                     val selectedLanguage = parent?.getItemAtPosition(position).toString()
-                    // check if the selected language is different from the current language
                     if (selectedLanguage != currentLanguage) {
-                        // set the new locale
                         setNewLocale(requireContext(), selectedLanguage)
-                        // update the current language
                         currentLanguage = selectedLanguage
-                        // refresh the activity
-                        //activity?.recreate()
                     }
                 }
 
@@ -77,27 +66,8 @@ class PreferencesFragment : Fragment() {
         }
 
         val switchAutoTheme: Switch = binding.switchAutoTheme
-        val switchDarkTheme = binding.switchDarkTheme
+        val switchDarkTheme: Switch = binding.switchDarkTheme
         val prefsHelper = PrefsHelper(requireContext())
-
-        switchAutoTheme.setOnClickListener() {
-            switchDarkTheme.isEnabled = !switchAutoTheme.isChecked
-
-            if (switchDarkTheme.isEnabled) {
-                prefsHelper.updateTheme("auto")
-                switchDarkTheme.isChecked = false
-            }
-        }
-
-        switchDarkTheme.setOnCheckedChangeListener { _, value ->
-            if (!switchAutoTheme.isChecked) {
-                switchDarkTheme.isEnabled = true
-                when (value) {
-                    true -> prefsHelper.updateTheme("dark")
-                    false -> prefsHelper.updateTheme("light")
-                }
-            }
-        }
 
         when(prefsHelper.getTheme()) {
             "auto" -> {
@@ -116,7 +86,27 @@ class PreferencesFragment : Fragment() {
                 switchAutoTheme.isChecked = false
                 switchDarkTheme.isChecked = true
                 switchDarkTheme.isEnabled = true
-                switchAutoTheme.isEnabled = true
+                switchAutoTheme.isEnabled = false
+            }
+        }
+
+        switchAutoTheme.setOnCheckedChangeListener { _, value ->
+            if (switchAutoTheme.isChecked) {
+                prefsHelper.updateTheme("auto")
+                switchDarkTheme.isEnabled = false
+            } else {
+                prefsHelper.updateTheme("light")
+                switchDarkTheme.isEnabled = true
+            }
+        }
+
+        switchDarkTheme.setOnCheckedChangeListener { _, value ->
+            if (!switchAutoTheme.isChecked) {
+                switchDarkTheme.isEnabled = true
+                when (value) {
+                    true -> prefsHelper.updateTheme("dark")
+                    false -> prefsHelper.updateTheme("light")
+                }
             }
         }
 

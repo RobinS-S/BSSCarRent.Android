@@ -178,7 +178,7 @@
 
     <fragment
         android:id="@+id/nav_preferences"
-        android:name="com.bss.carrent.ui.user.PreferencesFragment"
+        android:name="com.bss.carrent.ui.PreferencesFragment"
         android:label="@string/preferences"
         tools:layout="@layout/preferences" />
 
