@@ -10,38 +10,48 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.bss.carrent.R
 import com.bss.carrent.misc.GeoLocationManager
+import com.bss.carrent.ui.rental.RentalCreateFragmentArgs
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.*
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationResult
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 
-class MapsFragment : Fragment() {
+class CarMapFragment : Fragment() {
+    private val args: CarMapFragmentArgs by navArgs()
 
     private var locationPermissions = arrayOf(
         Manifest.permission.ACCESS_COARSE_LOCATION,
         Manifest.permission.ACCESS_FINE_LOCATION
     )
+
     private fun requestLocationPermission() {
         permissionRequest.launch(locationPermissions)
     }
 
     private fun isLocationAllowed(): Boolean {
         return ActivityCompat.checkSelfPermission(
-            requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(
-            requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     // Permission result
-    private val permissionRequest = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-        val granted = permissions.entries.all {
-            it.value == true
+    private val permissionRequest =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            val granted = permissions.entries.all {
+                it.value
+            }
         }
-    }
 
     private var ownUserMarker: Marker? = null
     private val callback = OnMapReadyCallback { googleMap ->
@@ -52,7 +62,7 @@ class MapsFragment : Fragment() {
         locationManager = GeoLocationManager(activity as Context)
         if (permissionGranted) {
             locationManager.startLocationTracking(locationCallback)
-        }else {
+        } else {
             requestLocationPermission()
         }
 
@@ -64,17 +74,20 @@ class MapsFragment : Fragment() {
         val yourLocation = LatLng(lat, lng)
         boundsBuilder.include(yourLocation)
 
-        ownUserMarker = googleMap.addMarker(MarkerOptions().position(yourLocation).title(getString(R.string.youarehere)))
+        ownUserMarker = googleMap.addMarker(
+            MarkerOptions().position(yourLocation).title(getString(R.string.youarehere))
+        )
         ownUserMarker?.isVisible = false
 
-        //TODO: Car location has a temporary fixed location, replace with real car location
-        val yourCarLocation = LatLng(51.587083, 4.798504)
+        val yourCarLocation = LatLng(args.car.lat, args.car.lng)
 
-        googleMap.addMarker(MarkerOptions().position(yourCarLocation).title(getString(R.string.yourcarishere)))
+        googleMap.addMarker(
+            MarkerOptions().position(yourCarLocation).title(getString(R.string.yourcarishere))
+        )
         boundsBuilder.include(yourCarLocation)
 
         val bounds = boundsBuilder.build()
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds,100))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
     }
 
     override fun onCreateView(
@@ -90,6 +103,7 @@ class MapsFragment : Fragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
+
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             for (location in locationResult.locations) {

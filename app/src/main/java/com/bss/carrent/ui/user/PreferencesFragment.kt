@@ -6,15 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Switch
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.bss.carrent.R
 import com.bss.carrent.databinding.PreferencesBinding
+import com.bss.carrent.misc.PrefsHelper
 import java.util.*
 
 class PreferencesFragment : Fragment() {
@@ -38,7 +35,7 @@ class PreferencesFragment : Fragment() {
         _binding = PreferencesBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val languageTextView: TextView = binding.languageValue
-       languageTextView.text = currentLanguage
+        languageTextView.text = currentLanguage
 
         val spinner = view?.findViewById<Spinner>(R.id.spinner_language)
         // set up adapter for the spinner
@@ -54,11 +51,16 @@ class PreferencesFragment : Fragment() {
 
         if (spinner != null) {
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
                     // get the selected language
                     val selectedLanguage = parent?.getItemAtPosition(position).toString()
                     // check if the selected language is different from the current language
-                    if(selectedLanguage != currentLanguage) {
+                    if (selectedLanguage != currentLanguage) {
                         // set the new locale
                         setNewLocale(requireContext(), selectedLanguage)
                         // update the current language
@@ -74,26 +76,47 @@ class PreferencesFragment : Fragment() {
             }
         }
 
-        val switchAutoTheme:Switch = binding.switchAutoTheme
+        val switchAutoTheme: Switch = binding.switchAutoTheme
         val switchDarkTheme = binding.switchDarkTheme
-
+        val prefsHelper = PrefsHelper(requireContext())
 
         switchAutoTheme.setOnClickListener() {
             switchDarkTheme.isEnabled = !switchAutoTheme.isChecked
 
             if (switchDarkTheme.isEnabled) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                prefsHelper.updateTheme("auto")
                 switchDarkTheme.isChecked = false
             }
         }
 
         switchDarkTheme.setOnCheckedChangeListener { _, value ->
             if (!switchAutoTheme.isChecked) {
-                switchDarkTheme.isClickable = true
+                switchDarkTheme.isEnabled = true
                 when (value) {
-                    true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    true -> prefsHelper.updateTheme("dark")
+                    false -> prefsHelper.updateTheme("light")
                 }
+            }
+        }
+
+        when(prefsHelper.getTheme()) {
+            "auto" -> {
+                switchAutoTheme.isEnabled = true
+                switchAutoTheme.isChecked = true
+                switchDarkTheme.isChecked = false
+                switchDarkTheme.isEnabled = false
+            }
+            "light" -> {
+                switchAutoTheme.isChecked = false
+                switchDarkTheme.isChecked = false
+                switchDarkTheme.isEnabled = true
+                switchAutoTheme.isEnabled = true
+            }
+            "dark" -> {
+                switchAutoTheme.isChecked = false
+                switchDarkTheme.isChecked = true
+                switchDarkTheme.isEnabled = true
+                switchAutoTheme.isEnabled = true
             }
         }
 

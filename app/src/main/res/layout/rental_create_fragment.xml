@@ -73,29 +73,28 @@
         android:id="@+id/rental_initial_cost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
         android:layout_marginTop="12dp"
+        android:layout_marginEnd="45dp"
         android:text="49,99"
-        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
-        android:layout_marginStart="65dp"
         android:layout_marginTop="12dp"
+        android:layout_marginEnd="5dp"
         android:text="€"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/rental_initial_cost"
-        app:layout_constraintStart_toEndOf="@+id/rental_create_km_price"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <TextView
         android:id="@+id/rental_create_end_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="18:00"
+        android:text="--:--"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rental_create_end_date" />
 
@@ -122,8 +121,9 @@
         android:id="@+id/rental_create_change_end_date_button"
         android:layout_width="94dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="44dp"
         android:text="Date"
-        app:layout_constraintEnd_toStartOf="@+id/rental_create_end_date"
+        app:layout_constraintEnd_toStartOf="@+id/rental_create_end"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -131,7 +131,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="11-11-2111"
+        android:text="xx-xx-xxxx"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rental_create_end" />
 
@@ -156,7 +156,7 @@
         android:id="@+id/rental_create_start_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="18:00"
+        android:text="--:--"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rental_create_start_date" />
 
@@ -183,9 +183,9 @@
         android:id="@+id/rental_create_change_start_date_button"
         android:layout_width="94dp"
         android:layout_height="50dp"
-        android:layout_marginStart="76dp"
+        android:layout_marginStart="40dp"
         android:text="Date"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rental_create_start"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -193,8 +193,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="20dp"
-        android:text="11-11-2111"
+        android:text="xx-xx-xxxx"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rental_create_start" />
 
@@ -215,6 +214,7 @@
         android:layout_height="wrap_content"
         android:text="@string/rental_create_slot_unavailable_at_time"
         android:textColor="@color/design_default_color_error"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -226,6 +226,7 @@
         android:text="11-11-2111 11:11 - 12-12-2222 22:22"
         android:textColor="@color/design_default_color_error"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rental_create_unavailable_text" />
@@ -236,6 +237,7 @@
         android:layout_height="wrap_content"
         android:text="@string/rental_create_slot_unavailable"
         android:textColor="@color/design_default_color_error"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -247,6 +249,7 @@
         android:layout_height="wrap_content"
         android:text="@string/rental_slot_available"
         android:textColor="?attr/colorSecondaryVariant"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
@@ -361,7 +364,8 @@
         app:layout_constraintBottom_toTopOf="@+id/rental_create_total_price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rental_create_calculated_km_price" />
+        app:layout_constraintTop_toBottomOf="@+id/rental_create_calculated_km_price"
+        tools:listitem="@layout/rental_create_slot" />
 
     <TextView
         android:id="@+id/textView2"

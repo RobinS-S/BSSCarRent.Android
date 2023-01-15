@@ -55,6 +55,13 @@
                 android:name="userId"
                 app:argType="long" />
         </action>
+        <action
+            android:id="@+id/action_nav_car_details_to_nav_map"
+            app:destination="@id/nav_map">
+            <argument
+                android:name="car"
+                app:argType="com.bss.carrent.data.car.CarDto" />
+        </action>
     </fragment>
 
     <fragment
@@ -90,6 +97,13 @@
             app:destination="@id/nav_user">
             <argument
                 android:name="userId"
+                app:argType="long" />
+        </action>
+        <action
+            android:id="@+id/action_nav_rental_details_to_nav_car_details"
+            app:destination="@id/nav_car_details">
+            <argument
+                android:name="carId"
                 app:argType="long" />
         </action>
     </fragment>
@@ -154,9 +168,13 @@
 
     <fragment
         android:id="@+id/nav_map"
-        android:name="com.bss.carrent.ui.car.MapsFragment"
+        android:name="com.bss.carrent.ui.car.CarMapFragment"
         android:label="@string/map"
-        tools:layout="@layout/maps_fragment" />
+        tools:layout="@layout/maps_fragment">
+        <argument
+            android:name="car"
+            app:argType="com.bss.carrent.data.car.CarDto" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_preferences"

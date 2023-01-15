@@ -57,7 +57,7 @@
     <string name="car_initialcost">500</string>
     <string name="car_priceperhour_label">Price/hour €</string>
     <string name="car_priceperhour">2</string>
-    <string name="car_kilometersdistance">2.05 km</string>
+    <string name="car_kilometersdistance">\?</string>
     <string name="car_kilometersdistance_label">Distance to car</string>
     <string name="car_fueltype_label">Fuel</string>
     <string name="car_fueltype">\?</string>
@@ -189,4 +189,8 @@
     <string name="rental_detail">Rental detail</string>
     <string name="car_license_plate">License plate:</string>
     <string name="car_create_button">Create</string>
+    <string name="my_invoices">My invoices</string>
+    <string name="owned_invoices">Owned invoices</string>
+    <string name="location">Location</string>
+    <string name="view_map">View map</string>
 </resources>

@@ -27,10 +27,23 @@ class InvoiceViewModel : ViewModel() {
         _invoiceList.value = value
     }
 
-    fun getInvoices(context: Context) {
+    fun getMyInvoices(context: Context) {
         viewModelScope.launch {
             val repository = InvoiceRepository()
             val retrievedInvoices = repository.getMyInvoices(context)
+            if (retrievedInvoices == null) {
+                setIsError(true)
+            } else {
+                setIsError(false)
+                setInvoiceList(retrievedInvoices)
+            }
+        }
+    }
+
+    fun getOwnedInvoices(context: Context) {
+        viewModelScope.launch {
+            val repository = InvoiceRepository()
+            val retrievedInvoices = repository.getOwnedInvoices(context)
             if (retrievedInvoices == null) {
                 setIsError(true)
             } else {

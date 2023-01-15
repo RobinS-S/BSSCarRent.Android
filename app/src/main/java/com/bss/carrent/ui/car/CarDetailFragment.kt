@@ -91,16 +91,25 @@ class CarDetailFragment : Fragment() {
 
         carDetailSwipeRefresh.setOnRefreshListener {
             lifecycleScope.launch {
-                carDetailViewModel.getCar(requireContext(), args.carId)
+                carDetailViewModel.getCar(args.carId)
             }
         }
         lifecycleScope.launch {
-            carDetailViewModel.getCar(requireContext(), args.carId)
+            carDetailViewModel.getCar(args.carId)
         }
 
         carDetailButtonViewRentalOptions.setOnClickListener {
             if (carDetailViewModel.carDto.value != null) {
                 val action = CarDetailFragmentDirections.actionNavCarDetailsToNavCreateRental(
+                    carDetailViewModel.carDto.value!!
+                )
+                requireParentFragment().findNavController().navigate(action)
+            }
+        }
+
+        binding.carDetailMapsButton.setOnClickListener {
+            if (carDetailViewModel.carDto.value != null) {
+                val action = CarDetailFragmentDirections.actionNavCarDetailsToNavMap(
                     carDetailViewModel.carDto.value!!
                 )
                 requireParentFragment().findNavController().navigate(action)
