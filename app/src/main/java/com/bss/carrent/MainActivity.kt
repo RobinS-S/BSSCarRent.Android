@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 R.id.nav_invoices,
                 R.id.nav_register,
                 R.id.nav_login,
+                R.id.nav_map,
                 R.id.switch_auto_theme,
                 R.id.switch_dark_theme
             ), drawerLayout
