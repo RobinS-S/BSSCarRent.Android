@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -30,8 +29,8 @@ class CarEditFragment : Fragment() {
 
         _binding = CarEditFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        binding.carDetailBrandName.text?.clear()
-        binding.carDetailBrandName.text?.append(args.car.brand)
+        binding.carDetailBrandNameEdit.text?.clear()
+        binding.carDetailBrandNameEdit.text?.append(args.car.brand)
 
         binding.carDetailModelName.text?.clear()
         binding.carDetailModelName.text?.append(args.car.model)
@@ -61,15 +60,21 @@ class CarEditFragment : Fragment() {
         binding.carDetailApk.text?.clear()
         binding.carDetailApk.text?.append(Helpers.formatShortDate(args.car.apkUntil))
 
-        binding.carDetailCartype.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                val selectedItem = parent.getItemAtPosition(position) as String
-                // TODO: update DTO member and conditionally set fuelType to null
-            }
+        binding.carDetailCartype.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) {
+                    val selectedItem = parent.getItemAtPosition(position) as String
+                    // TODO: update DTO member and conditionally set fuelType to null
+                }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                }
             }
-        }
 
         return root
     }

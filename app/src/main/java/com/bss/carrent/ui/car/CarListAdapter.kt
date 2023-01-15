@@ -13,7 +13,6 @@ import com.bss.carrent.api.CarApi
 import com.bss.carrent.data.car.CarDto
 import com.bss.carrent.misc.Helpers
 import com.bumptech.glide.Glide
-import kotlinx.coroutines.coroutineScope
 
 class CarListAdapter : RecyclerView.Adapter<CarListAdapter.CarViewHolder>() {
     private var carDtoList: List<CarDto> = emptyList()

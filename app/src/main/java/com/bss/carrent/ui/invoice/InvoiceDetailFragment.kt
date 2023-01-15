@@ -46,7 +46,7 @@ class InvoiceDetailFragment : Fragment() {
         payButton.setOnClickListener {
             lifecycleScope.launch {
                 val invoice = invoiceDetailViewModel.payInvoice(requireContext(), args.invoice.id)
-                if(invoice != null) {
+                if (invoice != null) {
                     Toast.makeText(context, "You just paid!.", Toast.LENGTH_LONG).show()
                     view?.findNavController()?.navigate(R.id.nav_invoices)
                 }
@@ -54,13 +54,11 @@ class InvoiceDetailFragment : Fragment() {
         }
 
         val backButton: Button = binding.payInvoiceDetailBackButton
-        backButton.setOnClickListener {
-                view ->
+        backButton.setOnClickListener { view ->
             view.findNavController().navigate(R.id.nav_invoices)
         }
         return root
     }
-
 
 
     override fun onDestroyView() {

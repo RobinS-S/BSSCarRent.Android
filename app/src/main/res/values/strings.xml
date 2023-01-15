@@ -147,6 +147,11 @@
     <string name="rental_tenant">Tenant</string>
     <string name="rental_owner">Owner</string>
     <string name="rental_car">Car</string>
+
+    <string name="rental_deliver_button">Deliver car</string>
+    <string name="rental_cancel_button">Cancel</string>
+    <string name="rental_pickup_car_button">Mark car as picked up</string>
+
     <string name="rental_create_price_warning">Note: these prices are not final. Damage, bringing the car back late, driving more kilometers than booked and misbehavior may result in financial penalties.</string>
     <string name="rental_create_place_reservation">Place reservation</string>
     <string name="rental_price_per_km">Price per km</string>
@@ -168,4 +173,5 @@
     <string name="erroroccurred">Error</string>
     <string name="youarehere">Your location</string>
     <string name="google_maps_key" translatable="false">key</string>
+    <string name="rental_detail">Rental detail</string>
 </resources>
