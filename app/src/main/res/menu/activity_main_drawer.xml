@@ -11,11 +11,11 @@
             android:title="@string/menu_car_list" />
         <item
             android:id="@+id/nav_own_car_list"
-            android:icon="@drawable/unknown_car"
+            android:icon="@drawable/ic_menu_home"
             android:title="@string/menu_own_cars_list" />
         <item
             android:id="@+id/nav_rentals"
-            android:icon="?android:attr/actionModeFindDrawable"
+            android:icon="@drawable/ic_menu_home"
             android:title="@string/menu_rental_list" />
         <item
             android:id="@id/nav_invoices"
@@ -24,11 +24,11 @@
 
         <item
             android:id="@+id/nav_login"
-            android:icon="@drawable/ic_login_button"
+            android:icon="@drawable/ic_menu_slideshow"
             android:title="Login" />
         <item
             android:id="@+id/nav_register"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@drawable/ic_menu_slideshow"
             android:title="Register" />
 
         <item
