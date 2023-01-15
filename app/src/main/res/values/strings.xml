@@ -170,4 +170,6 @@
     <string name="my_rentals">My rentals</string>
     <string name="owned_rentals">Owned rentals</string>
     <string name="rental_detail">Rental detail</string>
+    <string name="my_invoices">My invoices</string>
+    <string name="owned_invoices">Owned invoices</string>
 </resources>

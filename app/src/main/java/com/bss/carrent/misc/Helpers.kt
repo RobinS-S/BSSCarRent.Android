@@ -4,9 +4,12 @@ import com.bss.carrent.R
 import com.bss.carrent.data.car.CarType
 import com.bss.carrent.data.car.CombustionFuelType
 import com.bss.carrent.data.user.UserDto
+import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 object Helpers {
     fun getFormattedName(userDto: UserDto): String {
@@ -29,6 +32,12 @@ object Helpers {
     fun formatDateTime(value: LocalDateTime): String {
         val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
         return value.format(formatter)
+    }
+
+    fun formatCurrency(value: Double?): String {
+        if(value == null) return "";
+        val decimalFormat = DecimalFormat("#,###.##")
+        return decimalFormat.format(value)
     }
 
     fun getCarTypeName(value: CarType): Int {

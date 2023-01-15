@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bss.carrent.R
 import com.bss.carrent.data.InvoiceDto
 import com.bss.carrent.databinding.InvoiceListFragmentBinding
 import kotlinx.coroutines.launch
@@ -53,12 +54,27 @@ class InvoiceListFragment : Fragment() {
 
         binding.invoicesListSwipeRefresh.setOnRefreshListener {
             lifecycleScope.launch {
-                invoiceViewModel.getInvoices(requireContext())
+                invoiceViewModel.getOwnedInvoices(requireContext())
             }
         }
 
         lifecycleScope.launch {
-            invoiceViewModel.getInvoices(requireContext())
+            invoiceViewModel.getOwnedInvoices(requireContext())
+        }
+
+        binding.rentalListRadiogroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.invoice_list_radio_button_mine -> {
+                    lifecycleScope.launch {
+                        invoiceViewModel.getOwnedInvoices(requireContext())
+                    }
+                }
+                R.id.invoice_list_radio_button_owned -> {
+                    lifecycleScope.launch {
+                        invoiceViewModel.getMyInvoices(requireContext())
+                    }
+                }
+            }
         }
 
         return root
