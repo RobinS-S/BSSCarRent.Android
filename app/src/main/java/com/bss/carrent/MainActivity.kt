@@ -32,8 +32,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var prefsHelper: PrefsHelper
-    private lateinit var switchAutoTheme: SwitchCompat
-    private lateinit var switchDarkTheme: SwitchCompat
 
     private lateinit var sensorManager: SensorManager
     private lateinit var lightSensor: Sensor
@@ -102,12 +100,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
@@ -130,10 +122,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 val lux = event.values[0]
                 if (lux > 30000) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    switchDarkTheme.isChecked = false
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    switchDarkTheme.isChecked = true
                 }
             }
         }
