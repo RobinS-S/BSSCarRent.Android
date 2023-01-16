@@ -58,6 +58,33 @@ class RentalDetailFragment : Fragment() {
             requireParentFragment().findNavController().navigate(action)
         }
 
+        binding.rentalCancelButton.isEnabled = !args.rental.cancelled && args.rental.deliveredAt == null
+        binding.rentalPickupButton.isEnabled = !args.rental.cancelled && args.rental.pickedUpAt == null
+        binding.rentalDeliverCarButton.isEnabled = !args.rental.cancelled && args.rental.pickedUpAt != null && args.rental.deliveredAt == null
+
+        binding.rentalCancelButton.setOnClickListener {
+            rentalDetailViewModel.cancel(requireContext())
+        }
+        binding.rentalDeliverCarButton.setOnClickListener {
+            rentalDetailViewModel.deliver(requireContext(), args.rental.id)
+        }
+        binding.rentalPickupButton.setOnClickListener {
+            rentalDetailViewModel.pickup(requireContext(), args.rental.id)
+        }
+
+        rentalDetailViewModel.isCancelled.observe(viewLifecycleOwner) {
+            requireParentFragment().findNavController().popBackStack()
+        }
+
+        rentalDetailViewModel.pickup.observe(viewLifecycleOwner) {
+            requireParentFragment().findNavController().popBackStack()
+        }
+
+        rentalDetailViewModel.invoice.observe(viewLifecycleOwner) {
+            val action = RentalDetailFragmentDirections.actionNavRentalDetailsToNavInvoices()
+            requireParentFragment().findNavController().navigate(action)
+        }
+
         return root
     }
 

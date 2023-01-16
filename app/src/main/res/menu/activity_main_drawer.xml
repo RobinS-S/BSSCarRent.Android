@@ -23,13 +23,13 @@
             android:title="@string/menu_invoice" />
 
         <item
-            android:id="@+id/nav_login"
-            android:icon="@drawable/ic_login_button"
-            android:title="Login" />
-        <item
             android:id="@+id/nav_register"
             android:icon="@android:drawable/ic_input_add"
-            android:title="Register" />
+            android:title="@string/register" />
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/ic_login_button"
+            android:title="@string/login" />
 
         <item
             android:id="@+id/nav_preferences"

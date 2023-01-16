@@ -43,6 +43,7 @@ class InvoiceListFragment : Fragment() {
         })
 
         binding.invoicesListRecyclerView.adapter = invoiceAdapter
+        binding.invoicesListSwipeRefresh.isRefreshing = true
 
         invoiceViewModel.invoiceList.observe(viewLifecycleOwner) { invoiceList ->
             invoiceList?.let {
@@ -54,15 +55,13 @@ class InvoiceListFragment : Fragment() {
 
         binding.invoicesListSwipeRefresh.setOnRefreshListener {
             lifecycleScope.launch {
+                binding.invoicesListSwipeRefresh.isRefreshing = true
                 invoiceViewModel.getOwnedInvoices(requireContext())
             }
         }
 
-        lifecycleScope.launch {
-            invoiceViewModel.getOwnedInvoices(requireContext())
-        }
-
         binding.rentalListRadiogroup.setOnCheckedChangeListener { group, checkedId ->
+            binding.invoicesListSwipeRefresh.isRefreshing = true
             when (checkedId) {
                 R.id.invoice_list_radio_button_mine -> {
                     lifecycleScope.launch {
@@ -76,6 +75,8 @@ class InvoiceListFragment : Fragment() {
                 }
             }
         }
+
+        binding.invoiceListRadioButtonMine.isChecked = true
 
         return root
     }

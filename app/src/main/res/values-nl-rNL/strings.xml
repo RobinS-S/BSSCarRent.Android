@@ -155,12 +155,12 @@
     <string name="auto_theme">Automatisch thema</string>
     <string name="car_edit">Bewerk auto</string>
     <string name="car_detail">Auto details</string>
-    <string name="rental_create">Maak  verhuur</string>
+    <string name="rental_create">Maak verhuur</string>
     <string name="user_phone_number">Telefoonnummer</string>
     <string name="user_last_name">Achternaam</string>
     <string name="user_infix">tussenvoegsel</string>
     <string name="user_first_name">Voornaam</string>
-    <string name="user_detail">Gebruikrs details</string>
+    <string name="user_detail">Gebruikers details</string>
     <string name="my_rentals">Mijn huur</string>
     <string name="owned_rentals">Mijn verhuur</string>
     <string name="title_car_list">Lijst</string>
@@ -171,10 +171,12 @@
     <string name="map">Kaart</string>
     <string name="now_setting_from">Nu ingesteld van</string>
     <string name="now_setting_until">Nu ingesteld tot</string>
-    <string name="time_span_taken">Deze is bezet. Kies een andere tijd</string>
+    <string name="time_span_taken">Deze periode is bezet. Kies een andere tijd</string>
     <string name="current_language">Taal</string>
     <string name="current_language_value">-</string>
     <string name="register">Registreer</string>
-    <string name="location">Location</string>
-    <string name="view_map">View map</string>
+    <string name="location">Locatie</string>
+    <string name="view_map">Kaart</string>
+    <string name="new_mileage">Nieuwe kilometerstand</string>
+    <string name="current_rental">Huidige</string>
 </resources>

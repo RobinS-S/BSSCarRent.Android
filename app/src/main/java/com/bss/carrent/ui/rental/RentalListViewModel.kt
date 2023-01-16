@@ -30,13 +30,24 @@ class RentalListViewModel : ViewModel() {
     fun getRentals(context: Context, value: String) {
         viewModelScope.launch {
             val repository = RentalRepository()
-            val rentals =
-                if (value == "mine") repository.getMine(context) else repository.getOwned(context)
-            if (rentals == null) {
-                setIsError(true)
+            if(value == "current") {
+                val rental = repository.getCurrentRental(context)
+                if (rental == null) {
+                    setIsError(false)
+                    setRentalList(listOf())
+                } else {
+                    setIsError(false)
+                    setRentalList(listOf(rental))
+                }
             } else {
-                setIsError(false)
-                setRentalList(rentals)
+                val rentals =
+                    if (value == "mine") repository.getMine(context) else repository.getOwned(context)
+                if (rentals == null) {
+                    setIsError(true)
+                } else {
+                    setIsError(false)
+                    setRentalList(rentals)
+                }
             }
         }
     }

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -63,6 +64,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_car_list,
+                R.id.nav_own_car_list,
                 R.id.nav_rentals,
                 R.id.nav_invoices,
                 R.id.nav_register,
@@ -77,14 +79,27 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         prefsHelper = PrefsHelper(applicationContext)
 
+        navView.menu.findItem(R.id.nav_own_car_list).isVisible = false
+        navView.menu.findItem(R.id.nav_rentals).isVisible = false
+        navView.menu.findItem(R.id.nav_invoices).isVisible = false
+        navView.menu.findItem(R.id.nav_register).isVisible = true
+
         viewModel.userDto.observe(this) { user ->
             val headerLayout = navView.getHeaderView(0)
             val textView = headerLayout.findViewById<TextView>(R.id.subNavTitle)
             if (user == null) {
                 textView.setText(R.string.nav_header_subtitle)
                 prefsHelper.resetCredentials()
+                navView.menu.findItem(R.id.nav_own_car_list).isVisible = false
+                navView.menu.findItem(R.id.nav_rentals).isVisible = false
+                navView.menu.findItem(R.id.nav_invoices).isVisible = false
+                navView.menu.findItem(R.id.nav_register).isVisible = true
             } else {
                 textView.text = "Logged in as ${Helpers.getFormattedName(user)}"
+                navView.menu.findItem(R.id.nav_own_car_list).isVisible = true
+                navView.menu.findItem(R.id.nav_rentals).isVisible = true
+                navView.menu.findItem(R.id.nav_invoices).isVisible = true
+                navView.menu.findItem(R.id.nav_register).isVisible = false
             }
         }
         if (prefsHelper.areCredentialsFilled()) {
