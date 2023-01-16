@@ -179,4 +179,5 @@
     <string name="view_map">Kaart</string>
     <string name="new_mileage">Nieuwe kilometerstand</string>
     <string name="current_rental">Huidige</string>
+    <string name="car_create">Create car</string>
 </resources>

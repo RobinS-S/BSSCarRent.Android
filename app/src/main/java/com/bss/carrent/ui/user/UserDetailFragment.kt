@@ -42,7 +42,7 @@ class UserDetailFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            userDetailViewModel.getUser(args.userId)
+            userDetailViewModel.getUser(args.userId, requireContext())
         }
 
         return root

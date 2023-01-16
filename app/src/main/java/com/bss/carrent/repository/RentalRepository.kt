@@ -5,6 +5,7 @@ import com.bss.carrent.api.RentalApiService
 import com.bss.carrent.api.client.ApiClient
 import com.bss.carrent.data.InvoiceDto
 import com.bss.carrent.data.rental.RentalCreateDto
+import com.bss.carrent.data.rental.RentalDeliverDto
 import com.bss.carrent.data.rental.RentalDto
 import com.bss.carrent.data.rental.RentalPeriodDto
 import com.bss.carrent.misc.PrefsHelper
@@ -13,7 +14,7 @@ import java.io.IOException
 class RentalRepository {
     suspend fun getForCarId(context: Context, id: Long): List<RentalDto>? {
         val rentalApiService =
-            ApiClient.createService(RentalApiService::class.java)
+            ApiClient.createService(RentalApiService::class.java, context)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {
@@ -32,7 +33,7 @@ class RentalRepository {
 
     suspend fun getPeriodsForCarId(context: Context, id: Long): List<RentalPeriodDto>? {
         val rentalApiService =
-            ApiClient.createService(RentalApiService::class.java)
+            ApiClient.createService(RentalApiService::class.java, context)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {
@@ -51,7 +52,7 @@ class RentalRepository {
 
     suspend fun getMine(context: Context): List<RentalDto>? {
         val rentalApiService =
-            ApiClient.createService(RentalApiService::class.java)
+            ApiClient.createService(RentalApiService::class.java, context)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {
@@ -69,7 +70,7 @@ class RentalRepository {
 
     suspend fun getOwned(context: Context): List<RentalDto>? {
         val rentalApiService =
-            ApiClient.createService(RentalApiService::class.java)
+            ApiClient.createService(RentalApiService::class.java, context)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {
@@ -88,7 +89,7 @@ class RentalRepository {
 
     suspend fun createRental(context: Context, rentalCreateDto: RentalCreateDto): RentalDto? {
         val rentalApiService =
-            ApiClient.createService(RentalApiService::class.java)
+            ApiClient.createService(RentalApiService::class.java, context)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {
@@ -109,7 +110,7 @@ class RentalRepository {
 
     suspend fun markRentalAsPickedUp(context: Context, id: Long): RentalDto? {
         val rentalApiService =
-            ApiClient.createService(RentalApiService::class.java)
+            ApiClient.createService(RentalApiService::class.java, context)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {
@@ -126,16 +127,17 @@ class RentalRepository {
         return null
     }
 
-    suspend fun markRentalAsDelivered(context: Context, id: Long): InvoiceDto? {
+    suspend fun markRentalAsDelivered(context: Context, id: Long, dto: RentalDeliverDto): InvoiceDto? {
         val rentalApiService =
-            ApiClient.createService(RentalApiService::class.java)
+            ApiClient.createService(RentalApiService::class.java, context)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {
             return try {
                 val invoice = rentalApiService.markRentalAsDelivered(
                     prefsHelper.getAuthorizationHeader()!!,
-                    id
+                    id,
+                    dto
                 )
                 if (invoice.code() == 200) {
                     invoice.body()
@@ -149,7 +151,7 @@ class RentalRepository {
 
     suspend fun getCurrentRental(context: Context): RentalDto? {
         val rentalApiService =
-            ApiClient.createService(RentalApiService::class.java)
+            ApiClient.createService(RentalApiService::class.java, context)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {
@@ -168,7 +170,7 @@ class RentalRepository {
 
     suspend fun deleteCurrentRental(context: Context): RentalDto? {
         val rentalApiService =
-            ApiClient.createService(RentalApiService::class.java)
+            ApiClient.createService(RentalApiService::class.java, context)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {

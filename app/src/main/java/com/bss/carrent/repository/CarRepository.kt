@@ -13,9 +13,9 @@ import java.io.File
 import java.io.IOException
 
 class CarRepository {
-    suspend fun getAll(): List<CarDto>? {
+    suspend fun getAll(context: Context): List<CarDto>? {
         val carApiService =
-            ApiClient.createService(CarApiService::class.java)
+            ApiClient.createService(CarApiService::class.java, context)
 
         return try {
             val cars = carApiService.getCars()
@@ -29,7 +29,7 @@ class CarRepository {
 
     suspend fun getMyCars(context: Context): List<CarDto>? {
         val carApiService =
-            ApiClient.createService(CarApiService::class.java)
+            ApiClient.createService(CarApiService::class.java, context)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {
@@ -45,9 +45,9 @@ class CarRepository {
         return null
     }
 
-    suspend fun getCar(id: Long): CarDto? {
+    suspend fun getCar(id: Long, context: Context): CarDto? {
         val carApiService =
-            ApiClient.createService(CarApiService::class.java)
+            ApiClient.createService(CarApiService::class.java, context)
 
         return try {
             val cars = carApiService.getCar(id)
@@ -57,9 +57,9 @@ class CarRepository {
         }
     }
 
-    suspend fun getCarTco(id: Long): Double? {
+    suspend fun getCarTco(id: Long, context: Context): Double? {
         val carApiService =
-            ApiClient.createService(CarApiService::class.java)
+            ApiClient.createService(CarApiService::class.java, context)
 
         return try {
             val tco = carApiService.getCarTco(id)
@@ -71,7 +71,7 @@ class CarRepository {
 
     suspend fun createCar(context: Context, carDto: CarDto): CarDto? {
         val carApiService =
-            ApiClient.createService(CarApiService::class.java)
+            ApiClient.createService(CarApiService::class.java, context)
         val prefsHelper = PrefsHelper(context)
 
         if (prefsHelper.areCredentialsFilled()) {
@@ -89,7 +89,7 @@ class CarRepository {
 
     suspend fun updateCar(context: Context, id: Long, carUpdateDto: CarUpdateDto): CarDto? {
         val carApiService =
-            ApiClient.createService(CarApiService::class.java)
+            ApiClient.createService(CarApiService::class.java, context)
         val prefsHelper = PrefsHelper(context)
 
         if (prefsHelper.areCredentialsFilled()) {
@@ -108,7 +108,7 @@ class CarRepository {
 
     suspend fun deleteCar(context: Context, id: Long): Any? {
         val carApiService =
-            ApiClient.createService(CarApiService::class.java)
+            ApiClient.createService(CarApiService::class.java, context)
         val prefsHelper = PrefsHelper(context)
 
         if (prefsHelper.areCredentialsFilled()) {
@@ -126,7 +126,7 @@ class CarRepository {
 
     suspend fun uploadCarImage(context: Context, id: Long, image: File): Long? {
         val carApiService =
-            ApiClient.createService(CarApiService::class.java)
+            ApiClient.createService(CarApiService::class.java, context)
         val prefsHelper = PrefsHelper(context)
 
         if (prefsHelper.areCredentialsFilled()) {

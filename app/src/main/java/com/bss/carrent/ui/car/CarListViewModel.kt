@@ -30,7 +30,7 @@ class CarListViewModel : ViewModel() {
     fun getCars(context: Context) {
         viewModelScope.launch {
             val repository = CarRepository()
-            val retrievedCars = repository.getAll()
+            val retrievedCars = repository.getAll(context)
             if (retrievedCars == null) {
                 setIsError(true)
             } else {

@@ -3,6 +3,7 @@ package com.bss.carrent.api
 import com.bss.carrent.api.client.ApiService
 import com.bss.carrent.data.InvoiceDto
 import com.bss.carrent.data.rental.RentalCreateDto
+import com.bss.carrent.data.rental.RentalDeliverDto
 import com.bss.carrent.data.rental.RentalDto
 import com.bss.carrent.data.rental.RentalPeriodDto
 import retrofit2.Response
@@ -42,7 +43,8 @@ interface RentalApiService : ApiService {
     @POST("rentals/{id}/markDelivered")
     suspend fun markRentalAsDelivered(
         @Header("Authorization") authHeader: String,
-        @Path("id") id: Long
+        @Path("id") id: Long,
+        @Body deliverDto: RentalDeliverDto
     ): Response<InvoiceDto>
 
     @GET("rentals/current")

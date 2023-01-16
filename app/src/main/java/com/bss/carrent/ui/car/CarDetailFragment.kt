@@ -89,11 +89,11 @@ class CarDetailFragment : Fragment() {
 
         carDetailSwipeRefresh.setOnRefreshListener {
             lifecycleScope.launch {
-                carDetailViewModel.getCar(args.carId)
+                carDetailViewModel.getCar(args.carId, requireContext())
             }
         }
         lifecycleScope.launch {
-            carDetailViewModel.getCar(args.carId)
+            carDetailViewModel.getCar(args.carId, requireContext())
         }
 
         carDetailButtonViewRentalOptions.setOnClickListener {

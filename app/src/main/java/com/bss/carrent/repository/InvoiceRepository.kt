@@ -10,7 +10,7 @@ import java.io.IOException
 class InvoiceRepository {
     suspend fun getMyInvoices(context: Context): List<InvoiceDto>? {
         val invoiceApiService =
-            ApiClient.createService(InvoiceApiService::class.java)
+            ApiClient.createService(InvoiceApiService::class.java, context)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {
@@ -29,7 +29,7 @@ class InvoiceRepository {
 
     suspend fun getOwnedInvoices(context: Context): List<InvoiceDto>? {
         val invoiceApiService =
-            ApiClient.createService(InvoiceApiService::class.java)
+            ApiClient.createService(InvoiceApiService::class.java, context)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {
@@ -48,7 +48,7 @@ class InvoiceRepository {
 
     suspend fun payInvoice(context: Context, id: Long): InvoiceDto? {
         val invoiceApiService =
-            ApiClient.createService(InvoiceApiService::class.java)
+            ApiClient.createService(InvoiceApiService::class.java, context)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {
