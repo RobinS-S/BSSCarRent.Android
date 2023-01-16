@@ -10,7 +10,6 @@
         android:id="@+id/rental_list_radiogroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/invoices_list_swipe_refresh"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +39,7 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/invoices_list_swipe_refresh"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

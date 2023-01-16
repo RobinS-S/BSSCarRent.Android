@@ -65,6 +65,7 @@ class RentalListFragment : Fragment() {
         }
 
         binding.rentalListRadiogroup.setOnCheckedChangeListener { group, checkedId ->
+            rentalListSwipeRefresh.isRefreshing = true
             when (checkedId) {
                 R.id.rental_list_radio_button_mine -> {
                     viewModel.getRentals(requireContext(), "owned")
@@ -75,9 +76,22 @@ class RentalListFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launch {
-            viewModel.getRentals(requireContext(), "owned")
+        rentalListSwipeRefresh.setOnRefreshListener {
+            lifecycleScope.launch {
+                rentalListSwipeRefresh.isRefreshing = true
+                when (binding.rentalListRadiogroup.checkedRadioButtonId) {
+                    R.id.rental_list_radio_button_mine -> {
+                        viewModel.getRentals(requireContext(), "owned")
+                    }
+                    R.id.rental_list_radio_button_owned -> {
+                        viewModel.getRentals(requireContext(), "mine")
+                    }
+                    -1 -> viewModel.getRentals(requireContext(), "owned")
+                }
+            }
         }
+
+        binding.rentalListRadioButtonMine.isChecked = true
 
         return root
     }
