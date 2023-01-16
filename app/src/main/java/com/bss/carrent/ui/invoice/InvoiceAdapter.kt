@@ -23,7 +23,7 @@ class InvoiceAdapter : RecyclerView.Adapter<InvoiceAdapter.InvoiceViewHolder>() 
     }
 
     fun setInvoiceList(invoiceList: List<InvoiceDto>) {
-        this.invoiceList = invoiceList
+        this.invoiceList = invoiceList.sortedByDescending { it.id }
         notifyDataSetChanged()
     }
 

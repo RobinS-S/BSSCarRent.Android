@@ -67,16 +67,16 @@ class RentalListFragment : Fragment() {
         binding.rentalListRadiogroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.rental_list_radio_button_mine -> {
-                    viewModel.getRentals(requireContext(), "mine")
+                    viewModel.getRentals(requireContext(), "owned")
                 }
                 R.id.rental_list_radio_button_owned -> {
-                    viewModel.getRentals(requireContext(), "owned")
+                    viewModel.getRentals(requireContext(), "mine")
                 }
             }
         }
 
         lifecycleScope.launch {
-            viewModel.getRentals(requireContext(), "mine")
+            viewModel.getRentals(requireContext(), "owned")
         }
 
         return root

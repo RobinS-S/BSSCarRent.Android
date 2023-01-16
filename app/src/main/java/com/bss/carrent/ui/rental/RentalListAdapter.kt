@@ -25,7 +25,7 @@ class RentalListAdapter : RecyclerView.Adapter<RentalListAdapter.ViewHolder>() {
     }
 
     fun setRentalList(rentalDtoList: List<RentalDto>) {
-        this.rentalDtoList = rentalDtoList
+        this.rentalDtoList = rentalDtoList.sortedByDescending { it.id }
         notifyDataSetChanged()
     }
 

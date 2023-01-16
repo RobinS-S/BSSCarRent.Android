@@ -28,7 +28,7 @@ class CarListAdapter : RecyclerView.Adapter<CarListAdapter.CarViewHolder>() {
     }
 
     fun setCarList(carDtoList: List<CarDto>) {
-        this.carDtoList = carDtoList
+        this.carDtoList = carDtoList.sortedByDescending { it.id }
         notifyDataSetChanged()
     }
 
