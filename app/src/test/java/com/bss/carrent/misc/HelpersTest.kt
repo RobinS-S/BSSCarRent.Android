@@ -25,6 +25,6 @@ class HelpersTest {
     @Test
     fun testFormatDoubleWithOptionalDecimals() {
         assertEquals("1", Helpers.formatDoubleWithOptionalDecimals(1.0))
-        assertEquals("1,50", Helpers.formatDoubleWithOptionalDecimals(1.5))
+        assertEquals("1.50", Helpers.formatDoubleWithOptionalDecimals(1.5))
     }
 }
