@@ -73,6 +73,9 @@ class RentalListFragment : Fragment() {
                 R.id.rental_list_radio_button_owned -> {
                     viewModel.getRentals(requireContext(), "mine")
                 }
+                R.id.rental_list_radio_button_current -> {
+                    viewModel.getRentals(requireContext(), "current")
+                }
             }
         }
 
@@ -85,6 +88,9 @@ class RentalListFragment : Fragment() {
                     }
                     R.id.rental_list_radio_button_owned -> {
                         viewModel.getRentals(requireContext(), "mine")
+                    }
+                    R.id.rental_list_radio_button_current -> {
+                        viewModel.getRentals(requireContext(), "current")
                     }
                     -1 -> viewModel.getRentals(requireContext(), "owned")
                 }

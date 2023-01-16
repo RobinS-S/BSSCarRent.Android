@@ -193,4 +193,6 @@
     <string name="owned_invoices">Owned invoices</string>
     <string name="location">Location</string>
     <string name="view_map">View map</string>
+    <string name="new_mileage">New mileage</string>
+    <string name="current_rental">Current</string>
 </resources>
