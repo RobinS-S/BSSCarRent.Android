@@ -11,7 +11,7 @@ import java.io.IOException
 class ProfileRepository {
     suspend fun attemptLogin(context: Context): UserDto? {
         val profileApiService =
-            ApiClient.createService(UserApiService::class.java)
+            ApiClient.createService(UserApiService::class.java, context)
 
         val prefsHelper = PrefsHelper(context)
         if (prefsHelper.areCredentialsFilled()) {
@@ -27,9 +27,9 @@ class ProfileRepository {
         return null
     }
 
-    suspend fun getProfileForUser(userId: Long): UserDto? {
+    suspend fun getProfileForUser(userId: Long, context: Context): UserDto? {
         val profileApiService =
-            ApiClient.createService(UserApiService::class.java)
+            ApiClient.createService(UserApiService::class.java, context)
 
         return try {
             val profile = profileApiService.getUserProfile(userId)
@@ -41,9 +41,9 @@ class ProfileRepository {
         }
     }
 
-    suspend fun register(registerDto: UserRegisterDto): UserDto? {
+    suspend fun register(registerDto: UserRegisterDto, context: Context): UserDto? {
         val profileApiService =
-            ApiClient.createService(UserApiService::class.java)
+            ApiClient.createService(UserApiService::class.java, context)
         return try {
             val car = profileApiService.register(registerDto)
             if (car.code() == 200) {

@@ -1,5 +1,6 @@
 package com.bss.userrent.ui.user
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,10 +27,10 @@ class UserDetailViewModel : ViewModel() {
         _user.value = value
     }
 
-    fun getUser(id: Long) {
+    fun getUser(id: Long, context: Context) {
         viewModelScope.launch {
             val profileRepository = ProfileRepository()
-            val retrievedUser = profileRepository.getProfileForUser(id)
+            val retrievedUser = profileRepository.getProfileForUser(id, context)
             if (retrievedUser == null) {
                 setIsError(true)
             } else {

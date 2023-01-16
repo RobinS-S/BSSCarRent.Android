@@ -33,10 +33,10 @@ class CarEditViewModel : ViewModel() {
     val updatedCar: LiveData<CarDto>
         get() = _updated
 
-    fun getCar(id: Long) {
+    fun getCar(id: Long, context: Context) {
         viewModelScope.launch {
             val repository = CarRepository()
-            val retrievedCar = repository.getCar(id)
+            val retrievedCar = repository.getCar(id, context)
             if (retrievedCar == null) {
                 setIsError(true)
             } else {

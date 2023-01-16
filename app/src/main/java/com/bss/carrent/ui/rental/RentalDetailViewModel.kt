@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bss.carrent.data.InvoiceDto
+import com.bss.carrent.data.rental.RentalDeliverDto
 import com.bss.carrent.data.rental.RentalDto
 import com.bss.carrent.repository.RentalRepository
 import kotlinx.coroutines.launch
@@ -55,10 +56,10 @@ class RentalDetailViewModel : ViewModel() {
         }
     }
 
-    fun deliver(context: Context, id: Long) {
+    fun deliver(context: Context, id: Long, dto: RentalDeliverDto) {
         viewModelScope.launch {
             val repository = RentalRepository()
-            val invoice = repository.markRentalAsDelivered(context, id)
+            val invoice = repository.markRentalAsDelivered(context, id, dto)
             if (invoice == null) {
                 setIsError(true)
             } else {

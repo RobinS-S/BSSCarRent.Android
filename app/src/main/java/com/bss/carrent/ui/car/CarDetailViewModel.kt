@@ -1,5 +1,6 @@
 package com.bss.carrent.ui.car
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -36,17 +37,17 @@ class CarDetailViewModel : ViewModel() {
         _user.value = value
     }
 
-    fun getCar(id: Long) {
+    fun getCar(id: Long, context: Context) {
         viewModelScope.launch {
             val carRepository = CarRepository()
             val profileRepository = ProfileRepository()
-            val retrievedCar = carRepository.getCar(id)
+            val retrievedCar = carRepository.getCar(id, context)
             if (retrievedCar == null) {
                 setIsError(true)
             } else {
                 setIsError(false)
                 setCar(retrievedCar)
-                val owner = profileRepository.getProfileForUser(retrievedCar.ownerId)
+                val owner = profileRepository.getProfileForUser(retrievedCar.ownerId, context)
                 if (owner != null) {
                     setUser(owner)
                 }

@@ -27,43 +27,15 @@ import com.google.android.gms.maps.model.MarkerOptions
 class CarMapFragment : Fragment() {
     private val args: CarMapFragmentArgs by navArgs()
 
-    private var locationPermissions = arrayOf(
-        Manifest.permission.ACCESS_COARSE_LOCATION,
-        Manifest.permission.ACCESS_FINE_LOCATION
-    )
-
-    private fun requestLocationPermission() {
-        permissionRequest.launch(locationPermissions)
-    }
-
-    private fun isLocationAllowed(): Boolean {
-        return ActivityCompat.checkSelfPermission(
-            requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(
-            requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    // Permission result
-    private val permissionRequest =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            val granted = permissions.entries.all {
-                it.value
-            }
-        }
-
     private var ownUserMarker: Marker? = null
     private val callback = OnMapReadyCallback { googleMap ->
 
-        val permissionGranted = isLocationAllowed()
-        var locationManager: GeoLocationManager
-
-        locationManager = GeoLocationManager(activity as Context)
+        var locationManager = GeoLocationManager(requireContext())
+        val permissionGranted = locationManager.isLocationAllowed(requireContext())
         if (permissionGranted) {
             locationManager.startLocationTracking(locationCallback)
         } else {
-            requestLocationPermission()
+            locationManager.requestLocationPermission(this)
         }
 
         val boundsBuilder = LatLngBounds.Builder()
