@@ -82,6 +82,9 @@
         <argument
             android:name="car"
             app:argType="com.bss.carrent.data.car.CarDto" />
+        <action
+            android:id="@+id/action_nav_create_rental_to_nav_rentals"
+            app:destination="@id/nav_rentals" />
     </fragment>
 
     <fragment

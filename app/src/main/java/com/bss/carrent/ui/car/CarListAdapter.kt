@@ -88,11 +88,11 @@ class CarListAdapter : RecyclerView.Adapter<CarListAdapter.CarViewHolder>() {
             }
 
             carInitialCostTextView.text =
-                Helpers.formatDoubleWithOptionalDecimals(carDto.initialCost)
+                Helpers.formatCurrency(carDto.initialCost)
             carPriceKmTextView.text =
-                Helpers.formatDoubleWithOptionalDecimals(carDto.pricePerKilometer)
+                Helpers.formatCurrency(carDto.pricePerKilometer)
             carPriceHourTextView.text =
-                Helpers.formatDoubleWithOptionalDecimals(carDto.pricePerHour)
+                Helpers.formatCurrency(carDto.pricePerHour)
 
             if (carDto.imageIds != null && carDto.imageIds.isNotEmpty()) {
                 val imgId = carDto.imageIds.first()

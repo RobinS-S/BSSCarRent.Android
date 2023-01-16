@@ -62,9 +62,9 @@ class CarDetailFragment : Fragment() {
             carModelName.text = it.model
             carColorName.text = it.color
             carDetailCurrentKilometers.text = it.kilometersCurrent.toString()
-            carDetailPricePerHour.text = Helpers.formatDoubleWithOptionalDecimals(it.pricePerHour)
+            carDetailPricePerHour.text = Helpers.formatCurrency(it.pricePerHour)
             carDetailPricePerKilometer.text =
-                Helpers.formatDoubleWithOptionalDecimals(it.pricePerKilometer)
+                Helpers.formatCurrency(it.pricePerKilometer)
             carDetailYear.text = it.constructed.year.toString()
             carDetailCarType.setText(Helpers.getCarTypeName(it.carType))
             carDetailApk.text = Helpers.formatShortDate(it.apkUntil)
@@ -73,7 +73,7 @@ class CarDetailFragment : Fragment() {
                 carDetailFuelType.setText(Helpers.getCombustionFuelTypeName(it.fuelType))
             }
             carDetailFuelType.isVisible = it.fuelType != null
-            carDetailHireprice.text = Helpers.formatDoubleWithOptionalDecimals(it.initialCost)
+            carDetailHireprice.text = Helpers.formatCurrency(it.initialCost)
 
             if (it.imageIds != null && it.imageIds.isNotEmpty()) {
                 val tabLayout: TabLayout = binding.tabLayout

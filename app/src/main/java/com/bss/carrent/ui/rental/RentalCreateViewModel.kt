@@ -1,10 +1,13 @@
 package com.bss.carrent.ui.rental
 
 import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bss.carrent.data.rental.RentalCreateDto
+import com.bss.carrent.data.rental.RentalDto
 import com.bss.carrent.data.rental.RentalPeriodDto
 import com.bss.carrent.repository.RentalRepository
 import kotlinx.coroutines.launch
@@ -22,6 +25,7 @@ class RentalCreateViewModel : ViewModel() {
     private val _hoursCost = MutableLiveData<Double>()
     private val _usedTimeSlots = MutableLiveData<List<RentalPeriodDto>>()
     private val _totalPrice = MutableLiveData<Double>()
+    private val _createdRental = MutableLiveData<RentalDto>()
 
     val reservedFromDate: LiveData<LocalDate>
         get() = _reservedFromDate
@@ -70,6 +74,9 @@ class RentalCreateViewModel : ViewModel() {
     fun setTotalPrice(value: Double) {
         this._totalPrice.value = value
     }
+
+    val createdRental: LiveData<RentalDto>
+        get() = _createdRental
 
     fun getUsedSlots(context: Context, carId: Long) {
         viewModelScope.launch {
@@ -123,5 +130,25 @@ class RentalCreateViewModel : ViewModel() {
     fun getFullUntilDateTime(): LocalDateTime? {
         if (this.reservedUntilDate.value == null || this.reservedUntilTime.value == null) return null
         return LocalDateTime.of(this.reservedUntilDate.value, this.reservedUntilTime.value)
+    }
+
+    fun createDto(carId: Long): RentalCreateDto? {
+        val from = getFullFromDateTime()
+        val until = getFullUntilDateTime()
+        if(from == null || until == null || kmCount.value == null) return null
+        val dto = RentalCreateDto(from, until, kmCount.value!!.toLong(), carId)
+        return dto
+    }
+
+    fun post(context: Context, dto: RentalCreateDto) {
+        viewModelScope.launch {
+            val repository = RentalRepository()
+            val createdRental = repository.createRental(context, dto)
+            if (createdRental != null) {
+                _createdRental.value = createdRental!!
+            } else {
+                Toast.makeText(context, "Error while creating", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 }
