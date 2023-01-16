@@ -109,6 +109,9 @@
                 android:name="carId"
                 app:argType="long" />
         </action>
+        <action
+            android:id="@+id/action_nav_rental_details_to_nav_invoices"
+            app:destination="@id/nav_invoices" />
     </fragment>
 
     <fragment

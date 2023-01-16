@@ -75,13 +75,11 @@ class CarDetailFragment : Fragment() {
             carDetailFuelType.isVisible = it.fuelType != null
             carDetailHireprice.text = Helpers.formatCurrency(it.initialCost)
 
-            if (it.imageIds != null && it.imageIds.isNotEmpty()) {
-                val tabLayout: TabLayout = binding.tabLayout
-                val imageUrls = it.imageIds.map { img -> CarApi.generateImageUrl(it.id, img) }
+            val tabLayout: TabLayout = binding.tabLayout
+            val imageUrls = if(it.imageIds != null && it.imageIds.isNotEmpty()) it.imageIds.map { img -> CarApi.generateImageUrl(it.id, img) } else listOf("")
 
-                carDetailImagesViewpager.adapter = CarImageSliderAdapter(this, imageUrls)
-                TabLayoutMediator(tabLayout, carDetailImagesViewpager) { _, _ -> }.attach()
-            }
+            carDetailImagesViewpager.adapter = CarImageSliderAdapter(this, imageUrls)
+            TabLayoutMediator(tabLayout, carDetailImagesViewpager) { _, _ -> }.attach()
 
             carDetailSwipeRefresh.isRefreshing = false
         }

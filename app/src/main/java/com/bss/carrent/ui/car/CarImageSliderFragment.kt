@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bss.carrent.R
 import com.bss.carrent.databinding.CarImageSliderFragmentBinding
 import com.bumptech.glide.Glide
 
@@ -24,9 +25,13 @@ class CarImageSliderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val imageUrl = requireArguments().getString("image_url")
-        Glide.with(view)
-            .load(imageUrl)
-            .into(binding.imageView)
+        if(imageUrl == null || imageUrl.isEmpty()) {
+            binding.imageView.setImageResource(R.drawable.unknown_car)
+        } else {
+            Glide.with(view)
+                .load(imageUrl)
+                .into(binding.imageView)
+        }
     }
 
     companion object {
