@@ -45,7 +45,7 @@ object Helpers {
 
     fun formatCurrency(value: Double?): String {
         if (value == null) return "";
-        val decimalFormat = DecimalFormat("#,###.##")
+        val decimalFormat = DecimalFormat("####.##")
         return decimalFormat.format(value)
     }
 

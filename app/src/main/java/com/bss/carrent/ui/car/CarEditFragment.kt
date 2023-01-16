@@ -44,11 +44,11 @@ class CarEditFragment : Fragment() {
         binding.carDetailColorName.text?.append(args.car.color)
 
         binding.carDetailPricePerHour.text?.clear()
-        binding.carDetailPricePerHour.text?.append(Helpers.formatDoubleWithOptionalDecimals(args.car.pricePerHour))
+        binding.carDetailPricePerHour.text?.append(Helpers.formatCurrency(args.car.pricePerHour))
 
         binding.carDetailPricePerKilometer.text?.clear()
         binding.carDetailPricePerKilometer.text?.append(
-            Helpers.formatDoubleWithOptionalDecimals(
+            Helpers.formatCurrency(
                 args.car.pricePerKilometer
             )
         )

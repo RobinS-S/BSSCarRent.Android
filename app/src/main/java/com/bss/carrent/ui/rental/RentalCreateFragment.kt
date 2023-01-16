@@ -14,10 +14,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bss.carrent.databinding.RentalCreateFragmentBinding
 import com.bss.carrent.misc.Helpers
+import com.bss.carrent.ui.car.CarDetailFragmentDirections
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -55,6 +57,11 @@ class RentalCreateFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.getUsedSlots(requireContext(), args.car.id)
         }
+
+        viewModel.createdRental.observe(viewLifecycleOwner) { _ ->
+            val action = RentalCreateFragmentDirections.actionNavCreateRentalToNavRentals()
+            requireParentFragment().findNavController().navigate(action)
+        }
     }
 
     override fun onCreateView(
@@ -75,6 +82,8 @@ class RentalCreateFragment : Fragment() {
                 val num = binding.editTextLayoutKmPackage.text.toString().toInt()
                 binding.rentalCreateCalculatedKmPrice.text =
                     Helpers.formatCurrency(num * args.car.pricePerKilometer)
+                calculateTotalPrice()
+                viewModel.setKmCount(num)
             } else {
                 binding.rentalCreateCalculatedKmPrice.text = "-"
             }
@@ -90,6 +99,7 @@ class RentalCreateFragment : Fragment() {
                 viewModel.setReservedFromDate(selectedDate)
                 viewModel.calculateHoursCost(args.car.pricePerHour)
                 updateAvailability()
+                calculateTotalPrice()
             }
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
@@ -108,6 +118,7 @@ class RentalCreateFragment : Fragment() {
                 viewModel.setReservedFromTime(selectedTime)
                 viewModel.calculateHoursCost(args.car.pricePerHour)
                 updateAvailability()
+                calculateTotalPrice()
             }
             val now = LocalDateTime.now()
             val timePickerDialog =
@@ -123,6 +134,7 @@ class RentalCreateFragment : Fragment() {
                 viewModel.setReservedUntilDate(selectedDate)
                 viewModel.calculateHoursCost(args.car.pricePerHour)
                 updateAvailability()
+                calculateTotalPrice()
             }
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
@@ -141,11 +153,19 @@ class RentalCreateFragment : Fragment() {
                 viewModel.setReservedUntilTime(selectedTime)
                 viewModel.calculateHoursCost(args.car.pricePerHour)
                 updateAvailability()
+                calculateTotalPrice()
             }
             val now = LocalDateTime.now()
             val timePickerDialog =
                 TimePickerDialog(requireContext(), timeSetListener, now.hour, now.minute, true)
             timePickerDialog.show()
+        }
+
+        binding.rentalCreatePlaceReservation.setOnClickListener {
+            val dto = viewModel.createDto(args.car.id)
+            if(dto != null) {
+                viewModel.post(requireContext(), dto)
+            }
         }
 
         return root
@@ -167,12 +187,21 @@ class RentalCreateFragment : Fragment() {
         } else {
             binding.rentalCreateAvailable.visibility = GONE
             binding.rentalCreateUnavailableDatetime.text =
-                "${Helpers.formatDateTime(viewModel.getFullFromDateTime()!!)} - ${
-                    Helpers.formatDateTime(viewModel.getFullUntilDateTime()!!)
-                }"
+                Helpers.formatDateTime(viewModel.getFullFromDateTime()!!) + " - " + Helpers.formatDateTime(
+                    viewModel.getFullUntilDateTime()!!
+                )
             binding.rentalCreateUnavailableText.visibility = VISIBLE
             binding.rentalCreateUnavailableDatetime.visibility = VISIBLE
             binding.rentalCreateUnavailableText3.visibility = VISIBLE
         }
+    }
+
+    private fun calculateTotalPrice() {
+        val kmPrice = binding.rentalCreateCalculatedKmPrice.text.toString().toDoubleOrNull()
+        val initialCost = args.car.initialCost
+        val hourPrice = viewModel.hoursCost.value
+        if(kmPrice == null || hourPrice == null) return
+        val totalPrice = kmPrice + initialCost + hourPrice
+        binding.rentalCreateTotalPrice.text = Helpers.formatCurrency(totalPrice)
     }
 }
